@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 <div style="text-align: center;">
-    <img src="https://pbs.twimg.com/profile_images/1753312460453613568/qj-V6HD__400x400.jpg" style="border-radius: 50%; border: 3px solid red; width: 400px; height: 400px">
+    <img src="https://pbs.twimg.com/profile_images/1753312460453613568/qj-V6HD__400x400.jpg" style="border-radius: 50%; border: 3px solid red; width: 400px; height: 400px" alt="">
     <h2>Hey, I'm Zavier</h2>
 </div>
 
