@@ -3,3 +3,6 @@ The `main` branch is built and pushed to production automatically to [https://ga
 
 ## Dev-Build
 The `dev` branch is the branch that you may find random shit in before it's merged to `main` and pushed to production. 
+```
+bundle exec jekyll s
+```
