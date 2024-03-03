@@ -9,6 +9,8 @@ Antivirus evasion has quickly become one of the most overwritten topics, with en
 
 Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.
 
+![hmm](https://i.gyazo.com/f4ec1ce964d4e5f578ae47055ee132f4.png)
+
 ## A Humble Beginning
 
 For many malware developers, evading Windows Defender often represents the first hurdle or objective. While more experienced developers might view this as a relatively simple challenge, it certainly was not easy for me.
