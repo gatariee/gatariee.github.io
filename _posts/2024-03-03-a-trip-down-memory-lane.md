@@ -320,7 +320,7 @@ $ ldd implant.exe
         x00x00x00x00 => not found
 ```
 
-### Denial
+## Denial
 
 I went back to think about how the `msvcrt.dll` detection was being made, and it felt really strange. `msvcrt.dll` is a legitimate DLL by Microsoft that provides access to the MS Visual C Runtime Library, detection on an import of this library would lead to _many_ false positives.
 
