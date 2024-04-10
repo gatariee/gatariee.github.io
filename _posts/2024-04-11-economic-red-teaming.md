@@ -212,7 +212,7 @@ I'm not a fan of flag-hunting in labs, and I think that the flags in Offshore we
 ### Cobalt Strike
 If you're using Cobalt Strike for this lab, here's some general tips:
 1. Windows Defender on some of the machines seem to be more updated than others, I had trouble getting a beacon on some machines and had to bring in my own loader. To be safe, you should assume that Windows Defender is enabled on all machines.
-> In hindsight, I think Windwos Defender **is** enabled on all machines; but other students turned it off.
+> In hindsight, I think Windoes Defender **is** enabled on all machines; but other students turned it off.
 2. Did you know that you can SSH into linux machines from beacon? I didn't know that, but it's a pretty neat feature! Unfortunately, I don't think it helps very much in this lab, just thought it was a pretty cool feature!
 3. I couldn't get any of CS' lateral movement options to work with against Defender, but this might be a skill issue. Anyway, drop beacon remotely and execute with `remote-exec` or `shell sc create` & `shell sc start` with the binPath set to point to beacon.
 
