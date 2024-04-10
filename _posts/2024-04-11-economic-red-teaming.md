@@ -49,7 +49,7 @@ It definitely lived up to its name as a beginner-friendly lab, with not too many
 
 Although Dante didn't have a large focus on domain-joined machines, I wanted to take it slow and spend my time here learning ligolo-ng and getting comfortable with pivoting.
 
-I didn't use a C2 framework for Dante as I felt like setting up beacons would be overkill, I and was _a bit lazy_, so I just used `ligolo-ng` and raw-dogged netcat reverse shells for the most part. I heavily abused [ropnop's](https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/) blog post on upgrading shells to fully interactive TTYs, and it was a lifesaver for me.
+I didn't use a C2 framework for Dante as I felt like setting up beacons would be overkill, and I was _a bit lazy_, so I just used `ligolo-ng` and raw-dogged netcat reverse shells for the most part. I heavily abused [ropnop's](https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/) blog post on upgrading shells to fully interactive TTYs, and it was a lifesaver for me.
 
 ### The Good
 The lab was a good refresher for me as I was able to practice my enumeration skills and learn some new TTPs, and there was a short but sweet AD portion that I enjoyed. The rest of the boxes were pretty straightforward and, none of the standalone linux machines were harder than an "Easy" box on the main HTB platform.
@@ -63,7 +63,7 @@ Unfortunately, this definitely threw me off guard as I wasn't expecting to do bi
 
 > from my experience, the binary exploitation portion seemed to be harder than the rest of the lab; so if you're not comfortable with binary exploitation, I'd recommend you to practice some challenges before starting the lab.
 
-I'll also have to give credit to my friend [@KaligulaSec](https://twitter.com/KaligulaSec) for recommending spamming me with binary exploitation challenges and resources; here are some links: [Nightmare](https://guyinatuxedo.github.io/), [pwnable.tw](https://pwnable.tw/challenge/)
+I'll also have to give credit to my friend [@KaligulaSec](https://twitter.com/KaligulaSec) for spamming me with binary exploitation challenges and resources; here are some links: [Nightmare](https://guyinatuxedo.github.io/), [pwnable.tw](https://pwnable.tw/challenge/)
 
 ### Tips & Tricks
 Before starting the lab, I would recommend you to have a semi-decent understanding of pivoting as every host except for the very first machine exists on an internal subnet. As with the spirit of why I started the lab, I would recommend you to use [ligolo-ng](https://github.com/nicocha30/ligolo-ng) and you will never have to touch `proxychains` again! (for Dante, at least...)
