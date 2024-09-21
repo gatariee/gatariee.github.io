@@ -12,4 +12,4 @@ order: 0
 
 I'm an offensive researcher, malware developer, red teamer and skid. I find joy in emulating TTPs used by adversaries in the wild, and developing evasive tradecraft.
 
-[GitHub](https://github.com/gatariee) /\ [Twitter](https://twitter.com/gatariee) /\ [LinkedIn](https://twitter.com/gatariee)
+[GitHub](https://github.com/gatariee) /\ [Twitter](https://twitter.com/gatariee) /\ [LinkedIn](https://www.linkedin.com/in/zavierlee-sg/)
