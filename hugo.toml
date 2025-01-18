@@ -58,3 +58,15 @@ rssFeedDescription = "summary"
 avatar = "avatar.jpg"                       # /assets/avatar.jpg
 intro = "gatari's blog"
 description = "offensive security research"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/gatariee"
+
+[[params.socialIcons]]
+name = "x"
+url = "https://x.com/gatariee"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/zavierlee-sg/"

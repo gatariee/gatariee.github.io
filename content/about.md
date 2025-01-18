@@ -8,8 +8,16 @@ author: Hugo Authors
 </div>
 
 <br> <!-- i love md -->
-
 I'm an offensive researcher, malware developer, red teamer and skid. I find joy in emulating TTPs used by adversaries in the wild, and developing evasive tradecraft.
 
-[GitHub](https://github.com/gatariee) /\ [Twitter](https://twitter.com/gatariee) /\ [LinkedIn](https://www.linkedin.com/in/zavierlee-sg/)
+* OffSec Certified Professional (OSCP)
+* Certified Penetration Testing Specialist (CPTS)
+* Certified Red Team Lead (CRTL)
+* Certified Red Team Operator (CRTO)
+* Certified Red Team Expert (CRTE)
+* Certified Red Team Professional (CRTP)
+* Certified Azure Red Team Professional (CARTP)
 
+* [GitHub](https://github.com/gatariee)
+* [Twitter](https://twitter.com/gatariee)
+* [LinkedIn](https://www.linkedin.com/in/zavierlee-sg/)
