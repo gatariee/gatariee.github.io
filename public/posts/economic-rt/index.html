@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Economical Red Teaming | gatari&#39;s blog</title>
+<meta property="og:title" content="Economical Red Teaming | gatari&#39;s blog" />
+<meta name="twitter:title" content="Economical Red Teaming | gatari&#39;s blog" />
+<meta itemprop="name" content="Economical Red Teaming | gatari&#39;s blog" />
+<meta name="application-name" content="Economical Red Teaming | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/economic-rt/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-04-11T00:00:00Z />
+    <meta property="article:published_time" content=2024-04-11T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/economic-rt/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Economical Red Teaming",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-04-11",
+        "description": "",
+        "wordCount":  3373 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-04-11",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="Economical Red Teaming" />
+<meta property="og:description" content="As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like cai png
+In this blog post, I&rsquo;ll be talking about an underrated resource that can provide an absurd amount of practice &amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/economic-rt/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-04-11T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Economical Red Teaming"/>
+<meta name="twitter:description" content="As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like cai png
+In this blog post, I&rsquo;ll be talking about an underrated resource that can provide an absurd amount of practice &amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/economic-rt/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Economical Red Teaming</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-04-11T00:00:00&#43;00:00" itemprop="datePublished"> 11 Apr 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p>As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like <a href="https://en.wikipedia.org/wiki/Economy_rice">cai png</a></p>
+<p><img alt="img" src="https://i.gyazo.com/ab5ce8f88a20dc80808326ee54e42b87.png"></p>
+<p>In this blog post, I&rsquo;ll be talking about an underrated resource that <strong>can</strong> provide an absurd amount of practice &amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story.</p>
+<p>After I completed the <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">Certified Red Team Operator</a> certification in October 2023, I took an extended break from boxes and red team labs to focus on offensive development. During this time, I dedicated a majority of my time to school (I&rsquo;m in high school) and writing a <a href="https://github.com/gatariee">couple projects</a>.</p>
+<p>Nearing the end of my academic semester, I came across <a href="https://medium.com/@cyberpri3st/hack-the-box-red-team-operator-pro-labs-review-zephyr-8c175b4d02fe">CyberPri3st&rsquo;s review</a> on HTB&rsquo;s newest Prolab <strong>Zephyr</strong>; created by Daniel Morris (<a href="https://twitter.com/dmw0ng1">@dmw0ng</a>) and Matthew Bach (<a href="https://twitter.com/TheCyberGeek19">@TheCyberGeek</a>) and felt some nostalgia from my time in the <strong>Red Team Operator</strong> lab.</p>
+<h2 id="why-prolabs">Why Prolabs?</h2>
+<p>At this point, I wanted to get back into the groove of things and learn some new TTPs, get comfortable with more open-source C2 frameworks like (<a href="https://github.com/BishopFox/sliver">Sliver</a> and <a href="https://github.com/HavocFramework/Havoc">Havoc</a>) and most importantly learn how to pivot properly with <a href="https://github.com/nicocha30/ligolo-ng">ligolo-ng</a></p>
+<p>However, my sights were set at RastaMouse&rsquo;s <a href="https://training.zeropointsecurity.co.uk/bundles/open-ad-lab">Open AD Labs</a> (formerly known as Open RTO Lab) which he recently announced. This lab is a modification of CRTO&rsquo;s lab environment without <a href="https://www.cobaltstrike.com/">Cobalt Strike</a> given to the students; which I was fine with as I wanted to learn how to use other C2 frameworks.</p>
+<h3 id="price">Price</h3>
+<p>Considering my goal was to learn new TTPs and get comfortable with new C2 frameworks, I just needed a lab that simulated a real-world environment and had a good amount of boxes to practice on.</p>
+<p>I had a lot of options to choose from, but I was looking for something that was relatively cheap and had a good amount of boxes to practice on.</p>
+<p>The pricing for 30 days of access on Open AD Labs is <a href="https://training.zeropointsecurity.co.uk/bundles/open-ad-lab">S$68.00</a>, and HTB&rsquo;s Prolabs are <a href="https://help.hackthebox.com/en/articles/7257535-htb-labs-subscriptions">S$66.00</a>; so the price was pretty much not a factor in my decision.</p>
+<p>For a comparison, here&rsquo;s the pricing for some other options I was considering at the time:</p>
+<ol>
+<li><a href="https://www.offsec.com/courses/pen-300/">OffSec Experienced Pentester (OSEP)</a> - S$2,216.00</li>
+<li><a href="https://www.alteredsecurity.com/redteamlab">Certified Red Team Expert (CRTE)</a> - S$401.00 (not sure if I can even bring in my own C2)</li>
+<li><a href="https://www.alteredsecurity.com/gcb">Certified Red Team Master (CRTM)</a> - S$536.00 (not sure if I can even bring in my own C2)</li>
+<li><a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops-ii">Certified Red Team Lead (CRTL)</a> - S$681.00 (cobalt strike + evasion)</li>
+</ol>
+<p>Unless I was satisfied with eating <a href="https://shengsiong.com.sg/product/super-value-enriched-wholemeal-bread-600-g">Super Value Enriched Wholemeal Bread</a> for the next 3 months, my options were really only Open AD Labs and HTB&rsquo;s Prolabs.</p>
+<h3 id="coverage">Coverage</h3>
+<p>The Prolabs subscription comes with <strong>all 6 labs</strong> (Dante, Rasta, Zephyr, Offshore, Cybernetics and APT) and shiny certificates for each lab completed, while Open AD Labs only has one lab, and no certificate of completion :(</p>
+<p>With some gaslighting from <a href="https://twitter.com/codex_tf2">@CodexTF2</a>, I decided to go with HTB&rsquo;s Prolabs and started with <strong>Dante</strong>; which ironically is the only Prolab that is the least like Open AD Labs (heavily linux-focused).</p>
+<h2 id="dante">Dante</h2>
+<p><img alt="dante" src="https://i.gyazo.com/5dbd289b5a6706cbf62a65cfb90b7024.png"></p>
+<p>Dante is a beginner-friendly lab heavily focused on Linux, and has a total of 14 boxes and 27 flags. The lab is designed to teach the basics of enumeration, exploit development, lateral movement, LPE, situational awareness and web application attacks; created by @Shaun Whorton.</p>
+<p>It definitely lived up to its name as a beginner-friendly lab, with not too many rabbitholes and relatively straight-forward attack paths. However, according to <a href="https://cybergladius.com/htb-dante-pro-lab-review-tips/">this review</a>, many of the boxes were outdated and had some issues with them; which made it trivial to escalate privileges.</p>
+<blockquote>
+<p>The labs <strong>do</strong> get patched every now and then to prevent boxes from being cheesed by kernel exploits, however I <strong>was</strong> able to cheese the privesc portion of a box using a relatively recent kernel exploit.</p>
+</blockquote>
+<p>Although Dante didn&rsquo;t have a large focus on domain-joined machines, I wanted to take it slow and spend my time here learning ligolo-ng and getting comfortable with pivoting.</p>
+<p>I didn&rsquo;t use a C2 framework for Dante as I felt like setting up beacons would be overkill, and I was <em>a bit lazy</em>, so I just used <code>ligolo-ng</code> and raw-dogged netcat reverse shells for the most part. I heavily abused <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">ropnop&rsquo;s</a> blog post on upgrading shells to fully interactive TTYs, and it was a lifesaver for me.</p>
+<h3 id="the-good">The Good</h3>
+<p>The lab was a good refresher for me as I was able to practice my enumeration skills and learn some new TTPs, and there was a short but sweet AD portion that I enjoyed. The rest of the boxes were pretty straightforward and, none of the standalone linux machines were harder than an &ldquo;Easy&rdquo; box on the main HTB platform.</p>
+<p>The boxes had relatively easy solve paths, and lab stability was great; I didn&rsquo;t experience any downtime or issues with the lab. The same can&rsquo;t be said about some of the <em>other</em> labs, but I&rsquo;ll get to that in a bit.</p>
+<h3 id="the-bad">The Bad</h3>
+<p>There is also a notorious (?) section involving binary exploitation of an executable running as <code>SYSTEM</code> listening on a port (very OSCP-like). However, the binary wasn&rsquo;t too challenging to exploit; in fact, it&rsquo;s significantly simpler compared to pwn challenges on modern CTFs.</p>
+<p>Unfortunately, this definitely threw me off guard as I wasn&rsquo;t expecting to do binary exploitation in a lab that was supposed to be beginner-friendly</p>
+<blockquote>
+<p>from my experience, the binary exploitation portion seemed to be harder than the rest of the lab; so if you&rsquo;re not comfortable with binary exploitation, I&rsquo;d recommend you to practice some challenges before starting the lab.</p>
+</blockquote>
+<p>I&rsquo;ll also have to give credit to my friend <a href="https://twitter.com/KaligulaSec">@KaligulaSec</a> for spamming me with binary exploitation challenges and resources; here are some links: <a href="https://guyinatuxedo.github.io/">Nightmare</a>, <a href="https://pwnable.tw/challenge/">pwnable.tw</a></p>
+<h3 id="tips--tricks">Tips &amp; Tricks</h3>
+<p>Before starting the lab, I would recommend you to have a semi-decent understanding of pivoting as every host except for the very first machine exists on an internal subnet. As with the spirit of why I started the lab, I would recommend you to use <a href="https://github.com/nicocha30/ligolo-ng">ligolo-ng</a> and you will never have to touch <code>proxychains</code> again! (for Dante, at least&hellip;)</p>
+<p>Specifically for Dante, I&rsquo;d highly recommend everything that you&rsquo;d recommend to someone taking the OSCP; <a href="https://github.com/0xsyr0/OSCP">this</a> cheatsheet was also very useful, similarly <a href="https://book.hacktricks.xyz/">HackTrick&rsquo;s</a> methodology is also king when it comes to doing boxes!</p>
+<p>In no particular order, here are some reads that may or may not be useful for Dante:</p>
+<ul>
+<li><a href="https://medium.com/@Aircon/nmap-live-host-discovery-tryhackme-thm-47c5c69f1bd7">https://medium.com/@Aircon/nmap-live-host-discovery-tryhackme-thm-47c5c69f1bd7</a></li>
+<li><a href="https://cybergladius.com/building-custom-company-specific-wordlists/">https://cybergladius.com/building-custom-company-specific-wordlists/</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap">https://book.hacktricks.xyz/pentesting-web/sql-injection/sqlmap</a></li>
+<li><a href="https://ir0nstone.gitbook.io/notes/types/stack">https://ir0nstone.gitbook.io/notes/types/stack</a></li>
+</ul>
+<h2 id="rasta">Rasta</h2>
+<p><img alt="rasta" src="https://i.gyazo.com/5ed79ee6e6191147530c37d5cae2db29.png"></p>
+<p>RastaLabs is an intermediate-level lab that is heavily focused on red teaming and has a total of 15 machines, and 22 flags! The lab is designed to teach&hellip; a <em>lot</em> of things, you can find the full list <a href="https://app.hackthebox.com/prolabs/overview/rastalabs">here</a>, but the main focus is on Red Teaming and Adversary Simulation; created by Daniel Duggan (<a href="https://twitter.com/_RastaMouse">@_RastaMouse</a>).</p>
+<p>I found RastaLabs to be incredibly fun, with an amazing AD environment that was very realistic and even had simulated users that would perform actions on their own.</p>
+<p>The lab was also very stable, and I didn&rsquo;t experience any downtime or issues with the lab. This lab felt really similar to <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">CRTO</a> (the author also made Rastalabs), with realistic scenarios and the same rabbit holes that you&rsquo;d find in a real-world environment, and of course with Windows Defender enabled on nearly every box.</p>
+<h3 id="the-good-1">The Good</h3>
+<p>The lab had a very complex AD environment, with some hosts only being accessible via a jump host; which would&rsquo;ve been hell without a C2 (I used the built-in socks proxy with <a href="https://github.com/BishopFox/sliver">sliver</a> instead of ligolo-ng for everything besides RDP).</p>
+<p>There were an incredible amount of attacks that aren&rsquo;t seen very often in other AD labs; such as reading DPAPI secrets, weird GPO abuses and keymap shenanigans. Windows Defender being enabled on every box was also added a sense of realism as you had to constantly worry about nuking your pivots.</p>
+<p>Arguably the best part of Rastalabs is the fact that the lab <strong>does not automatically reset</strong>, which means your pivots and footholds will persist until a lab reset is requested. This was a HUGE plus for me as I didn&rsquo;t have to worry about losing my shells from daily resets, and persistence was very easy to setup with <a href="https://github.com/mandiant/SharPersist">SharPersist</a> and manually setting up scheduled tasks.</p>
+<h3 id="the-bad-1">The Bad</h3>
+<p>The last part of Rastalabs never resetting is a double-edged sword, as the long periods between resets means that the lab is often griefed by other students; or students leaving credentials and domain admin net-logons in the open. At some points, it was extremely difficult to discern which credentials were part of the lab and which were left by other students.</p>
+<p>By the time I had domain admin on all domains, I still only had about 75% of the flags collected; which meant that I had to go back and find all the missing flags that I had skipped from taking unintended paths.</p>
+<p>Overall the lab was extremely fun when moving to escalating privileges to DA, but the &ldquo;side-quests&rdquo; were a pain in the ass and I think I spent more time getting the remaining flags than escalating to DA.</p>
+<h3 id="tips--tricks-1">Tips &amp; Tricks</h3>
+<p>If you don&rsquo;t care about the certificate of completion, I&rsquo;d personally skip the side quests after getting DA as they don&rsquo;t really contribute to much learning; the lab time is much better spent attempting other prolabs.</p>
+<p>A great resource to refer to while doing Rastalabs were the <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">CRTO</a> notes, a lot of the attacks in the lab were covered in the course material in great detail.</p>
+<p><img alt="a" src="https://i.gyazo.com/fb6f7c0df683b418c4ca4a579b9c7f3e.png"></p>
+<p>In no particular order, here are some reads that may or may not be useful for Rasta:</p>
+<ul>
+<li><a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">https://training.zeropointsecurity.co.uk/courses/red-team-ops</a></li>
+<li><a href="https://www.ired.team/">https://www.ired.team/</a></li>
+<li><a href="https://posts.specterops.io/operational-guidance-for-offensive-user-dpapi-abuse-1fb7fac8b107">https://posts.specterops.io/operational-guidance-for-offensive-user-dpapi-abuse-1fb7fac8b107</a></li>
+<li><a href="https://www.slideshare.net/ItaiGrady/protecting-browsers-secrets-in-adomainenvironment">https://www.slideshare.net/ItaiGrady/protecting-browsers-secrets-in-adomainenvironment</a></li>
+<li><a href="https://www.ired.team/offensive-security/code-injection-process-injection/binary-exploitation/rop-chaining-return-oriented-programming">https://www.ired.team/offensive-security/code-injection-process-injection/binary-exploitation/rop-chaining-return-oriented-programming</a></li>
+<li><a href="https://github.com/S3cur3Th1sSh1t/OffensiveVBA">https://github.com/S3cur3Th1sSh1t/OffensiveVBA</a></li>
+<li><a href="https://github.com/hashcat/kwprocessor">https://github.com/hashcat/kwprocessor</a></li>
+<li><a href="https://github.com/sevagas/macro_pack">https://github.com/sevagas/macro_pack</a></li>
+</ul>
+<p>Before doing Rastalabs, I <strong>highly</strong> recommend familiarizing yourself with evasion TTPs; or at least be able to get your initial access loaders to bypass Windows Defender. I&rsquo;m not too sure about the version of Windows Defender in the labs, but I brought in loaders that were able to evade the latest Defender and it worked just fine.</p>
+<ul>
+<li><a href="https://maldevacademy.com/">https://maldevacademy.com/</a></li>
+<li><a href="https://www.ired.team/offensive-security/defense-evasion">https://www.ired.team/offensive-security/defense-evasion</a></li>
+<li><a href="https://gatari.dev/posts/a-trip-down-memory-lane/">https://gatari.dev/posts/a-trip-down-memory-lane/</a></li>
+</ul>
+<p>When approaching the lab, don&rsquo;t think of it as a pentest; there will not be any CVEs to exploit (iirc) and there are many attacks that are directed towards &ldquo;humans&rdquo; in the environment. The lab is designed to teach you how to think, and act like an adversary.</p>
+<h3 id="sliver">Sliver</h3>
+<p>Since I did this lab with <a href="https://github.com/BishopFox/sliver">sliver</a>, here&rsquo;s some things that I found very useful:</p>
+<ol>
+<li>Their inband socks proxy doesn&rsquo;t play well into some services, such as RDP (TCP/3389). I&rsquo;d recommend preparing your own proxies with <a href="https://github.com/nicocha30/ligolo-ng">ligolo</a> or <a href="https://github.com/jpillora/chisel">chisel</a> for pivots.</li>
+<li><code>execute-assembly</code> has a length limit, remember to run with <code>--in-process</code> with the AMSI &amp; ETW bypass flags.
+<ul>
+<li>refer to point 5 before running anything in the beacon process, as it can crash or hang beacon.</li>
+</ul>
+</li>
+<li>The <code>armory</code> aliases can be a little obnoxious with the syntax, for reference this is how you can run the <code>sharp-hound-4</code> collector with args: <code>-c all</code>
+<ul>
+<li><code>sharp-hound-4 -- '-c all'</code></li>
+</ul>
+</li>
+<li>The &ldquo;opsec-safe&rdquo; way of looting LSASS is with sliver&rsquo;s built-in <code>procdump</code> or the <code>nanodump</code> COFF; but if you&rsquo;re lazy like me, you can get away with sideloading mimikatz.
+<ul>
+<li><code>sideload /opt/mimi/mimikatz.exe &quot;coffee&quot; &quot;exit&quot;</code></li>
+</ul>
+</li>
+<li>As soon as you can, remember to set up persistence; or at the very least, execute sliver shellcode in another process and set that as your &ldquo;long haul&rdquo; beacon as sliver has crashed on me a couple of times.</li>
+</ol>
+<h2 id="zephyr">Zephyr</h2>
+<p><img alt="zephyr" src="https://i.gyazo.com/f495423c8c933ba1538be06f38916955.png"></p>
+<p>Zephyr is an intermediate-level lab heavily focused on Active Directory attacks with 17 machines and 17 flags, created by <a href="https://twitter.com/thecybergeek19">@TheCyberGeek</a>.</p>
+<p>I took a short break after finishing Rastalabs to focus on organizing the 4th iteration of <a href="https://lagncra.sh/">Lag and Crash</a> which ran from 11th to 15th March 2024 (I&rsquo;m not in this picture btw, thanks <a href="https://www.linkedin.com/feed/update/urn:li:activity:7177381260049149952/">charlene</a> for the pic :D)
+<img alt="lnc" src="https://i.gyazo.com/0ad5eea64146543df8efd8aa3613ce11.jpg"></p>
+<p>Despite the <a href="https://github.com/Lag-and-Crash/2024/">ungodly amounts of preparation</a> I had to do for LNC, I finished Zephyr in 2 sprints (~3 days each) and had a lot of fun with it.</p>
+<p>In my opinion, Zephyr is tied with Offshore as the best prolabs in terms of learning and stability for the most part(we&rsquo;ll get to this soon); the lab features multiple domains and covers attacks from constrained delegation abuses, to looting chrome credentials via DPAPI and some ADCS attacks.</p>
+<h3 id="the-good-2">The Good</h3>
+<p>Zephyr doesn&rsquo;t have any guessy paths, when I got Domain Admin on all domains; I was still missing 4 flags, but I knew where exactly these 4 flags were (if you&rsquo;ve done Zephyr, this should make much more sense).</p>
+<p>Personally, I think that Zephyr should be the golden standard for AD labs; with a good mix of attacks that are seen in the wild and some that are not so common, of course with Windows Defender enabled in some of the later machines.</p>
+<p>However, the straight-forward nature of Zephyr meant that I didn&rsquo;t have enumerate thoroughly on some machines, as the path forward was glaringly obvious at times; although I&rsquo;m unsure as to whether this is to the benefit or detriment of the lab.</p>
+<h3 id="the-bad-2">The Bad</h3>
+<p>The lab was very stable for the most part, as in the machines themselves never outright crashed; however the attack paths is a different issue.</p>
+<p>There are some attacks in Zephyr that involve changing/resetting passwords, and these attacks are the intended path forward; however, the lab does not reset passwords automatically. This means that if another student changes the password to something very simple, you&rsquo;d be able to skip a lot of the intended path by spraying passwords or (spoiler) kerberoasting the user.</p>
+<h3 id="tips--tricks-2">Tips &amp; Tricks</h3>
+<ol>
+<li>If you&rsquo;re not comfortable with cross-forest attacks, I&rsquo;d recommend familiarizing yourself with this: <a href="https://www.thehacker.recipes/a-d/movement/trusts#trust-types">https://www.thehacker.recipes/a-d/movement/trusts#trust-types</a>.</li>
+<li>Make sure that your impacket suite is up-to-date, some attacks don&rsquo;t play well with old versions of impacket; and you might run into some issues with the lab.</li>
+<li>This applies to every prolab: Be <strong>very</strong> familiar with <a href="https://www.netexec.wiki/">netexec</a>, this tool can do a <strong>lot</strong> more than just checking if you have local admin on a machine; <a href="https://www.netexec.wiki/getting-started/bloodhound-integration">bloodhound integration</a> for example.</li>
+<li>Flags do not necessarily have to be in order, don&rsquo;t feel pressured to skip a flag or two.</li>
+</ol>
+<p>In no particular order, here are some reads that may or may not be useful for Zephyr:</p>
+<ul>
+<li><a href="https://www.hackingarticles.in/a-detailed-guide-on-rubeus/">https://www.hackingarticles.in/a-detailed-guide-on-rubeus/</a></li>
+<li><a href="https://0xdeaddood.rocks/2023/05/11/forging-tickets-in-2023/">https://0xdeaddood.rocks/2023/05/11/forging-tickets-in-2023/</a></li>
+<li><a href="https://github.com/Greenwolf/ntlm_theft">https://github.com/Greenwolf/ntlm_theft</a></li>
+<li><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberos-double-hop-problem">https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberos-double-hop-problem</a></li>
+</ul>
+<h3 id="havoc">Havoc</h3>
+<p>Since I used <a href="https://github.com/HavocFramework/Havoc">Havoc</a> for this lab, here&rsquo;s some general tips:</p>
+<ol>
+<li>You don&rsquo;t actually need to do any evasion even for the boxes with Windows Defender because the signatures are not updated lol</li>
+<li>The built-ins are all a little buggy and causes crashes/unexpected behavior sometimes, setup persistence.</li>
+<li><code>dotnet execute-assembly</code> doesn&rsquo;t retrieve the result of the assembly; use <code>inline-execute</code> instead but it runs in the beacon process so prepare for beacon to crash. (I might be crazy here, but I swear it doesn&rsquo;t get the result)</li>
+</ol>
+<h2 id="offshore">Offshore</h2>
+<p><img alt="offshore" src="https://i.gyazo.com/0091f7892ca53762e01ea668c841f821.png"></p>
+<p>Offshore is an intermediate-level lab heavily focused on Active Directory attacks with 21 machines, and&hellip; 38 flags (more on this later) by <a href="https://twitter.com/mrb3n813?">@mrb3n</a>.</p>
+<blockquote>
+<p>I forgot to cancel my prolabs subscription after finishing Zephyr, so now I had another month of prolabs lmao; so I took a couple days to chill and then started Offshore.</p>
+</blockquote>
+<p>Offshore felt like Zephyr in a lot of ways, there were a couple similar attacks but the attack paths were much more complex and there were a lot more machines to compromise. The lab was also incredibly stable, and I didn&rsquo;t experience any downtime or issues with the lab.</p>
+<h3 id="the-good-3">The Good</h3>
+<p>Offshore has an incredibly large environment, with 5 domains (?) and a lot of machines to compromise. The path to DA on all the domains were awesome, and once again the attack paths didn&rsquo;t feel forced or guessy at all although they did take a little more enumeration than Zephyr.</p>
+<p>Some of these attacks were very unique, and I had a lot of fun (and pain) and some of the Linux machines were also super fun to compromise.</p>
+<p>Overall, the lab was awesome and I had a lot of fun re-learning Cobalt Strike throughout the lab.</p>
+<blockquote>
+<p>Sidenote: I&rsquo;ve learnt to appreciate the stability of Cobalt Strike compared to other C2 frameworks</p>
+</blockquote>
+<h3 id="the-bad-3">The Bad</h3>
+<p>As much as I loved doing Offshore, I had a very big issue with the flags in the lab.</p>
+<p>I&rsquo;m not a fan of flag-hunting in labs, and I think that the flags in Offshore were way too CTF-like for my liking. I got DA on all 4 domains, and I was still missing 40% of the flags; which meant that I had to go back and hunt for 15 flags that I had missed.</p>
+<ul>
+<li>These flags were <strong>not</strong> easy to find at all, and I was not having any fun at all trying to find them.
+<ul>
+<li>I also wrote a quick <a href="https://github.com/gatariee/locate-bof">BOF</a> to recursive grep for &ldquo;flag.txt&rdquo; because I got so frustrated with verifying C:\Users*\flag.txt on every machine.
+<img alt="bof" src="https://camo.githubusercontent.com/30ee6ee7c644ff66bec2906480c79adca292e2c1f0a8529d6ec9d52a7a5f2abf/68747470733a2f2f692e6779617a6f2e636f6d2f38663161363634353538326165366539333235393932646238303366383838642e706e67"></li>
+</ul>
+</li>
+</ul>
+<h3 id="tips--tricks-3">Tips &amp; Tricks</h3>
+<ol>
+<li>Be <strong>very</strong> familiar with performing double and triple pivots, or be very comfortable with using a C2 framework! I used <a href="https://www.cobaltstrike.com/">Cobalt Strike</a> for this lab, and their inband socks proxy was a lifesaver.</li>
+<li>Remember to document your attacks, and where you got your flags. This makes it a lot easier for others to help you, and for you to debug for yourself as to where you missed a flag or two.</li>
+<li>Check <strong>everywhere</strong> for flags before moving on: look at GPOs, descriptions, registries, look through folders, web roots,</li>
+<li>Don&rsquo;t underestimate the Linux standalone machines, they have some very unique attacks and I found them more difficult than the domain-joined machines.</li>
+</ol>
+<h3 id="cobalt-strike">Cobalt Strike</h3>
+<p>If you&rsquo;re using Cobalt Strike for this lab, here&rsquo;s some general tips:</p>
+<ol>
+<li>Windows Defender on some of the machines seem to be more updated than others, I had trouble getting a beacon on some machines and had to bring in my own loader. To be safe, you should assume that Windows Defender is enabled on all machines.</li>
+</ol>
+<blockquote>
+<p>In hindsight, I think Windows Defender is enabled on all machines; but other students turned it off.</p>
+</blockquote>
+<ol start="2">
+<li>Did you know that you can SSH into linux machines from beacon? I didn&rsquo;t know that, but it&rsquo;s a pretty neat feature! Unfortunately, I don&rsquo;t think it helps very much in this lab, just thought it was a pretty cool feature!</li>
+<li>I couldn&rsquo;t get any of CS&rsquo; lateral movement options to work with against Defender, but this might be a skill issue. Anyway, drop beacon remotely and execute with <code>remote-exec</code> or <code>shell sc create</code> &amp; <code>shell sc start</code> with the binPath set to point to beacon.</li>
+</ol>
+<h2 id="cybernetics--apt">Cybernetics &amp; APT</h2>
+<p><img alt="cybernetics" src="https://i.gyazo.com/1c2dabcd73ae28c6ab4bc98acd57083c.png"></p>
+<p>Cybernetics is an advanced-level lab heavily focused on Active Directory attacks with 28 machines, and 25 flags; created by <a href="https://app.hackthebox.com/users/709">@Ikys37en</a></p>
+<p>APT is an advanced-level lab heavily focused on Active Directory attacks with 20 machines, and 18 flags; created by <a href="https://twitter.com/cube0x0">cube0x0</a>.</p>
+<p>I started Cybernetics after finishing Offshore, and I&rsquo;m still not done with it as of writing this blog post; but I&rsquo;m very close to finishing it. Although, I don&rsquo;t intend to finish it as I&rsquo;m super burnt out and school is starting in a couple of days.</p>
+<p>I also touched a bit on APT but wasn&rsquo;t able to get past the MFA portion and gave up shortly after; I&rsquo;ll probably be coming back to Cybernetics &amp; APT after my semester ends in June.
+<img alt="aptcyb" src="https://i.gyazo.com/caba10252f60363a6300afbc5762b63b.png"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>After completing Dante, Rasta, Zephyr and Offshore; I can safely say that Prolabs have been the best investment I&rsquo;ve made in my offensive security journey. The labs were incredibly fun, and I learned a lot of new TTPs and got comfortable with new C2 frameworks.</p>
+<p>These labs are criminally underrated for the number of machines, and the sheer size of the environments; and I&rsquo;d highly recommend them to anyone looking to get comfortable with Active Directory attacks.</p>
+<p><img alt="labs" src="https://i.gyazo.com/9c6c77e44f3f0ffb5bba2fae42e363d9.png"></p>
+<h2 id="support">Support</h2>
+<p>Of course, I wouldn&rsquo;t have been able to complete these labs without the help of my friends and the community. It was an awesome and heartwarming experience to see everyone helping each other with hints.</p>
+<p>I&rsquo;d love to contribute back to the community; so feel free to reach out if you need help with any of the prolabs!</p>
+<p><img alt="friends" src="https://i.gyazo.com/fc5bd82f23da19ff2acc6f848002698d.png"></p>
+<p>In no particular order, here&rsquo;s some people that I&rsquo;d like to thank for helping me with the labs (I&rsquo;m sorry if I missed anyone):</p>
+<ul>
+<li><a href="https://discord.gg/hackthebox">HTB Discord</a></li>
+<li>@Shelldon</li>
+<li>@JayW5321</li>
+<li>@L0neW@lF</li>
+<li>@Khalid</li>
+<li>@B4Tm4n#1337</li>
+<li>@olliz0r</li>
+<li>@zdizzlerizzle</li>
+<li>@NightWolf56</li>
+<li>@Skillcoilz</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>

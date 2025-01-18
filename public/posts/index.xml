@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on gatari&#39;s blog</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on gatari&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Art of Exploiting Active Directory from Linux</title>
+      <link>http://localhost:1313/posts/ad-linux/</link>
+      <pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/ad-linux/</guid>
+      
+      <description>Over the past 6 months, I&amp;rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the Cybernetics prolab and passed the CRTP and CRTE certifications from Altered Security.
+After spending considerable time working with different Command &amp;amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly.</description>
+      
+    </item>
+    
+    <item>
+      <title>Economical Red Teaming</title>
+      <link>http://localhost:1313/posts/economic-rt/</link>
+      <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/economic-rt/</guid>
+      
+      <description>As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like cai png
+In this blog post, I&amp;rsquo;ll be talking about an underrated resource that can provide an absurd amount of practice &amp;amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story.</description>
+      
+    </item>
+    
+    <item>
+      <title>A Trip Down Memory Lane</title>
+      <link>http://localhost:1313/posts/memory-lane/</link>
+      <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/memory-lane/</guid>
+      
+      <description>Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
+Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.
+A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective.</description>
+      
+    </item>
+    
+    <item>
+      <title>Identifying Malicious Bytes in Malware</title>
+      <link>http://localhost:1313/posts/malicious-bytes/</link>
+      <pubDate>Wed, 07 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/malicious-bytes/</guid>
+      
+      <description>This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.
+Introduction An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

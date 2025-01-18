@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Identifying Malicious Bytes in Malware | gatari&#39;s blog</title>
+<meta property="og:title" content="Identifying Malicious Bytes in Malware | gatari&#39;s blog" />
+<meta name="twitter:title" content="Identifying Malicious Bytes in Malware | gatari&#39;s blog" />
+<meta itemprop="name" content="Identifying Malicious Bytes in Malware | gatari&#39;s blog" />
+<meta name="application-name" content="Identifying Malicious Bytes in Malware | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/malicious-bytes/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-02-07T00:00:00Z />
+    <meta property="article:published_time" content=2024-02-07T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/malicious-bytes/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Identifying Malicious Bytes in Malware",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-02-07",
+        "description": "",
+        "wordCount":  1347 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-02-07",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="Identifying Malicious Bytes in Malware" />
+<meta property="og:description" content="This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.
+Introduction An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/malicious-bytes/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-02-07T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Identifying Malicious Bytes in Malware"/>
+<meta name="twitter:description" content="This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.
+Introduction An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/malicious-bytes/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Identifying Malicious Bytes in Malware</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-02-07T00:00:00&#43;00:00" itemprop="datePublished"> 7 Feb 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p>This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.</p>
+<h2 id="introduction">Introduction</h2>
+<p>An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash.</p>
+<p>A blog post by <a href="https://www.ired.team/offensive-security/defense-evasion/av-bypass-with-metasploit-templates">ired.team</a> explored the use of Metasploit templates to create payloads using a non-standard template to generate payloads with unique hashes and signatures. However, despite the use of a non-standard template, the payloads were still detected by 36/68 AVs on VirusTotal, including <strong>Windows Defender</strong>.</p>
+<p>A solution that they found to be more effective was to develop a custom loader, and load the shellcode into a remote process using <code>CreateRemoteThread</code>.</p>
+<p>This approach resulted in significantly reduced detections&hellip; with only 8/68 detections&hellip;</p>
+<p>See: <a href="https://www.ired.team/offensive-security/defense-evasion/av-bypass-with-metasploit-templates">AV Bypass with Metasploit Templates and Custom Binaries</a></p>
+<p>The loader they used was a simple remote shellcode loader using <code>CreateRemoteThread</code> with no encryption or obfuscation. The code is as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdafx.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Windows.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;</span><span class="se">\x48\x31\xc9\x48\x81\xe9\xc6\xff\xff\xff\x48\x8d\x05\xef\xff</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;</span><span class="se">\xff\xff\x48\xbb\x1d\xbe\xa2\x7b\x2b\x90\xe1\xec\x48\x31\x58</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[..</span><span class="n">SNIP</span><span class="p">...]</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;</span><span class="se">\xb4\x22\x80\xcb\xe5\xe4\x57\x5a\xad\xd0\x14\x41\x90\xb8\xad</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;</span><span class="se">\x94\x64\x5d\xae\x2b\x90\xe1\xec</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">HANDLE</span> <span class="n">processHandle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">HANDLE</span> <span class="n">remoteThread</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">PVOID</span> <span class="n">remoteBuffer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Injecting to PID: %i&#34;</span><span class="p">,</span> <span class="nf">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">processHandle</span> <span class="o">=</span> <span class="nf">OpenProcess</span><span class="p">(</span><span class="n">PROCESS_ALL_ACCESS</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="nf">DWORD</span><span class="p">(</span><span class="nf">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">remoteBuffer</span> <span class="o">=</span> <span class="nf">VirtualAllocEx</span><span class="p">(</span><span class="n">processHandle</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">shellcode</span><span class="p">,</span> <span class="p">(</span><span class="n">MEM_RESERVE</span> <span class="o">|</span> <span class="n">MEM_COMMIT</span><span class="p">),</span> <span class="n">PAGE_EXECUTE_READWRITE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">WriteProcessMemory</span><span class="p">(</span><span class="n">processHandle</span><span class="p">,</span> <span class="n">remoteBuffer</span><span class="p">,</span> <span class="n">shellcode</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">shellcode</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">remoteThread</span> <span class="o">=</span> <span class="nf">CreateRemoteThread</span><span class="p">(</span><span class="n">processHandle</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">LPTHREAD_START_ROUTINE</span><span class="p">)</span><span class="n">remoteBuffer</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">CloseHandle</span><span class="p">(</span><span class="n">processHandle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The 8/68 detections caught me off guard as I was expecting much <em>much</em> higher detections, and I was curious as to why the loader was not detected by more AVs.</p>
+<blockquote>
+<p>The blog post was written in 2018.</p>
+</blockquote>
+<p>Attempting the same technique today (2024) with the same loader, resulted in 26/72 detections on VirusTotal, including <strong>Windows Defender</strong>, which was not detected in the original post in 2018.
+<img alt="vt1" src="https://i.gyazo.com/c124739b0e64e0885ec3c3d918cf4e39.png"></p>
+<p>A common misconception is that static detection is based only on file hashes, however this is not the case as proven by the above example. Static analysis can also be based on specific byte sequences, or bad bytes in executables.</p>
+<h2 id="detection-using-malicious-bytes">Detection using Malicious Bytes</h2>
+<p>The first step in identifying malicious bytes is to understand how security products detect malware. The definition given by <a href="https://www.malwarebytes.com/glossary/signature">MalwareBytes</a> of a malware signature is as follows:</p>
+<blockquote>
+<p>In computer security, a signature is a specific pattern that allows cybersecurity technologies to recognize malicious threats, such as a byte sequence in network traffic or known malicious instruction sequences used by families of malware. Signature-based detection, then, is a methodology used by many cybersecurity companies to detect malware that has already been discovered in the wild and cataloged as part of a database.</p>
+</blockquote>
+<p>The phrase: &ldquo;known malicious instruction sequences used by families of malware&rdquo; is of particular interest, as it implies that security products are looking for specific byte sequences in executables and are able to identify them as malicious based on just those sequences.</p>
+<p>This means that if we are able to accurately identify which byte sequences are being detected as malicious, we can replace them with benign bytes, and evade static detection.</p>
+<h2 id="identifying-malicious-bytes">Identifying Malicious Bytes</h2>
+<p>The process of identifying malicious bytes is simple, we can splice byte sequences from an executable and pass them into scanners repeatedly and continue until we are able to isolate exact byte sequences that are being detected as malicious. I was first introduced to this technique after watching a <a href="https://www.youtube.com/watch?v=9pwMCHlNma4">a video by ippsec</a> where he repeatedly passed byte chunks of <code>mimikatz</code> into Windows Defender and was able to identify the exact byte sequence that was being detected as malicious.</p>
+<h3 id="high-level-overview">High Level Overview</h3>
+<p>The following is an overview of the process:</p>
+<ul>
+<li>Identify whether the initial executable is malicious</li>
+</ul>
+<p><img alt="img" src="https://i.gyazo.com/bd5974b13bb7262a2071637c6f171009.png"></p>
+<ul>
+<li>If the initial executable is detected as malicious, splice the executable into half and pass each half into the scanner</li>
+</ul>
+<p><img alt="img2" src="https://i.gyazo.com/956d6651b0ee60324ac05762aafbc969.png"></p>
+<ul>
+<li>If one of the halves is detected as malicious, repeat the half-splicing process with the detected half until you are able to isolate the exact byte sequence that is being detected as malicious.</li>
+</ul>
+<p><img alt="img3" src="https://i.gyazo.com/02b45f8ac80f414166da945799ce65f1.png"></p>
+<p>After isolating the exact byte sequence that is being detected as malicious, we can calculate the offset of the byte sequence in the original executable and identify which code section it belongs to and change it to something that achieves the same functionality but produces a different byte sequence.</p>
+<h2 id="existing-tools">Existing Tools</h2>
+<p>There are multiple existing tools that can automate the process of identifying malicious bytes, such as matterpreter&rsquo;s <a href="https://github.com/matterpreter/DefenderCheck">DefenderCheck</a>, RastaMouse&rsquo;s <a href="https://github.com/rasta-mouse/ThreatCheck">ThreatCheck</a> and my own <a href="https://github.com/gatariee/gocheck">GoCheck</a> but they all serve the same purpose of identifying malicious bytes in executables.</p>
+<p>The code below (original source from <a href="https://github.com/gatariee/gocheck">GoCheck</a>) is a small snippet of how the binary splicing process is run under the hood:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Run</span><span class="p">(</span><span class="nx">token</span> <span class="nx">Scanner</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="p">[</span><span class="nx">SNIP</span><span class="p">]</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">tempDir</span> <span class="o">:=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nf">TempDir</span><span class="p">(),</span> <span class="s">&#34;gocheck&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">os</span><span class="p">.</span><span class="nf">MkdirAll</span><span class="p">(</span><span class="nx">tempDir</span><span class="p">,</span> <span class="mi">0</span><span class="nx">o755</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">testFilePath</span> <span class="o">:=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">tempDir</span><span class="p">,</span> <span class="s">&#34;testfile.exe&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">lastGood</span> <span class="o">:=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">upperBound</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">original_file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">mid</span> <span class="o">:=</span> <span class="nx">upperBound</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">threatFound</span> <span class="o">:=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">upperBound</span><span class="o">-</span><span class="nx">lastGood</span> <span class="p">&gt;</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">testFilePath</span><span class="p">,</span> <span class="nx">original_file</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">mid</span><span class="p">],</span> <span class="mi">0</span><span class="nx">o644</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">utils</span><span class="p">.</span><span class="nf">PrintErr</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;failed to write to test file: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">scanner</span><span class="p">.</span><span class="nf">Scan</span><span class="p">(</span><span class="nx">testFilePath</span><span class="p">,</span> <span class="nx">threat_names</span><span class="p">)</span> <span class="o">==</span> <span class="nx">ThreatFound</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">threatFound</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">upperBound</span> <span class="p">=</span> <span class="nx">mid</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">lastGood</span> <span class="p">=</span> <span class="nx">mid</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mid</span> <span class="p">=</span> <span class="nx">lastGood</span> <span class="o">+</span> <span class="p">(</span><span class="nx">upperBound</span><span class="o">-</span><span class="nx">lastGood</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="p">[</span><span class="nx">SNIP</span><span class="p">]</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="application-with-cobalt-strike">Application with Cobalt Strike</h2>
+<p>Let&rsquo;s attempt to identify malicious bytes in a default Cobalt Strike beacon since it has this wonderful evasion feature known as the &ldquo;Artifact Kit&rdquo; which allows us to customize the loading techniques used by the beacon.</p>
+<p>We can generate a default beacon by navigating to <code>Payloads</code> -&gt; <code>Windows Stageless Payload</code> -&gt; <code>Generate</code></p>
+<p><img alt="cobalt" src="https://i.gyazo.com/02841312054b5ea1046211e3cfb189b1.png"></p>
+<p>Now, we can pass it into <a href="https://github.com/gatariee/gocheck">GoCheck</a>.</p>
+<p><img alt="cobalt2" src="https://i.gyazo.com/2e087966205436d49f281beaea11d371.png"></p>
+<p>And, we were able to identify that the payload was signatured as: <code>Win64/CobaltStrike.NP!dha</code>, <code>Win64/CobaltStrike.CB!MTB</code> and <code>Win64/CobaltStrike.HN!MTB</code> by Windows Defender, with the first offending byte at an offset of: <strong>0x9DD</strong>.</p>
+<p>Next, we can pass the executable into a decompiler such as <a href="https://ghidra-sre.org/">Ghidra</a> and identify the code section that the byte sequence belongs to, we can jump to a memory offset using <code>G</code> and provide the offset as: <code>file ( OFFSET )</code></p>
+<p><img alt="ghidra" src="https://i.gyazo.com/8bf01144f36a4cbbeb64176aae21fbc7.png"></p>
+<p>And, we are able to identify that the byte sequence flagged belongs to the <code>.code</code> section, and specifically flags within the shellcode decryption routine of beacon.</p>
+<p><img alt="ghidra2" src="https://i.gyazo.com/07fb8276c5adc3589eaab41a20189245.png"></p>
+<p>The decompiled code allows us to pretty obviously see that this code section occurs after a call to <code>VirtualAlloc</code> with <code>0x4</code> passed to <code>flProtect</code> indicating <code>PAGE_EXECUTE_READWRITE</code> (RWX) and before a call to <code>VirtualProtect</code> with <code>0x2</code> passed to <code>flNewProtect</code> indicating <code>PAGE_EXECUTE_READ</code> (RX), which is a pretty good indicator that this is where the shellcode is decrypted, and <code>FUN_00401563</code> is likely <code>RtlMoveMemory</code>.</p>
+<p><img alt="ghidra3" src="https://i.gyazo.com/e09a725df8f2f7d8ea44f89fea9cc5e3.png"></p>
+<p>With all of these details, we can infer that the byte sequence flagged can likely be easily replaced with another loop that achieves the same decryption routine without touching any of the API calls.</p>
+<p>However, due to my seething hatred for the Cobalt Strike Artifact Kit, I will not be providing a POC for this- but here&rsquo;s Raphael&rsquo;s video on <a href="https://www.youtube.com/watch?v=6mC21kviwG4">using the Artifact Kit for Cobalt Strike 4.0</a></p>
+<h2 id="takeaways">Takeaways</h2>
+<p>The reason I wrote this blog was to provide a high level overview of the process of identifying malicious bytes in executables, and to provide a simple example of how it can be used in conjunction with Cobalt Strike&rsquo;s Artifact Kit to generate evasive beacons.</p>
+<p>For most cases, we tend to write our own custom loaders and encrypt our shellcode, which is a much more effective way of evading static detection as the custom nature of the loader and encryption will result in a completely different byte sequence, and the use of a custom loader will result in a completely different hash.</p>
+<p>However, the process of identifying malicious bytes is still useful in cases where writing a custom loader is not feasible as we want to retrieve output from a specific tool, or god forbid we are forced to use Cobalt Strike&rsquo;s Artifact Kit.</p>
+<h2 id="references">References</h2>
+<p>If you have any questions or feedback, feel free to flame me on <a href="https://twitter.com/gatariee">Twitter</a>.</p>
+<ul>
+<li><a href="https://www.ired.team/offensive-security/defense-evasion/av-bypass-with-metasploit-templates">AV Bypass with Metasploit Templates and Custom Binaries</a></li>
+<li><a href="https://github.com/matterpreter/DefenderCheck">Matterpreter&rsquo;s DefenderCheck</a></li>
+<li><a href="https://github.com/rasta-mouse/ThreatCheck">RastaMouse&rsquo;s ThreatCheck</a></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>

