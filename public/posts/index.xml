@@ -6,7 +6,20 @@
     <description>Recent content in Posts on gatari&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Certified Certification Collector</title>
+      <link>http://localhost:1313/posts/certified-cert-collector/</link>
+      <pubDate>Sun, 19 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/certified-cert-collector/</guid>
+      
+      <description>I did 6 certifications in 9 months, so that you don&amp;rsquo;t have to!
+Introduction In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the Industry Preparation for Pre-graduate (iPREP) Programme offered by The InfoComm Media Development Authority (IMDA).
+The iPREP Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education.</description>
+      
+    </item>
+    
     <item>
       <title>The Art of Exploiting Active Directory from Linux</title>
       <link>http://localhost:1313/posts/ad-linux/</link>

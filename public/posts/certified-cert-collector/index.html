@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Certified Certification Collector | gatari&#39;s blog</title>
+<meta property="og:title" content="Certified Certification Collector | gatari&#39;s blog" />
+<meta name="twitter:title" content="Certified Certification Collector | gatari&#39;s blog" />
+<meta itemprop="name" content="Certified Certification Collector | gatari&#39;s blog" />
+<meta name="application-name" content="Certified Certification Collector | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/certified-cert-collector/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-01-19T00:00:00Z />
+    <meta property="article:published_time" content=2025-01-19T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/certified-cert-collector/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Certified Certification Collector",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-01-19",
+        "description": "",
+        "wordCount":  3970 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-01-19",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="Certified Certification Collector" />
+<meta property="og:description" content="I did 6 certifications in 9 months, so that you don&rsquo;t have to!
+Introduction In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the Industry Preparation for Pre-graduate (iPREP) Programme offered by The InfoComm Media Development Authority (IMDA).
+The iPREP Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/certified-cert-collector/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-01-19T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Certified Certification Collector"/>
+<meta name="twitter:description" content="I did 6 certifications in 9 months, so that you don&rsquo;t have to!
+Introduction In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the Industry Preparation for Pre-graduate (iPREP) Programme offered by The InfoComm Media Development Authority (IMDA).
+The iPREP Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/certified-cert-collector/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Certified Certification Collector</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-01-19T00:00:00&#43;00:00" itemprop="datePublished"> 19 Jan 2025 </time>
+                </div>
+                
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#certification-dilemma">Certification Dilemma</a>
+      <ul>
+        <li><a href="#will-i-be-good-after-getting-the-certifications">Will I be good after getting the certifications?</a></li>
+        <li><a href="#is-it-worth-the-time">Is it worth the time?</a></li>
+        <li><a href="#is-it-worth-the-effort">Is it worth the effort?</a></li>
+        <li><a href="#is-it-worth-the-money">Is it worth the money?</a></li>
+      </ul>
+    </li>
+    <li><a href="#thoughts">Thoughts</a>
+      <ul>
+        <li><a href="#general-reviews">General Reviews</a>
+          <ul>
+            <li><a href="#ejptv2-july-2023">eJPTv2 (July 2023)</a></li>
+            <li><a href="#crto-october-2023">CRTO (October 2023)</a></li>
+            <li><a href="#cartp-april-2024">CARTP (April 2024)</a></li>
+            <li><a href="#crtp-july-2024">CRTP (July 2024)</a></li>
+            <li><a href="#crte-august-2024">CRTE (August 2024)</a></li>
+            <li><a href="#oscp-november-2024">OSCP+ (November 2024)</a></li>
+            <li><a href="#cpts-december-2024">CPTS (December 2024)</a></li>
+            <li><a href="#crtl-january-2025">CRTL (January 2025)</a></li>
+          </ul>
+        </li>
+        <li><a href="#how-hard-is-the-new-oscp">How hard is the new OSCP+?</a></li>
+        <li><a href="#cpts-or-oscp">CPTS or OSCP?</a></li>
+        <li><a href="#crtl-crto-crte-or-crtp">CRTL, CRTO, CRTE or CRTP?</a>
+          <ul>
+            <li><a href="#crtl--crto">CRTL / CRTO</a></li>
+            <li><a href="#crte--crtp">CRTE / CRTP</a></li>
+          </ul>
+        </li>
+        <li><a href="#im-a-student-how-do-i-get-started">I&rsquo;m a student, how do I get started?</a></li>
+        <li><a href="#im-considering-a-career-change-how-do-i-get-started">I&rsquo;m considering a career change, how do I get started?</a></li>
+        <li><a href="#what-do-i-do-after-cpts">What do I do after CPTS?</a></li>
+        <li><a href="#how-about-cape-hack-the-box">How about CAPE? (Hack The Box)</a></li>
+        <li><a href="#ejptv2-or-oscp">eJPTv2 or OSCP?</a></li>
+        <li><a href="#how-about-the-web-certifications">How about the web certifications?</a></li>
+        <li><a href="#osce3-when">OSCE3 when?</a></li>
+        <li><a href="#should-i-follow-your-path">Should I follow your path?</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#useful-links">Useful Links</a></li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <p>I did 6 certifications in 9 months, so that you don&rsquo;t have to!</p>
+<p><img alt="graph" src="/posts/certified-cert-collector/61e28902caf22ff636f8c0b26d902ebd.png"></p>
+<h2 id="introduction">Introduction</h2>
+<p>In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the <a href="https://www.imda.gov.sg/-/media/imda/files/about/media-releases/2017/annex-a---factsheet-of-the-iprep-programme.pdf">Industry Preparation for Pre-graduate (iPREP) Programme</a> offered by <a href="https://www.imda.gov.sg/">The InfoComm Media Development Authority (IMDA)</a>.</p>
+<p>The <code>iPREP</code> Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education. Unfortunately, a quick google search of the programme does not yield many results - but the <a href="https://nus.edu.sg/cfg/home/24">National University of Singapore (NUS)</a> and the <a href="https://computing.smu.edu.sg/undergraduate/beyond/iprep">Singapore Management University (SMU)</a> have pages dedicated to the programme, although the latter seems to be locked behind a login wall.</p>
+<p>Thankfully for me, <a href="https://www.sp.edu.sg/">Singapore Polytechnic (SP)</a> is also a participating institution and I was able to take advantage of the scheme.</p>
+<p>I managed to complete the following certifications during my full-time study at SP (in no particular order):</p>
+<ul>
+<li><a href="https://www.credential.net/6bf1e148-b2ea-490b-83dd-d4b33203720c">OffSec Certified Professional (OSCP+)</a> ❌</li>
+<li><a href="https://www.credly.com/badges/994bae50-fd4d-4cb2-9e49-fa1dd46844ee/">Certified Penetration Testing Specialist (CPTS)</a> ❌</li>
+<li><a href="https://eu.badgr.com/public/assertions/qSieUe-JSvK3Q3r3oGYjQA">Certified Red Team Lead (CRTL)</a> ❌</li>
+<li><a href="https://eu.badgr.com/public/assertions/B15X3Nb5TgaphN0epdKnbg">Certified Red Team Operator (CRTO)</a> ✅ - SGD$500</li>
+<li><a href="https://www.credential.net/648733ee-30f4-461d-ab3e-347e75870609">Certified Red Team Expert (CRTE)</a> ❌</li>
+<li><a href="https://www.credential.net/c43291df-a1c5-47d3-84cf-30702829adb7">Certified Red Team Professional (CRTP)</a>  ❌</li>
+<li><a href="https://www.credential.net/a41e5fc9-46dc-4a6b-84f7-a0f5ca45c21f#gs.7d8lp5">Certified Azure Red Team Professional (CARTP)</a> ❌</li>
+<li><a href="https://certs.ine.com/fa4d8f27-743b-4475-b676-a2f9fbe203be#gs.67vdcs">eLearnSecurity Junior Penetration Tester (eJPTv2)</a> ✅ - Full Reimbursement</li>
+</ul>
+<p>I have not been reimbursed for <strong>all</strong> of the above certifications, and cannot attest to whether or not the above certifications are still eligible for the <code>iPREP</code> Programme at this point in time. This post will be edited to reflect the current state of the reimbursement, as the reimbursement process can take a couple of months.</p>
+<h2 id="certification-dilemma">Certification Dilemma</h2>
+<p>A fair warning that the remainder of this post may have controversial opinions, please don&rsquo;t continue reading if you are easily offended.</p>
+<p><img alt="img" src="/posts/certified-cert-collector/guc.jpg"></p>
+<p>Many people have asked me about the value of certifications and whether they are worth the time and effort - especially those in a similar situation to mine, currently enrolled in a local institute of higher education.</p>
+<h3 id="will-i-be-good-after-getting-the-certifications">Will I be good after getting the certifications?</h3>
+<p>No, certifications are simply a means to an end - and are not a replacement for experience and should <strong>not</strong> be viewed as such. I believe that it is the practical experience that you gain from the certifications that are the most valuable, and not the certification itself.</p>
+<p>The objective of certifications is to give you the relevant fundamental knowledge to do your own research, and to provide you with a structured learning path that you can follow. Simply copying and pasting commands from course materials won’t make you a professional, nor will relying solely on the knowledge provided in those materials.</p>
+<p>If you don&rsquo;t have any relevant industry experience - you can express your competence by doing independent research, doing some box writeups, working on projects, or really anything that shows that you have a genuine interest in the field.</p>
+<h3 id="is-it-worth-the-time">Is it worth the time?</h3>
+<p>I will be addressing the question of whether or not certifications are worth the time in the <strong>context of a full-time student in high school, or university</strong>.</p>
+<p>I firmly believe that pursuing certifications doesn’t require dedicating a significant amount of time. In fact, a large portion of the time I spent on certifications was during lectures and tutorials, where my lecturer was quite literally reading directly from the slides.</p>
+<p><img src="./For%20my%20presentation%20today,%20I'll%20%20be%20reading%20the%20powerpoint%20%20slides%20word%20for%20word_.jpg"></p>
+<p>Generally, the only times I dedicated time outside of my daily &ldquo;working&rdquo; hours to certifications was when I was doing the examination for the course - a couple hours on the weekend or holidays were dedicated to this.</p>
+<p>If you&rsquo;re able to multitask relatively well, and relate to the above situations, then I would say that grinding out certifications is definitely worth the time - and probably more useful than listening to your lecturer drone on about the same topic for the 5th time.</p>
+<h3 id="is-it-worth-the-effort">Is it worth the effort?</h3>
+<p>Contrary to what I just said, I believe that <em>some</em> certifications are absolutely worth grinding out - even if it means sacrificing a couple of hours after school, or on the weekends.</p>
+<p>If you intend to pursue a career in offensive security in Singapore, <a href="https://docs.developer.tech.gov.sg/docs/security-testing-guidelines/penetration-test">you will minially require the OffSec Certified Professional (OSCP) certification or the CREST Registered Tester (CRT) certification.</a></p>
+<p><img src="./35dc404e40ea8721285a97149b125cdd.png"></p>
+<p>For Singaporean pre-enlistees, you will have plenty of time during your National Service (NS) to grind out the OSCP certification. For those who have completed their NS or are not required to serve (female, non-Singaporean, etc.), I would recommend grinding out the OSCP certification as soon as possible.</p>
+<p>If the latter applies to you, and are currently enrolled in a Polytechnic - then it&rsquo;s great news because the work load in Polytechnic is significantly less than that of a University so you&rsquo;ll have plenty of time to grind it out. More importantly, the possibility of failure isn&rsquo;t as daunting, as you have plenty of time to retake the examination before entering the workforce.</p>
+<p>If you intend to join the workforce directly after graduating from a Polytechnic, then you will absolutely require the OSCP (and more) to be even be considered for a junior role in most offensive security teams. (it&rsquo;s not up to them, OSCP/CRT is the industry requirement in order to remain compliant).</p>
+<h3 id="is-it-worth-the-money">Is it worth the money?</h3>
+<p>It depends™</p>
+<p>Some certifications are absolutely worth it for the knowledge that they provide, such as the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-penetration-testing-specialist">Certified Penetration Testing Specialist (CPTS)</a>, <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">Certified Red Team Operator (CRTO)</a>, and <a href="https://www.alteredsecurity.com/redteamlab">Certified Red Team Expert (CRTE)</a> - but others can simply be another line on your resume.</p>
+<p>Ultimately, it depends on your goals and aspirations. If you&rsquo;re looking to join a red team, then the CRTO may be worth it simply for the on-hands practice with <a href="https://www.cobaltstrike.com/">Cobalt Strike</a> for an affordable price.</p>
+<h2 id="thoughts">Thoughts</h2>
+<p>Rather than writing a detailed review for every certification that I have completed (since so many others have already done so), I will just provide a general review of each certification that I have completed. Additionally, I will address the questions that people have asked me in private; and questions that I wish I had the answers to when I was starting out.</p>
+<p>Some answers may have repeated information as I expect people to only read the sections that they are interested in.</p>
+<h3 id="general-reviews">General Reviews</h3>
+<p>First and foremost, I must say that I finished some certifications at an unrealistic pace as I had some prior experience with the topics covered in the certifications. On the contrary, I was either studying full-time, or working full-time during the period(s) that I completed the certifications.</p>
+<h4 id="ejptv2-july-2023">eJPTv2 (July 2023)</h4>
+<p><img src="./1689609558986.jpg"></p>
+<p>Prior to the eJPTv2, I had been doing primarily Easy/Medium boxes on Hack The Box for about 3-4 months. I started the eJPTv2 exam nearly right after buying the course with 0 lab completion, <strong>the exam took me around 1 hour to complete</strong>.</p>
+<p>I wouldn&rsquo;t pay for the eJPTv2 certification out of pocket, but if you can get it reimbursed then it&rsquo;s a good way to show that you have some interest in security outside of your studies.</p>
+<p>Would I do it again? ❌</p>
+<h4 id="crto-october-2023">CRTO (October 2023)</h4>
+<p><img src="./bbc1d91189dab701392af20f07f7f0cb.png"></p>
+<p>The labs took me about <strong>20 hours to complete (over a 2 week period)</strong>, additionally reading through the course materials took south of <strong>2 weeks at about 2 hours of study per day</strong>. This course was really good, I covered a little more about it here: <a href="/posts/certified-cert-collector/#crtl--crto">#crto-crtl</a></p>
+<p>The exam took me around <strong>8 hours in total to complete</strong>, including a 4-hour nap where I did not shut off the exam timer.</p>
+<p>Would I do it again? ✅ in a heartbeat</p>
+<h4 id="cartp-april-2024">CARTP (April 2024)</h4>
+<p><img src="./1712901281347.jpg"></p>
+<p>This venture was a little bit strange as I had no prior experience with Azure, but felt like learning some cloud one day. The labs took me about <strong>5 days to complete (at 8 hours per day)</strong>, and the exam took me around 4 hours to complete.</p>
+<p>The course materials were actually pretty good at teaching the basics of Entra ID, my only complaint was that it felt like the labs kept going in circles and taking a weird detour midway through an exploitation chain.</p>
+<p>Would I do it again? ❌ (only if it was reimbursed)</p>
+<h4 id="crtp-july-2024">CRTP (July 2024)</h4>
+<p><img src="./1721979822506.jpg"></p>
+<blockquote>
+<p>For both the CRTP and CRTE, I <em>must</em> add that I had extensive prior experience with Active Directory exploitation and largely did <em>not</em> follow the content taught in the course and opted to use my own methodology and tooling instead.</p>
+</blockquote>
+<p>Prior to attempting the CRTP, I had completed the CRTO, and the Dante, Rasta, Zephyr, Offshore and Cybernetics prolabs on Hack The Box. See: <a href="https://gatari.dev/posts/economic-rt/">here</a>.</p>
+<p>The labs took me about <strong>2 days to fully complete, at 14 hours a day</strong>. The exam took me around <strong>1 hour</strong> to fully complete, excluding the reporting time which took an additional hour. The exam was extremely straightforward, and should be doable in a similar time frame for anyone who has completed the labs (without referring to the lab writeup).</p>
+<p>I used <a href="https://github.com/BishopFox/sliver">Sliver</a> for the lab &amp; exam, and performed most attacks from Linux. I&rsquo;d recommend checking out <a href="https://github.com/its-a-feature/Mythic">Mythic</a> and <a href="https://github.com/HavocFramework/Havoc">Havoc</a> too.</p>
+<p>Would I do it again? ❌ (only if it was reimbursed)</p>
+<h4 id="crte-august-2024">CRTE (August 2024)</h4>
+<p><img src="/posts/certified-cert-collector/1725079083725.jpg"></p>
+<p>Prior to attempting the CRTP, I had completed the CRTO, CRTP, and the Dante, Rasta, Zephyr, Offshore and Cybernetics prolabs on Hack The Box. See: <a href="https://gatari.dev/posts/economic-rt/">here</a>.</p>
+<p>I&rsquo;d heavily recommend making full use of your lab time (especially so for CRTE) as the labs are incredibly valuable, I even used it for <a href="https://gatari.dev/posts/ad-linux/">this blog post</a>. I&rsquo;d also recommend learning to use a C2 framework for this exam, although it&rsquo;s completely unnecessary; it can make your life a lot easier if used correctly. The above linked blog post may help get you started with <a href="https://github.com/BishopFox/sliver">Sliver</a>.</p>
+<p>The labs took me about <strong>4 days to fully complete, at 8 hours a day</strong>.</p>
+<p>The exam took me around <strong>3 hours</strong> to fully complete. The exam was really fun, and although relatively straightforward, has some difficult quirks that may trip you up if you&rsquo;re not really familiar with your tools.</p>
+<p>Similar to the CRTP, I used <a href="https://github.com/BishopFox/sliver">Sliver</a> for the lab &amp; exam.</p>
+<p>Would I do it again? ✅</p>
+<h4 id="oscp-november-2024">OSCP+ (November 2024)</h4>
+<p><img src="/posts/certified-cert-collector/1732106864643.jpg"></p>
+<p>I&rsquo;ll go in greater detail about the OSCP+ exam in the <a href="/posts/certified-cert-collector/#how-hard-is-the-new-oscp">next section</a>, but I&rsquo;ll provide a general review of my experience with the OSCP+ course. Over the course of about <strong>2 months</strong>, I fully completed <a href="https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt/edit?gid=487240997#gid=487240997">Lainkusanagi&rsquo;s OSCP-Like PG Practice Boxes</a>, <a href="https://portal.offsec.com/courses/pen-200-44065/labs">Secura, Medtech, OSCP-A-B-C, Zeus and Poseidon Challenge Labs</a>.</p>
+<p>I did not do any of the PEN-200 labs, or course material and fully relied on the above (and prior experience) to pass the OSCP+ exam. The exam took me <strong>3 hours to achieve a passing score</strong>, of which only 10/40 points were from the Active Directory set.</p>
+<p>Would I do it again? ✅ (only if it was required by the industry)</p>
+<h4 id="cpts-december-2024">CPTS (December 2024)</h4>
+<p><img src="./1736863899794.jpg"></p>
+<p>Although I only receieved the passing notification in January 2025, I completed the CPTS exam with 100/100 points and submitted my report in December 2024.</p>
+<p>The full <strong>Penetration Tester path took me about 6 months</strong> to complete, but I realistically only spent about <strong>2 months</strong> actively working on the modules. (~4 hours a day).</p>
+<p>The exam took me around <strong>3 days</strong> to get 14/14 flags, and the report took an additional <strong>2 days</strong> to complete and totalled around 165 pages; which was also my first time writing a report.</p>
+<p>I highly recommend the CPTS certification to anyone who is looking to get into offensive security, and I still frequently refer back to the course materials for reference when working on other labs.</p>
+<p>Would I do it again? ✅ absolutely</p>
+<h4 id="crtl-january-2025">CRTL (January 2025)</h4>
+<p><img src="/posts/certified-cert-collector/1736044785029.jpg"></p>
+<p>The CRTL course is probably one of the best purchases I have made in terms of certifications. The course provides an extremely gentle introduction to EDR evasion, and does <strong>not</strong> handhold you through the process of evading common rules.</p>
+<p>Instead, there&rsquo;s a larger focus on teaching the methodology and thought process behind evading EDRs. This method of teaching is a complete 180 from the prequel (CRTO) which is quite handholdy in comparison.</p>
+<p>I couldn&rsquo;t recommend this course enough to anyone who is looking to get into red teaming, <a href="https://x.com/_RastaMouse">@RastaMouse</a> did an incredible job designing this course.</p>
+<p>The exam took me around <strong>4 hours</strong> to get a passing score, and I did not buy the labs - however I had a <a href="https://docs.ludus.cloud/docs/environment-guides/elastic">local lab running Elastic 12.2 with Ludus</a>, ignoring the <a href="https://www.elastic.co/security-labs/upping-the-ante-detecting-in-memory-threats-with-kernel-call-stacks">8.8+ kernel call stack detections</a> as the course was designed with 8.5 in mind.</p>
+<p>For those who have your own <a href="https://www.cobaltstrike.com/">Cobalt Strike license</a>, and a home-lab running Elastic - <a href="https://github.com/elastic/protections-artifacts/tree/7544cd7c2e7aa2b2a5552e45610e6837b3777d1a/behavior/rules">these are the rules</a> I used for my local practice. For the Elastic AV, just ensure that you can evade the latest version.</p>
+<p>Would I do it again? ✅ in a heartbeat</p>
+<h3 id="how-hard-is-the-new-oscp">How hard is the new OSCP+?</h3>
+<blockquote>
+<p>FWIW: There are a lot of other reviews that claim the opposite of what I&rsquo;m about to claim.</p>
+</blockquote>
+<p>I found my exam set to be significantly harder than the general consensus of the OSCP exam sets, although there seems to be a divide on this topic. I know several people who found the exam incredibly easy, and others who also found it incredibly difficult - it is ultimately up to which exam set you get.</p>
+<p>Similar to <a href="https://xre0us.io/posts/cpts-oscp-and-you/#oscp-1">this post by Xre0us</a>, my exam set also had standalones that <em>required</em> custom scripts to be written in order to exploit the box. The existing OSCP (PEN-200) materials <em>do not</em> sufficiently prepare an individual to pass the OSCP+ exam currently, it almost feels as if Offsec <strong>wants</strong> you to fail the exam to milk you for an additional retake fee.</p>
+<p>That being said, I passed the OSCP+ exam with 70/100 points (10 AD + 3x20 Standalone) in 3 hours and unfortunately could not guess hard enough to complete the remainder of my AD set - which I did not care to finish anyway.</p>
+<p>I would love to see some statistics on the passing rate of the OSCP exam based on which set the individual received, sometimes I wonder if Offsec themselves review these statistics.</p>
+<p>The post linked below has a more extensive discussion on the current state of OSCP:</p>
+<ul>
+<li><a href="https://www.linkedin.com/posts/robin-unglaub_tldr-kicking-off-the-year-with-the-oscp-activity-7284950654417063936-YI08/?utm_source=share&utm_medium=member_desktop">https://www.linkedin.com/posts/robin-unglaub_tldr-kicking-off-the-year-with-the-oscp-activity-7284950654417063936-YI08/?utm_source=share&amp;utm_medium=member_desktop</a></li>
+</ul>
+<h3 id="cpts-or-oscp">CPTS or OSCP?</h3>
+<p>In light of the <a href="https://www.offsec.com/blog/everything-you-need-to-know-about-the-oscp-plus/">recent updates</a> to the OSCP Certification, the <a href="https://www.reddit.com/r/oscp/comments/1hpm0ft/oscp_prices_are_increasing_from_jan_2025/">comical 10% flat price increase</a> in January 2025, the exam sets being nothing short of a <a href="https://www.linkedin.com/posts/robin-unglaub_tldr-kicking-off-the-year-with-the-oscp-activity-7284950654417063936-YI08/?utm_source=share&utm_medium=member_desktop">rigged lottery</a>, and the fact that the CPTS is a fraction of the price - I find it increasingly difficult to recommend the OSCP to anyone.</p>
+<p>Additionally, my exam set for OSCP felt more akin to the syllabus of <a href="https://www.alteredsecurity.com/adlab">CRTP</a> which is definitely out of the official scope of the PEN-200 course (sometimes I wonder if Offsec does this on purpose). See: <a href="/posts/certified-cert-collector/#crte--crtp">here</a></p>
+<p><img src="./2d44d534c5ef192a5a972de06e6d2f54.png"></p>
+<p><img src="./09e1ef4aa2c6bc83643c422156b1fcf2.png"></p>
+<p>The CPTS covers everything that OSCP does, and more - and the exam was much harder, but did not feel nearly as frustrating as my OSCP exam did. Additionally, the reporting requirements for the CPTS are much more stringent than that of the OSCP, which is a good thing as it forces you to write a report that is more inline with what you would be expected to write in a professional setting.</p>
+<p>My CPTS report totaled around 165 pages, with a <a href="https://docs.sysreptor.com/assets/reports/HTB-CPTS-Report.pdf">proper executive summary, methodology, detailed findings, remediations and findings</a>, whereas my OSCP report was a measly 30 pages that was <a href="https://docs.sysreptor.com/assets/reports/OSCP-Exam-Report.pdf">essentially a walkthrough of the boxes</a>.</p>
+<p>It is worth noting the sentiment that &ldquo;passing CPTS guarantees that you will pass OSCP&rdquo; does not hold as much truth in 2025, as the OSCP exam sets have become increasingly difficult (in terms of obscurity), and playing Roulette or Baccarat will probably prepare you better for some of the exam sets.</p>
+<p>That being said, as mentioned earlier, the OSCP is still the industry requirement for most offensive security roles in Singapore (and most other countries) - so if you&rsquo;re looking to join an offensive security team, you will eventually have to bite the bullet and roll the dice on OSCP.</p>
+<h3 id="crtl-crto-crte-or-crtp">CRTL, CRTO, CRTE or CRTP?</h3>
+<p>This was probably the most asked question that I received, and the answer is simple - you can&rsquo;t compare CRTL/CRTO with CRTE/CRTP as they are fundamentally different certifications that cater to different audiences.</p>
+<h4 id="crtl--crto">CRTL / CRTO</h4>
+<p><a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops-ii">CRTL</a> and <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">CRTO</a> are incredible courses by <a href="https://training.zeropointsecurity.co.uk/">Zero-Point Security</a> that cover adversary simulation, with a focus on operational security (OPSEC) and covert operations. The course is incredibly hands-on, and you will be using <a href="https://www.cobaltstrike.com/">Cobalt Strike</a> for the majority of the course.</p>
+<p>Although <em>some</em> attacks are taught, the focus is <strong>not</strong> on the attacks themselves but rather the OPSEC failures that may lead to detection - by it&rsquo;s nature, the course is catered to more experienced testers who are looking to improve their tradecraft, <strong>not</strong> complete beginners trying to learn Active Directory exploitation.</p>
+<p>Additionally, CRTL is a continuation of CRTO with Elastic 8.5 running on Prevent mode - which significantly adds to the difficulty of the course.</p>
+<blockquote>
+<p>That being said, the CRTO was my first certification, and I was able to complete it with no prior experience - but I would not recommend it to someone who is a complete beginner.</p>
+</blockquote>
+<h4 id="crte--crtp">CRTE / CRTP</h4>
+<p>Now, if you are a complete beginner trying to learn Active Directory exploitation, then these 2 course are more suited for you. <a href="https://www.alteredsecurity.com/adlab">CRTP</a> and <a href="https://www.alteredsecurity.com/redteamlab">CRTE</a> are more focused on Active Directory exploitation, with the latter being the continuation of the former.</p>
+<p><img src="./crtp.png"></p>
+<p>If you&rsquo;re fresh out of OSCP/CPTS, and looking for a course that will teach you how to exploit Active Directory, then you&rsquo;re probably looking for either of these certifications. Whichever one you choose is up to you, but I would recommend starting with the CRTP if you have never done Active Directory exploitation before.</p>
+<p>Similarly, if you&rsquo;re short on time/money, skipping CRTP might be wise.</p>
+<h3 id="im-a-student-how-do-i-get-started">I&rsquo;m a student, how do I get started?</h3>
+<p>I strongly recommend starting with the CPTS certification, it&rsquo;ll give you the fundamentals to do pretty much any other certification that you want to do. Additionally, the CPTS is the cheapest certification on this list (if you are a student, see next paragraph), and is the most beginner friendly.</p>
+<p>If you have an email that is associated with an educational instution, you can get a <a href="https://help.hackthebox.com/en/articles/7973133-getting-the-student-subscription">USD$8.00/month subscription to Hack The Box Academy</a> - which unlocks all Tier II modules. These modules are enough to complete the full path for the CPTS, CBBH and CDSA certifications, although exam vouchers are sold separately.</p>
+<p><img src="./dbfd96f51517f44856511cbe85cb4041.png"></p>
+<p>I have personally fully completed the CPTS, CBBH, CWEE, and the new CAPE (ty CSA) paths on Hack The Box Academy, and can attest to the quality of the content. After completing the CPTS, you can look into OSCP/CRTP/CRTE in any order of your choice depending on your goals.</p>
+<blockquote>
+<p>CPTS, CBBH and CDSA are Tier II paths, CWEE and CAPE have Tier III modules that will not be covered by the student subscription.</p>
+</blockquote>
+<h3 id="im-considering-a-career-change-how-do-i-get-started">I&rsquo;m considering a career change, how do I get started?</h3>
+<p>As mentioned <a href="/posts/certified-cert-collector/#is-it-worth-the-effort">above</a>, in Singapore you will minimally require the OSCP or CRT certification to be considered for a role in an offensive security team. Unfortunately, you will need to grind out the OSCP certification as soon as possible, as the industry requirement is not up to the companies themselves.</p>
+<p>Depending on how much time you have (or desperate you are), you can look into the CPTS certification to get a feel for the industry and see if it&rsquo;s something that you&rsquo;re interested in before biting the bullet on OSCP.</p>
+<h3 id="what-do-i-do-after-cpts">What do I do after CPTS?</h3>
+<p>Congratulations on completing the CPTS certification, the exam and the whole path is pretty difficult and you should take a short break and celebrate your achievement. After that, you&rsquo;ll probably have to think about your goals.</p>
+<p>Once again, unfortunately if you&rsquo;re in Singapore, OSCP is the next logical step if you&rsquo;re looking to join an offensive security team. If you&rsquo;re not in a rush to get into the industry, you should think about what specialization you&rsquo;re interested in.</p>
+<p>If you&rsquo;re into AD, then CRTP/CRTE (you can skip CRTP) is what I&rsquo;d recommend, see: <a href="/posts/certified-cert-collector/#crte-august-2024">#CRTE</a>. If you&rsquo;re into red teaming, then CRTO is a great next step, see: <a href="/posts/certified-cert-collector/#crto-october-2023">#CRTO</a>. I can&rsquo;t comment on other specializations.</p>
+<h3 id="how-about-cape-hack-the-box">How about CAPE? (Hack The Box)</h3>
+<p><img src="./27ca5661b4c4e08462c17be02635867a.png"></p>
+<p>The <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert">Certified Active Directory Penetration Testing Expert (CAPE)</a> is Hack The Box&rsquo;s newest AD certification, and is supposed to be the successor to the CPTS. I have not done the exam so I cannot comment on the examination difficulty but I have completed the CAPE learning path.</p>
+<p>The CAPE learning path is a lot more difficult than the CPTS learning path, and I would recommend having some prior experience with Active Directory exploitation before attempting the CAPE learning path - I&rsquo;d recommend having at least completed the CPTS before starting on the CAPE learning path. (but it&rsquo;s optional of course)</p>
+<p>The CAPE learning path is also <a href="https://www.reddit.com/r/hackthebox/comments/1hb53lp/comment/m1g4ewj/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button">significantly more expensive than the CPTS learning path (~USD$1000)</a>, and is not nearly as recognized as something like <a href="https://www.offsec.com/courses/pen-300/">OSEP</a> (not that I would be happy to recommend that either).</p>
+<p>The CAPE path took me about <strong>2 months</strong> to fully complete.</p>
+<h3 id="ejptv2-or-oscp">eJPTv2 or OSCP?</h3>
+<p>Okay so, I&rsquo;ve seen a lot of people asking this question and I think it&rsquo;s a little bit silly. The <a href="https://security.ine.com/certifications/ejpt-certification/">eJPTv2</a>, and the OSCP are not comparable in difficulty.</p>
+<p>eJPTv2 doesn&rsquo;t really show any technical competency, although it can be useful in demonstrating that you have some interest in security outside of your studies; other than that. Additionally, eJPTv2 has an extremely large reliance on the <a href="https://www.metasploit.com/">Metasploit Framework</a> which is only allowed one usage in OSCP (not that it helps anyway)</p>
+<p>If you currently have the eJPTv2 and feel discouraged by what I just said, not to worry - it&rsquo;s still a good certification to have on your resume, and can be a good conversation starter in interviews. Although, I had a rude awakening when I realized that the eJPTv2 was not nearly as difficult as the OSCP.</p>
+<h3 id="how-about-the-web-certifications">How about the web certifications?</h3>
+<p>I have not done any web certifications, and cannot comment on the difficulty or quality of the web certifications that are available. I have completed most of the <a href="https://portswigger.net/web-security">PortSwigger Academy Labs (BSCP)</a>, most of the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-bug-bounty-hunter">CBBH</a> path and fully completed the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-web-exploitation-expert">CWEE</a> path but never found the motivation to complete the exams.</p>
+<h3 id="osce3-when">OSCE3 when?</h3>
+<p>When I have the time, and the money. please hire me: <a href="mailto:zavier@gatari.dev">zavier@gatari.dev</a></p>
+<h3 id="should-i-follow-your-path">Should I follow your path?</h3>
+<p>I was fortunate enough to only have small battles with burnout throughout the year, and largely attribute my success against burnout with the fact that I only worked on certifications together with my full-time studies - and never outside of my daily &ldquo;working&rdquo; hours. My time outside of &ldquo;school&rdquo; was largely unaffected by the certifications, and I was able to maintain a healthy work-life balance.</p>
+<p>However, I know many people that dedicated a significant amount of time to certifications which resulted in severe burnout, and ultimately a lack of interest in the industry or even losing interest in cyber entirely. I strongly encourage taking your time and avoiding comparisons with others, even though I understand how challenging that can be.</p>
+<p>Ultimately, as mentioned earlier, certifications are merely a means to an end. Having certifications <strong>does not</strong> necessarily indicate that someone is skilled at what they do, just as not having certifications <strong>does not</strong> imply that someone lacks ability.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Cybersecurity is <strong>not</strong> easy, and it is <strong>not</strong> something that you can learn in a couple of months. Please join a couple communities to help along the way, and don&rsquo;t be afraid to ask questions.</p>
+<p>Feel free to join some communities, and/or reach out to me on <a href="https://discord.com/users/192548255098208256">Discord</a> if you have any questions.</p>
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+<li><a href="https://discord.com/invite/vulnlab">Vulnlab Discord</a></li>
+<li><a href="https://discord.gg/AqnUssuf85">0xH3xSec Discord</a></li>
+<li><a href="https://discord.gg/Whz3YtY4gG">Zero-Point Security Discord </a></li>
+<li><a href="https://discord.gg/hackthebox">Hack The Box Discord</a></li>
+<li><a href="https://www.offsec.com/courses/pen-200/">OSCP+ Page</a></li>
+<li><a href="https://academy.hackthebox.com/preview/certifications/htb-certified-penetration-testing-specialist">CPTS Page</a></li>
+<li><a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops-ii">CRTL Page</a></li>
+<li><a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">CRTO Page</a></li>
+<li><a href="https://www.alteredsecurity.com/adlab">CRTP Page</a></li>
+<li><a href="https://www.alteredsecurity.com/redteamlab">CRTE Page</a></li>
+<li><a href="https://academy.hackthebox.com/preview/certifications/htb-certified-azure-red-team-professional">CARTP Page</a></li>
+<li><a href="https://security.ine.com/certifications/ejpt-certification/">eJPT Page</a></li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://x.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="X">
+    <svg viewBox="0 0 1200 1227" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+</svg>
+</a>
+<a href="https://www.linkedin.com/in/zavierlee-sg/" target="_blank" rel="noopener noreferrer me"
+    title="Linkedin">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>
