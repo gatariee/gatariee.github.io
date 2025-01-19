@@ -135,7 +135,7 @@ Would I do it again? ❌ (only if it was reimbursed)
 
 ![](1725079083725.jpg)
 
-Prior to attempting the CRTP, I had completed the CRTO, CRTP, and the Dante, Rasta, Zephyr, Offshore and Cybernetics prolabs on Hack The Box. See: [here](https://gatari.dev/posts/economic-rt/).
+Prior to attempting the CRTE, I had completed the CRTO, CRTP, and the Dante, Rasta, Zephyr, Offshore and Cybernetics prolabs on Hack The Box. See: [here](https://gatari.dev/posts/economic-rt/).
 
 I'd heavily recommend making full use of your lab time (especially so for CRTE) as the labs are incredibly valuable, I even used it for [this blog post](https://gatari.dev/posts/ad-linux/). I'd also recommend learning to use a C2 framework for this exam, although it's completely unnecessary; it can make your life a lot easier if used correctly. The above linked blog post may help get you started with [Sliver](https://github.com/BishopFox/sliver).
 
