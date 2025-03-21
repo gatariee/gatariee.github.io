@@ -6,7 +6,20 @@
     <description>Recent content in Home on gatari&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 28 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The CAPE Experience</title>
+      <link>http://localhost:1313/posts/cape-experience/</link>
+      <pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/cape-experience/</guid>
+      
+      <description>Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
+Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
+The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&amp;rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days.</description>
+      
+    </item>
+    
     <item>
       <title>Long Live The Shellcode</title>
       <link>http://localhost:1313/posts/long-live-the-shellcode/</link>

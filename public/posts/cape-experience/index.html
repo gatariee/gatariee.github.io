@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">The CAPE Experience | gatari&#39;s blog</title>
+<meta property="og:title" content="The CAPE Experience | gatari&#39;s blog" />
+<meta name="twitter:title" content="The CAPE Experience | gatari&#39;s blog" />
+<meta itemprop="name" content="The CAPE Experience | gatari&#39;s blog" />
+<meta name="application-name" content="The CAPE Experience | gatari&#39;s blog" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="offensive security research">
+<meta itemprop="description" content="offensive security research" />
+<meta property="og:description" content="offensive security research" />
+<meta name="twitter:description" content="offensive security research" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/cape-experience/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-03-21T00:00:00Z />
+    <meta property="article:published_time" content=2025-03-21T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/cape-experience/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "The CAPE Experience",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-03-21",
+        "description": "",
+        "wordCount":  1119 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-03-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "gatari\u0027s blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.123.8">
+
+    
+    <meta property="og:title" content="The CAPE Experience" />
+<meta property="og:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
+Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
+The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/cape-experience/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-03-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-03-21T00:00:00+00:00" />
+
+
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The CAPE Experience"/>
+<meta name="twitter:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
+Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
+The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days."/>
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/cape-experience/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">The CAPE Experience</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-03-21T00:00:00&#43;00:00" itemprop="datePublished"> 21 Mar 2025 </time>
+                </div>
+                
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a>
+      <ul>
+        <li><a href="#the-good">The Good</a></li>
+        <li><a href="#the-bad">The Bad</a></li>
+        <li><a href="#how-do-i-prepare">How do I prepare?</a></li>
+        <li><a href="#tips--tricks">Tips &amp; Tricks</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <p><img alt="CAPE" src="./1742489483461.jpg"></p>
+<p>Earlier this month, I took the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert">Certified Active Directory Pentesting Expert (CAPE)</a> certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.</p>
+<h2 id="overview">Overview</h2>
+<blockquote>
+<p>As I was making this post, another CAPE holder made a <a href="https://medium.com/@filip.bartosz.wozniak/hackthebox-cape-certification-700737050cd6">review</a> of the certification, which I would highly recommend reading.</p>
+</blockquote>
+<p>The <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert">Certified Active Directory Pentesting Expert (CAPE)</a> certification is a gruelling 10-day long exam that tests the candidate&rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days. This course is meant to be a sequel to the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-penetration-testing-specialist">Certified Penetration Testing Specialist (CPTS)</a>, and candidates are expected to have the knowledge and skills covered in the CPTS course.</p>
+<p>All in all, it took me around 2 months to complete the course content while balancing full-time work. The exam itself took about 2.5 days, followed by another 2 days to write the report, which ended up being roughly 130 pages - about 30 pages shorter than my CPTS report. The grading of my report took (surprisingly) <strong>one</strong> working day!</p>
+<h3 id="the-good">The Good</h3>
+<p>The course and exam are, without a doubt, the best training I’ve encountered for Active Directory exploitation. The attack explanations are exceptional, the content is well-organized, and I frequently find myself revisiting the material as a reference. The <a href="https://academy.hackthebox.com/module/details/232">NTLM Relay Attacks</a>, <a href="https://academy.hackthebox.com/module/details/236">ADCS Attacks</a>, <a href="https://academy.hackthebox.com/module/details/253">Active Directory Trust Attacks</a> and <a href="https://academy.hackthebox.com/module/details/267">MSSQL, Exchange, and SCCM Attacks</a> modules offer some of the clearest and most effective explanations I’ve come across for such (relatively) complex topics.</p>
+<p>The exam is (imo) by far the most difficult AD exam on the market, and it achieves this without relying on unrealistic vectors or overly complex attacks. The exam is well designed, and the attacks are fully in-scope of the course material - with the bulk of the difficulty coming from enumerating, and chaining together the various attacks.</p>
+<p>Unfortunately, I find it difficult to draw any meaningful comparison between the CAPE and other AD certifications, as the difficulty far surpasses that of any other certification I have taken. However, I would say that it is somewhere between the <a href="https://app.hackthebox.com/prolabs/overview/cybernetics">Cybernetics</a> and <a href="https://app.hackthebox.com/prolabs/overview/aptlabs">APTLabs</a> prolabs in terms of <strong>AD Exploitation</strong> difficulty (specifically the AD exploitation sections of the labs).</p>
+<h3 id="the-bad">The Bad</h3>
+<blockquote>
+<p>The following is based on my own experience with the course and exam, and may not be representative of the experience of others.</p>
+</blockquote>
+<p>Some modules - such as the <a href="https://academy.hackthebox.com/module/details/69">Active Directory BloodHound</a> module, felt completely unnecessary to make an entire module out of. The same can be said for modules that teach a specific tool such as the <a href="https://academy.hackthebox.com/module/details/84">Using CrackMapExec</a> module, I do not believe that a module should be dedicated to teaching a specific tool, especially when the content of the module seems to be a copy-paste of the tool&rsquo;s documentation.</p>
+<p>During the exam, I found that the exam environment was very unstable, with exploit chains frequently requiring multiple resets to work. Additionally, at some points the latency was so bad that it was impossible to work effectively and I had no choice but to restart the lab.</p>
+<p><img alt="PING" src="./6c4c82357f3faa5aaecedd3e55f2cd57.png"></p>
+<p>However, the other CAPE holders that I spoke to did not experience the same issues, so it is possible that this was an isolated incident. Furthermore, HTB does not currently have any servers outside of EU/US, so the latency issues are not unexpected as I am in Singapore (APAC/Asia).</p>
+<h3 id="how-do-i-prepare">How do I prepare?</h3>
+<p>Before beginning the CAPE course, I would recommend that you either have completed and passed the CPTS exam and/or have an extremely sound understanding of Active Directory. This course is <strong>not</strong> for beginners.</p>
+<p>Ensure that you have fully understood the course material (very important), and are able to complete most/all of the skill assessments without any external help. The exam is pretty brutal in terms of understanding the underlying concepts, and you will need to know why you are doing what you are doing and why your attacks work when they do.</p>
+<p>That being said, everything in the exam is in-scope of the course material, however it may require some intuition and creative thinking to chain together the various attacks.</p>
+<p>I would set aside at least 2 months to comfortably complete the course content, and to redo the modules that you found difficult. The time investment for the CAPE is significant if you are not already familiar with Active Directory exploitation.</p>
+<h3 id="tips--tricks">Tips &amp; Tricks</h3>
+<ul>
+<li>For those living in APAC/Asia/anywhere outside of EU/US, prepare for an insane amount of latency. I was able to stabilize my latency at ~210ms by using a VPN to connect to a VPS in Germany, followed by using the <code>EU</code> VPN server in the HTB VPN.
+<ul>
+<li>Alternatively, prepare to use the provisioned PwnBox, which is located in the same datacenter as the exam servers - I opted not to use the PwnBox as I didn&rsquo;t want to deal with the latency of the PwnBox itself and to copy in all of my tools (including a licensed copy of Cobalt Strike).</li>
+</ul>
+</li>
+<li>Remember to take frequent breaks, the exam is absolutely a marathon and not a sprint. 10 days is a lot of time to work with, and you needn&rsquo;t rush to pass on the first attempt as you will be given a second attempt if you fail the first but have submitted a report.</li>
+<li>For those coming from CPTS, I personally felt that each flag of CAPE was <strong>minimally</strong> as &ldquo;difficult&rdquo; as CPTS&rsquo; 9th flag with the CAPE exam having multiple flags that were significantly more difficult - which is expected as CAPE is a sequel to CPTS.</li>
+<li>Having a solid methodology and well-organized notes is <strong>extremely important</strong>. It&rsquo;s just as important to recognize when to abandon a path, dig yourself out of a rabbit hole, and take a moment to mentally reset.</li>
+<li>Understand the limitations of the tools you are using, and assumptions that you are making. For example, if you are using BloodHound, actively think about what the tool <em>can</em> and <em>cannot</em> see.</li>
+</ul>
+<h3 id="faq">FAQ</h3>
+<ul>
+<li>
+<p>Should I do CAPE before CPTS?</p>
+<ul>
+<li>No, CAPE is a sequel to CPTS and builds upon the knowledge and skills covered in CPTS. You should complete CPTS before attempting CAPE.</li>
+</ul>
+</li>
+<li>
+<p>CAPE or <code>&lt;insert cert here&gt;</code> Certification?</p>
+<ul>
+<li>Instead of listing out a comparison chart, I will instead say that CAPE focuses purely on internal assessments - specifically in Active Directory environments. If you are looking for a certification that focuses on specifically AD exploitation, then CAPE is the certification for you. Additionally, it is also important to note that although CAPE is an extremely technically challenging certification, you will <strong>not</strong> currently receive the same HR recognition as you would with something like OSEP.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://x.com/gatariee" target="_blank" rel="noopener noreferrer me"
+    title="X">
+    <svg viewBox="0 0 1200 1227" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+</svg>
+</a>
+<a href="https://www.linkedin.com/in/zavierlee-sg/" target="_blank" rel="noopener noreferrer me"
+    title="Linkedin">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>
