@@ -68,31 +68,35 @@
     </script>
 
 
-<meta name="generator" content="Hugo 0.123.8">
+<meta name="generator" content="Hugo 0.160.1">
 
     
-    <meta property="og:title" content="A Trip Down Memory Lane" />
-<meta property="og:description" content="Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
+    <meta property="og:url" content="http://localhost:1313/posts/memory-lane/">
+  <meta property="og:site_name" content="gatari&#39;s blog">
+  <meta property="og:title" content="A Trip Down Memory Lane">
+  <meta property="og:description" content="Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
 Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.
-A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/memory-lane/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-03-03T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-03-03T00:00:00+00:00" />
-
+A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective. While more experienced developers might view this as a relatively simple challenge, it certainly was not easy for me.">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-03T00:00:00+00:00">
 
 
     
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Trip Down Memory Lane"/>
-<meta name="twitter:description" content="Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Trip Down Memory Lane">
+  <meta name="twitter:description" content="Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
 Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.
-A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective."/>
+A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective. While more experienced developers might view this as a relatively simple challenge, it certainly was not easy for me.">
 
 
     
 
     <link rel="canonical" href="http://localhost:1313/posts/memory-lane/">
-    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/style.min.1711a07554d0c3e03e7d9e8dbd6a510893056f7bdbca92d011ebe275690e3deb.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -157,13 +161,6 @@ stroke-linejoin="round" class="feather feather-home">
                     
                 </li>
                 
-                <li>
-                    <a class="menu-link " href="/about/">
-                        About
-                    </a>
-                    
-                </li>
-                
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
@@ -199,12 +196,12 @@ stroke-linejoin="round" class="feather feather-home">
 <p>Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.</p>
 <h2 id="a-humble-beginning">A Humble Beginning</h2>
 <p>For many malware developers, evading Windows Defender often represents the first hurdle or objective. While more experienced developers might view this as a relatively simple challenge, it certainly was not easy for me.</p>
-<p><img alt="hmm" src="https://i.gyazo.com/f4ec1ce964d4e5f578ae47055ee132f4.png"></p>
+<p><img src="https://i.gyazo.com/f4ec1ce964d4e5f578ae47055ee132f4.png" alt="hmm"></p>
 <p>Earlier this year, I passed the <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops">Certified Red Team Operator (CRTO)</a> and cleared HTB&rsquo;s <a href="https://app.hackthebox.com/prolabs/overview/rastalabs">RastaLabs</a> both of which had an emphasis on defense evasion, and had Windows Defender enabled. (To be fair, both were not the latest version :P)</p>
-<p><img alt="rastalabs" src="https://i.gyazo.com/6ef28fc3532aecc0806b2a9accb38dd9.png"></p>
+<p><img src="https://i.gyazo.com/6ef28fc3532aecc0806b2a9accb38dd9.png" alt="rastalabs"></p>
 <p>Although I didn&rsquo;t have much trouble getting past Windows Defender, I did notice that it was <em>significantly</em> harder than I had remembered, and a loader I made a couple months ago was getting signatured as soon as it was dropped to disk.</p>
 <p>And other times, loaders with quite literally no evasion and default generated shellcode will walk right past Windows Defender.</p>
-<p><img alt="huh&hellip;?" src="https://i.gyazo.com/b81c0ac734090a09e61e80e6949e044d.png"></p>
+<p><img src="https://i.gyazo.com/b81c0ac734090a09e61e80e6949e044d.png" alt="huh…?"></p>
 <p>Windows Defender has always felt like a black box to me; payloads that functioned perfectly today would suddenly cease to work the next day, getting flagged for seemingly no reason.</p>
 <p>Needless to say, without the necessary adjustments and refinement to public malware, your loaders are likely not going to get past defender.</p>
 <h2 id="a-trip-down-memory-lane">A Trip Down Memory Lane</h2>
@@ -220,9 +217,9 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">Payload size: <span class="m">460</span> bytes
 </span></span><span class="line"><span class="cl">Final size of exe file: <span class="m">7168</span> bytes
 </span></span></code></pre></div><p>The original article got: 48/68 or <strong>70.6%</strong> detections.</p>
-<p><img alt="msf1" src="https://2603957456-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LFEMnER3fywgFHoroYn%2F-LN_AaNCmLBXOjQbjcTg%2F-LN_K0T7sNTDWSbmUIsm%2Fmsf-templates-default-payload.png?alt=media&token=db1f1a48-08a2-4919-ae2d-9c87fc815e92"></p>
+<p><img src="https://2603957456-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LFEMnER3fywgFHoroYn%2F-LN_AaNCmLBXOjQbjcTg%2F-LN_K0T7sNTDWSbmUIsm%2Fmsf-templates-default-payload.png?alt=media&amp;token=db1f1a48-08a2-4919-ae2d-9c87fc815e92" alt="msf1"></p>
 <p>My results were: 58/72 or <strong>80.6%</strong> detections</p>
-<p><img alt="msf1" src="https://i.gyazo.com/07879cd9e2060a08b9bab50165a971bc.png"></p>
+<p><img src="https://i.gyazo.com/07879cd9e2060a08b9bab50165a971bc.png" alt="msf1"></p>
 <p>It doesn&rsquo;t seem too large of a difference so far, let&rsquo;s move all the way to the techniques that evaded Windows Defender at the time.</p>
 <h3 id="windows-defender-i-barely-know-er">Windows Defender? I barely know &rsquo;er</h3>
 <p>The article used a custom shellcode loader that casted the start address of the shellcode to a function, and called the function to execute the shellcode.</p>
@@ -240,7 +237,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5&#34;</span><span class="p">;</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[]</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[]</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;</span><span class="se">\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41\x50</span><span class="s">&#34;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">[...</span> <span class="n">SNIP</span> <span class="p">...]</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;</span><span class="se">\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5</span><span class="s">&#34;</span><span class="p">;</span>
@@ -252,24 +249,24 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>The article got a <em>staggering</em> 3/68 or <strong>4.4%</strong> detections, this included Windows Defender, of course.</p>
-<p><img alt="msf2" src="https://2603957456-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LFEMnER3fywgFHoroYn%2F-LN_sILlRtO9ChAFtFwH%2F-LN_uK2_OHmB2U0S10J0%2Fmsf-vt4.png?alt=media&token=44c0be3c-f17a-4a8d-a18c-9b25bd6eb4a8"></p>
+<p><img src="https://2603957456-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LFEMnER3fywgFHoroYn%2F-LN_sILlRtO9ChAFtFwH%2F-LN_uK2_OHmB2U0S10J0%2Fmsf-vt4.png?alt=media&amp;token=44c0be3c-f17a-4a8d-a18c-9b25bd6eb4a8" alt="msf2"></p>
 <p>My loader was not so fortunate with 32/71 or <strong>45.0%</strong> detections, which included Windows Defender.</p>
-<p><img alt="msf2" src="https://i.gyazo.com/07e7726345053880866f4c328a366141.png"></p>
+<p><img src="https://i.gyazo.com/07e7726345053880866f4c328a366141.png" alt="msf2"></p>
 <p>If you were paying attention to the Virus Total scans, you&rsquo;d very quickly see this.</p>
-<p><img alt="date" src="https://i.gyazo.com/d0dbc1535bf0f7e75c541f647edb6316.png"></p>
+<p><img src="https://i.gyazo.com/d0dbc1535bf0f7e75c541f647edb6316.png" alt="date"></p>
 <p>This article was posted and the scans were from around ~6 years ago (has it really been <strong>SIX</strong> years??). Since then, modern antivirus has gotten much <em>much</em> better at detecting shellcode loaders.</p>
 <p>My guess is that AV back then was not very familiar with detecting malicious PIC, and simple shellcode loaders were sufficient.</p>
 <h3 id="back-to-the-present">Back to the Present</h3>
 <p>Let&rsquo;s try to find out what Windows Defender is detecting in this loader.
-<img alt="gocheck" src="https://i.gyazo.com/5c89bbcf0730489a1b485061a870bfe0.png">
+<img src="https://i.gyazo.com/5c89bbcf0730489a1b485061a870bfe0.png" alt="gocheck">
 Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra</a> and start disassembling our loader!</p>
-<p><img alt="ghidra1" src="https://i.gyazo.com/761c604ee241ae9c1c63287ff3f6a6e4.png"></p>
+<p><img src="https://i.gyazo.com/761c604ee241ae9c1c63287ff3f6a6e4.png" alt="ghidra1"></p>
 <p>We didn&rsquo;t strip the binary when compiling, so it&rsquo;s pretty easy for us to find the main function. Let&rsquo;s take reference from our loader and start renaming the variables.</p>
-<p><img alt="ghidra2" src="https://i.gyazo.com/c99049220356dd0a9bb76d357e30e0cf.png"></p>
+<p><img src="https://i.gyazo.com/c99049220356dd0a9bb76d357e30e0cf.png" alt="ghidra2"></p>
 <p>Since Windows Defender signatured us at an offset of <strong>0x26CF</strong>, we can jump to that address (0x0 + 0x26CF).</p>
-<p><img alt="0x26CF" src="https://i.gyazo.com/6beca358a87dfb0bbb6b4e38941d9d13.png"></p>
+<p><img src="https://i.gyazo.com/6beca358a87dfb0bbb6b4e38941d9d13.png" alt="0x26CF"></p>
 <p>This section of memory exists in the <code>.data</code> section and exists after the symbol <code>buf</code>.</p>
-<p><img alt="buf" src="https://i.gyazo.com/dd3230dbcf9bb2358ef8533a3eb22246.png"></p>
+<p><img src="https://i.gyazo.com/dd3230dbcf9bb2358ef8533a3eb22246.png" alt="buf"></p>
 <p>If you remembered earlier, <code>buf</code> contains our msfvenom-generated shellcode. It seems like we&rsquo;re getting flagged on our shellcode when we drop to disk, let&rsquo;s work on extending their loader to be more evasive!</p>
 <h3 id="evading-static-analysis">Evading Static Analysis</h3>
 <p>Since our shellcode is being signatured, the next logical step is to include some encryption.</p>
@@ -334,7 +331,7 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </span></span></code></pre></div><h3 id="windows-defender-i-barely-know-er-part-2">Windows Defender? I barely know er&rsquo; Part 2</h3>
 <p>So far, we&rsquo;ve only added some basic encryption to the loader. It should look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="mh">0x9a</span><span class="p">,</span> <span class="mh">0x7e</span><span class="p">,</span> <span class="mh">0xb4</span><span class="p">,</span> <span class="mh">0x87</span><span class="p">,</span> <span class="mh">0xc2</span><span class="p">,</span> <span class="mh">0x8a</span><span class="p">,</span> <span class="mh">0xa3</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="p">[...</span><span class="n">SNIP</span><span class="p">...]</span>
@@ -367,10 +364,10 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </span></span></code></pre></div><p>Now, let&rsquo;s compile the loader and check defender again!</p>
 <h3 id="rabbitholes">Rabbitholes</h3>
 <p>After running <code>gocheck</code>, I was surprised to see that the binary was flagged as malicious.
-<img alt="huh" src="https://i.gyazo.com/26a0dff23c8cb9c90bd3d05dc4aa6e88.png"></p>
+<img src="https://i.gyazo.com/26a0dff23c8cb9c90bd3d05dc4aa6e88.png" alt="huh"></p>
 <p>According to <code>gocheck</code>, the string &ldquo;msvcrt.dll&rdquo; is being signatured as Meterpreter? That&rsquo;s strange.</p>
 <p>A google search doesn&rsquo;t help much, but string searching for &ldquo;msvcrt.dll&rdquo; in random discord channels lead me to <a href="https://whiteknightlabs.com/2023/05/23/unleashing-the-unseen-harnessing-the-power-of-cobalt-strike-profiles-for-edr-evasion/">this article</a> by White Knight Labs on weaponizing Cobalt Strike with their artifact kit.</p>
-<p><img alt="msvcrt.dll" src="https://i.gyazo.com/3afeb0b9f4340268df90bc2526c853dd.png"></p>
+<p><img src="https://i.gyazo.com/3afeb0b9f4340268df90bc2526c853dd.png" alt="msvcrt.dll"></p>
 <p>Seems like this is a known issue, the solution provided in the article was to make use of Cobalt Strike&rsquo;s Malleable C2 profile to <code>strrep</code> &ldquo;msvcrt.dll&rdquo; with an empty string. However, this wasn&rsquo;t very effective for them. But, since &ldquo;msvcrt.dll&rdquo; is our only false positive- let&rsquo;s try writing our own <code>strrep</code> script.</p>
 <h3 id="replacing-bad-strings">Replacing Bad Strings</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
@@ -407,9 +404,9 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 <h3 id="windows-defender-i-barely-know-er-part-3">Windows Defender? I barely know er&rsquo; Part 3</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./strrep.py ../bin/implant.exe msvcrt.dll <span class="se">\x</span>00<span class="se">\x</span>00<span class="se">\x</span>00<span class="se">\x</span><span class="m">00</span>
 </span></span></code></pre></div><p>Let&rsquo;s run a <code>gocheck</code> on our binary again.</p>
-<p><img alt="gocheck2" src="https://i.gyazo.com/9dc13793619e124ea4a141a97cc7f111.png"></p>
+<p><img src="https://i.gyazo.com/9dc13793619e124ea4a141a97cc7f111.png" alt="gocheck2"></p>
 <p>Awesome, let&rsquo;s drag this implant over to a Windows Defender enabled folder and get our callback!</p>
-<p><img alt="callback?" src="https://i.gyazo.com/7382008b8452f770d51589f9bdf649bf.png"></p>
+<p><img src="https://i.gyazo.com/7382008b8452f770d51589f9bdf649bf.png" alt="callback?"></p>
 <p>Yeap, knew it was too good to be true. A quick <code>ldd</code> on the binary shows that <code>msvcrt.dll</code> is dynamically linked.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">PC@Zavier MINGW64 ~/Desktop/malware/exe/bin
 </span></span><span class="line"><span class="cl">
@@ -421,27 +418,27 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </span></span></code></pre></div><h2 id="denial">Denial</h2>
 <p>I went back to think about how the <code>msvcrt.dll</code> detection was being made, and it felt really strange. <code>msvcrt.dll</code> is a legitimate DLL by Microsoft that provides access to the MS Visual C Runtime Library, detection on an import of this library would lead to <em>many</em> false positives.</p>
 <p>At this point, I went searching for others who were encountering the same issue- and found this response by <a href="https://twitter.com/_RastaMouse">@RastaMouse</a></p>
-<p><img alt="rasta" src="https://i.gyazo.com/b0edf8d0f655ef341f10df0bacfddf3c.png"></p>
+<p><img src="https://i.gyazo.com/b0edf8d0f655ef341f10df0bacfddf3c.png" alt="rasta"></p>
 <p>So, I dragged the original binary over to a folder with Windows Defender enabled ran it, and- <strong>i got my callback</strong></p>
 <h2 id="anger">Anger</h2>
 <p>At this point, I had spent countless hours trying to patch <code>msvcrt.dll</code> and trying to compile the loader with standard library linking disabled (<code>-no-stdlib</code>) and defining macros manually.</p>
 <p>A budget solution seemed to work was to run a packer on the binary to completely obfuscate the strings, however, <a href="https://upx.github.io/">UPX</a> was insufficient. <a href="https://vmpsoft.com/">VMProtect</a> however worked just fine but produced a binary of &gt;3 MB 😒</p>
-<p><img alt="bruh" src="https://i.gyazo.com/ff5e6ff3902391f9a82da49829ce78e2.png"></p>
+<p><img src="https://i.gyazo.com/ff5e6ff3902391f9a82da49829ce78e2.png" alt="bruh"></p>
 <h2 id="bargaining">Bargaining</h2>
 <p>I wanted to figure out why exactly this behavior was happening, as I was aware of false positives happening when running <code>gocheck</code> or any of the sort on binaries that were <em>already</em> flagged.</p>
 <p>For example, if the binary was flagged due to some kind of malicious behavior, <code>MpCmdRun.exe</code> will flag it as malicious and either signature all the way to the last byte or throw it at the nearest DLL import.</p>
 <p>However, in this case, I had Windows Defender Real-Time Protection disabled&hellip;</p>
-<p><img alt="exclusions" src="https://i.gyazo.com/0e5b902614846288e68b5a2fdbf4db00.png"></p>
+<p><img src="https://i.gyazo.com/0e5b902614846288e68b5a2fdbf4db00.png" alt="exclusions"></p>
 <h2 id="depression">Depression</h2>
 <p>Hmm, okay let&rsquo;s add our working directory as an exclusion despite real-time protection already being disabled.</p>
-<p><img alt="but" src="https://i.gyazo.com/ea8f279760e66789015499139c1359de.png"></p>
+<p><img src="https://i.gyazo.com/ea8f279760e66789015499139c1359de.png" alt="but"></p>
 <p>&hellip; but, why?</p>
 <h2 id="acceptance">Acceptance</h2>
-<p><img alt="okay" src="https://i.gyazo.com/1b990a2832195b1288ca28bdebda00a5.png"></p>
+<p><img src="https://i.gyazo.com/1b990a2832195b1288ca28bdebda00a5.png" alt="okay"></p>
 <h2 id="a-new-direction">A New Direction</h2>
 <p>Despite being added to an exclusion, and <code>gocheck</code> returning no threats found on the binary. I decided to drag it over to the desktop, and run it.</p>
 <p>Right after running it, I found this.</p>
-<p><img alt="process_start" src="https://i.gyazo.com/53ec6d3fd57c7893495b97dc886d8e41.png"></p>
+<p><img src="https://i.gyazo.com/53ec6d3fd57c7893495b97dc886d8e41.png" alt="process_start"></p>
 <p>The reason this is happening is because the series of calls:</p>
 <ol>
 <li>Process Start</li>
@@ -462,7 +459,7 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 <p>A more thorough and detailed explanation can be found: <a href="https://0xmani.medium.com/early-bird-injection-05027fbfb794">here</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="mh">0x9a</span><span class="p">,</span> <span class="mh">0x7e</span><span class="p">,</span> <span class="mh">0xb4</span><span class="p">,</span> <span class="mh">0x87</span><span class="p">,</span> <span class="mh">0xc2</span><span class="p">,</span> <span class="mh">0x8a</span><span class="p">,</span> <span class="mh">0xa3</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="p">[...</span> <span class="n">SNIP</span> <span class="p">...]</span>
@@ -524,43 +521,43 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Immediately, <code>gocheck</code> says that Windows Defender thinks the file is clean!</p>
-<p><img alt="new_impl" src="https://i.gyazo.com/b5b1cc4cc30515821e81af848fe16ff9.png"></p>
+<p><img src="https://i.gyazo.com/b5b1cc4cc30515821e81af848fe16ff9.png" alt="new_impl"></p>
 <p>And, executing the loader in a Windows Defender enabled folder gives us our callback successfully! :)</p>
-<p><img alt="callback" src="https://i.gyazo.com/52210081f416537f2a42d49241453dd5.png"></p>
+<p><img src="https://i.gyazo.com/52210081f416537f2a42d49241453dd5.png" alt="callback"></p>
 <p>Our RX section containing our shellcode can be found here.</p>
-<p><img alt="rx" src="https://i.gyazo.com/bcce9c385e5e3d1eaaacb5ec1385e231.png"></p>
+<p><img src="https://i.gyazo.com/bcce9c385e5e3d1eaaacb5ec1385e231.png" alt="rx"></p>
 <p>For shits and giggles, let&rsquo;s check the detections on VirusTotal</p>
-<p><img alt="vt" src="https://i.gyazo.com/903be9cf2631f6d19a74e1598b2de03c.png"></p>
+<p><img src="https://i.gyazo.com/903be9cf2631f6d19a74e1598b2de03c.png" alt="vt"></p>
 <p>20/72, or <strong>27.8%</strong> detections. Not bad, not bad at all, but not as good as ired.team&rsquo;s 4.4% detection rate from 2018 xD</p>
 <h2 id="sandbox-rabbithole-reprised">Sandbox Rabbithole (Reprised)</h2>
 <p>About 8 hours after finishing up the first iteration of this blog post and approximately 12 hours after submitting the samples onto VT, I restarted my computer and came back to Windows Defender flagging the new executable as malicious.</p>
-<p><img alt="hmm" src="https://i.gyazo.com/2b1069150a3e2082ffbeea703c76587e.png"></p>
+<p><img src="https://i.gyazo.com/2b1069150a3e2082ffbeea703c76587e.png" alt="hmm"></p>
 <p>Running the binary through <code>gocheck</code> again shows the following.</p>
-<p><img alt="gocheck" src="https://i.gyazo.com/5de76c0c9d4474529c4f7b91719bc816.png"></p>
+<p><img src="https://i.gyazo.com/5de76c0c9d4474529c4f7b91719bc816.png" alt="gocheck"></p>
 <p>A technical overview on on how <code>gocheck</code> attempts to isolate malicious bytes in an executable can be found in another blog post I made: <a href="https://gatari.dev/posts/identifying-malicious-bytes-in-malware/">Identifying Malicious Bytes in Malware</a></p>
-<p><img alt="hmm" src="https://i.gyazo.com/956d6651b0ee60324ac05762aafbc969.png"></p>
+<p><img src="https://i.gyazo.com/956d6651b0ee60324ac05762aafbc969.png" alt="hmm"></p>
 <p>The message: &ldquo;No threat detected, but the original file was flagged as malicious. The bad bytes are likely at the very end of the binary&rdquo; can be slightly misleading.</p>
 <p>When <code>gocheck</code> attempts to scan the binary, the <strong>entire</strong> file chunk (0-100%) is placed in a temporary folder and submitted to <code>MpCmdRun.exe</code>, and the isolation occurs when the file chunks are split into smaller and smaller pieces.</p>
 <p>The limitation occurs when the first chunk (0-100%) is flagged as malicious due to it being a <strong>known signature</strong>, which was determined to be malicious during <em>cloud analysis</em> or when run in a sandbox.</p>
 <p>As a result, <strong>the signature isn&rsquo;t on any particular malicious byte but on the entire file hash</strong></p>
 <h3 id="a-trip-back-to-the-past">A Trip Back To The Past</h3>
 <p>Let&rsquo;s go back to our VT scan that we run yesterday: <a href="https://www.virustotal.com/gui/file/f7c88b994a9e2d52a0ddb34bb26d3a3f9da58c73e789460fcb5b5939b28e8684">here</a></p>
-<p><img alt="yara" src="https://i.gyazo.com/f98272f9cf61b5fef46e5294c25f76d4.png"></p>
+<p><img src="https://i.gyazo.com/f98272f9cf61b5fef46e5294c25f76d4.png" alt="yara"></p>
 <p>Very quickly, you will see that <a href="https://www.nextron-systems.com/thor/">thor</a> (an APT scanner by Nextron-Systems) had picked up on our implant and it ticked off one of their YARA rules. And, our implant hash can be found right on the rule page.
-<img alt="hmm" src="https://i.gyazo.com/3c23a35f10967a4f1207a72d449a842b.png"></p>
+<img src="https://i.gyazo.com/3c23a35f10967a4f1207a72d449a842b.png" alt="hmm"></p>
 <p>Besides being picked up by automatic scanners, we can also go over to the &ldquo;Behavior&rdquo; tab and see that our implant has gotten flagged by <strong>sandboxes</strong> as well.</p>
-<p><img alt="sandbox" src="https://i.gyazo.com/3047cad3495bfcb65d60ead382494a94.png"></p>
+<p><img src="https://i.gyazo.com/3047cad3495bfcb65d60ead382494a94.png" alt="sandbox"></p>
 <p>And once again, we&rsquo;ve ticked off even more rules; this time a Sigma rule by <a href="https://twitter.com/cyb3rops">@Floran Roth</a>.</p>
-<p><img alt="sigma" src="https://i.gyazo.com/f1dfc7fe1ad263f5bd483ee3e6cfc59f.png"></p>
-<p><img alt="the_rule" src="https://i.gyazo.com/bd14e923738f514ff1a59e4742354b1c.png"></p>
+<p><img src="https://i.gyazo.com/f1dfc7fe1ad263f5bd483ee3e6cfc59f.png" alt="sigma"></p>
+<p><img src="https://i.gyazo.com/bd14e923738f514ff1a59e4742354b1c.png" alt="the_rule"></p>
 <p>And, the sandbox picks up on our MITRE ATT&amp;CK TTPs pretty accurately.</p>
-<p><img alt="mtre" src="https://i.gyazo.com/9bd5846290f5670e6774dad05b34d9a7.png"></p>
+<p><img src="https://i.gyazo.com/9bd5846290f5670e6774dad05b34d9a7.png" alt="mtre"></p>
 <h3 id="the-secrecy-paradox">The Secrecy Paradox</h3>
 <p>It should be obvious at this point that you probably shouldn&rsquo;t upload your samples onto Virus Total, however your implants <strong>will</strong> be under scrutiny at <strong>some point</strong> because of <a href="https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/enable-cloud-protection-microsoft-defender-antivirus?view=o365-worldwide">these options</a> on Windows Defender.</p>
-<p><img alt="hmm" src="https://i.gyazo.com/bcb1080f0ae22ccbafd0646942c71849.png"></p>
+<p><img src="https://i.gyazo.com/bcb1080f0ae22ccbafd0646942c71849.png" alt="hmm"></p>
 <p>You can prevent your implants from inadvertently getting nuked locally by turning these <strong>off</strong> and <strong>turning off internet connection</strong> (you can&rsquo;t trust Microsoft to actually turn them off).</p>
 <p>However, when your beacons land on a target, you can&rsquo;t ensure that these will be disabled on their systems.</p>
-<p><img alt="cdp" src="https://i.gyazo.com/7b2744b45220940e54c1aeb7b73d8a8c.png"></p>
+<p><img src="https://i.gyazo.com/7b2744b45220940e54c1aeb7b73d8a8c.png" alt="cdp"></p>
 <h3 id="guardrails--sandbox-evasion">Guardrails &amp; Sandbox Evasion</h3>
 <p>Lots of malware use execution guardrails to constrain execution based on environment specific conditions, such as hostname or whether a device is domain joined.</p>
 <p>These are often used in engagements for scoping reasons, but can also be used for sandbox evasion. There are <strong>literally hundreds</strong> of guardrails and sandbox detection &amp; evasion techniques that you can employ in your implant to constrain detonation.</p>
@@ -632,14 +629,14 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span> <span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">GuardrailHostname</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Despite being bullied by VT earlier, let&rsquo;s upload this onto VT once again.</p>
-<p><img alt="vt" src="https://i.gyazo.com/8a40dc391a0346685f2f8f4fecf26ef3.png"></p>
+<p><img src="https://i.gyazo.com/8a40dc391a0346685f2f8f4fecf26ef3.png" alt="vt"></p>
 <p>Detections dropped drastically to 8/71 or <strong>11.2%</strong>, but let&rsquo;s see what the sandboxes think about it.</p>
-<p><img alt="bruh" src="https://i.gyazo.com/e32dccb5f61789c121b31d81590e78e9.png"></p>
-<p><img alt="bruh" src="https://i.gyazo.com/ef39c1f8e9a5868d767be3463df2a316.png"></p>
+<p><img src="https://i.gyazo.com/e32dccb5f61789c121b31d81590e78e9.png" alt="bruh"></p>
+<p><img src="https://i.gyazo.com/ef39c1f8e9a5868d767be3463df2a316.png" alt="bruh"></p>
 <p>Seems like our guardrails have worked, however the simple comparison can be simply jumped over by patching the <code>JNE</code> instruction. Whether sandboxes are capable of doing this action, no one really knows lol.</p>
 <p>For better coverage, I&rsquo;d recommend encrypting your shellcode with the target hostname- so that the shellcode decryption routine will error out if the hostname was incorrect.</p>
 <p>There&rsquo;s an extremely deep rabbithole on sandbox evasion, but here&rsquo;s something else that I found while scrolling around.</p>
-<p><img alt="vm" src="https://i.gyazo.com/a61f4474c06c2f80fe3868048a5e682c.png"></p>
+<p><img src="https://i.gyazo.com/a61f4474c06c2f80fe3868048a5e682c.png" alt="vm"></p>
 <p><a href="https://unprotect.it/category/sandbox-evasion/">unprotect.it</a> also has a quite list of sandbox evasion techniques.</p>
 <h3 id="tldr">TLDR</h3>
 <p>Don&rsquo;t upload shit onto VT, do your dev work on a VM with no internet access and always check if you&rsquo;re in a debugger or sandbox.</p>
@@ -650,7 +647,7 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 <p>Have you ever had to encrypt and copy paste <code>sliver</code> shellcode? (BTW, <code>sliver</code> shellcode can be up to 10 MB large)</p>
 </blockquote>
 <p>This process can be irritating for a lazy person such as myself who doesn&rsquo;t want to set up stagers to catch shellcode, although in real engagements- I don&rsquo;t know a single person who doesn&rsquo;t endorse stagers.</p>
-<p><img alt="stager" src="https://i.gyazo.com/d99380ec8740ec60d9d0f2502d8226ff.png"> (image from: <a href="https://blog.spookysec.net/stage-v-stageless-1/">https://blog.spookysec.net/stage-v-stageless-1/</a>)</p>
+<p><img src="https://i.gyazo.com/d99380ec8740ec60d9d0f2502d8226ff.png" alt="stager"> (image from: <a href="https://blog.spookysec.net/stage-v-stageless-1/">https://blog.spookysec.net/stage-v-stageless-1/</a>)</p>
 <h3 id="automation">Automation</h3>
 <p>Earlier, we wrote a script that encrypts shellcode and spits them out into output files that can be directly included into projects as headers.</p>
 <p>This was just one of the many small little scripts I&rsquo;ve written to make my life just a little bit easier when writing stageless loaders, although I do stage my payloads when it&rsquo;s more convenient.</p>
@@ -694,6 +691,87 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
             </div>
         </article></main>
 </div>
+
+<script>
+    function toggleToc() {
+        const content = document.getElementById('tocContent');
+        const button = document.querySelector('.toc-toggle');
+        if (!content || !button) return;
+        content.classList.toggle('expanded');
+        button.classList.toggle('expanded');
+    }
+
+    function toggleMiniToc() {
+        const miniToc = document.getElementById('miniToc');
+        if (miniToc) miniToc.classList.toggle('minimized');
+    }
+
+    function setupActiveHighlighting(links) {
+        const targets = Array.from(links).map(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const el = document.getElementById(decodeURIComponent(href.slice(1)));
+                if (el) return { link, element: el };
+            }
+            return null;
+        }).filter(Boolean);
+
+        if (targets.length === 0) return;
+
+        function update() {
+            const scrollPosition = window.scrollY + 100;
+            let active = null;
+            targets.forEach(t => {
+                if (t.element.offsetTop <= scrollPosition) active = t;
+            });
+            links.forEach(l => l.classList.remove('active'));
+            if (active) active.link.classList.add('active');
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => { update(); ticking = false; });
+                ticking = true;
+            }
+        });
+        update();
+    }
+
+    function initMiniToc() {
+        const miniToc = document.getElementById('miniToc');
+        const miniTocContent = document.getElementById('miniTocContent');
+        const sourceToc = document.getElementById('tocContent');
+        if (!miniToc || !miniTocContent || !sourceToc) return;
+
+        const clone = sourceToc.cloneNode(true);
+        clone.classList.remove('toc-content', 'expanded');
+        clone.removeAttribute('id');
+
+        const links = clone.querySelectorAll('a');
+        if (links.length === 0) return;
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.getElementById(decodeURIComponent(href.slice(1)));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.pushState(null, '', href);
+                    }
+                }
+            });
+        });
+
+        miniTocContent.appendChild(clone);
+        miniToc.classList.add('visible');
+        setupActiveHighlighting(links);
+    }
+
+    document.addEventListener('DOMContentLoaded', initMiniToc);
+</script>
 <footer class="footer">
     <span class="footer_item"> </span>
     &nbsp;
@@ -726,7 +804,7 @@ Pop this into <a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra<
 </a>
 </div>
     <small class="footer_copyright">
-        © 2025 .
+        © 2026 .
         Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">

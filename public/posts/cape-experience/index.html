@@ -68,31 +68,35 @@
     </script>
 
 
-<meta name="generator" content="Hugo 0.123.8">
+<meta name="generator" content="Hugo 0.160.1">
 
     
-    <meta property="og:title" content="The CAPE Experience" />
-<meta property="og:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
+    <meta property="og:url" content="http://localhost:1313/posts/cape-experience/">
+  <meta property="og:site_name" content="gatari&#39;s blog">
+  <meta property="og:title" content="The CAPE Experience">
+  <meta property="og:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
 Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
-The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/cape-experience/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2025-03-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2025-03-21T00:00:00+00:00" />
-
+The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate’s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days. This course is meant to be a sequel to the Certified Penetration Testing Specialist (CPTS), and candidates are expected to have the knowledge and skills covered in the CPTS course.">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-21T00:00:00+00:00">
 
 
     
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The CAPE Experience"/>
-<meta name="twitter:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The CAPE Experience">
+  <meta name="twitter:description" content="Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
 Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
-The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days."/>
+The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate’s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days. This course is meant to be a sequel to the Certified Penetration Testing Specialist (CPTS), and candidates are expected to have the knowledge and skills covered in the CPTS course.">
 
 
     
 
     <link rel="canonical" href="http://localhost:1313/posts/cape-experience/">
-    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/style.min.1711a07554d0c3e03e7d9e8dbd6a510893056f7bdbca92d011ebe275690e3deb.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -157,13 +161,6 @@ stroke-linejoin="round" class="feather feather-home">
                     
                 </li>
                 
-                <li>
-                    <a class="menu-link " href="/about/">
-                        About
-                    </a>
-                    
-                </li>
-                
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
@@ -193,10 +190,9 @@ stroke-linejoin="round" class="feather feather-home">
                 </div>
                 
             </header>
-            
-    
-    <details class="toc" ZgotmplZ>
-        <summary><b>Table of Contents</b></summary>
+            <div class="toc-container">
+    <button class="toc-toggle" type="button" onclick="toggleToc()">Table of Contents</button>
+    <div class="toc-content" id="tocContent">
         <nav id="TableOfContents">
   <ul>
     <li><a href="#overview">Overview</a>
@@ -210,9 +206,22 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-    </details>
+    </div>
+</div>
+
+<div class="mini-toc" id="miniToc">
+    <div class="mini-toc-header">
+        <div class="mini-toc-title">Contents</div>
+        <button class="mini-toc-minimize" type="button" onclick="toggleMiniToc()" aria-label="Minimize TOC">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646 4.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 5.707V11.5a.5.5 0 0 1-1 0V5.707L6.354 6.854a.5.5 0 1 1-.708-.708l2-2z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="mini-toc-content" id="miniTocContent"></div>
+</div>
             <div class="page-content">
-                <p><img alt="CAPE" src="./1742489483461.jpg"></p>
+                <p><img src="/posts/cape-experience/1742489483461.jpg" alt="CAPE"></p>
 <p>Earlier this month, I took the <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert">Certified Active Directory Pentesting Expert (CAPE)</a> certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.</p>
 <h2 id="overview">Overview</h2>
 <blockquote>
@@ -230,7 +239,7 @@ stroke-linejoin="round" class="feather feather-home">
 </blockquote>
 <p>Some modules - such as the <a href="https://academy.hackthebox.com/module/details/69">Active Directory BloodHound</a> module, felt completely unnecessary to make an entire module out of. The same can be said for modules that teach a specific tool such as the <a href="https://academy.hackthebox.com/module/details/84">Using CrackMapExec</a> module, I do not believe that a module should be dedicated to teaching a specific tool, especially when the content of the module seems to be a copy-paste of the tool&rsquo;s documentation.</p>
 <p>During the exam, I found that the exam environment was very unstable, with exploit chains frequently requiring multiple resets to work. Additionally, at some points the latency was so bad that it was impossible to work effectively and I had no choice but to restart the lab.</p>
-<p><img alt="PING" src="./6c4c82357f3faa5aaecedd3e55f2cd57.png"></p>
+<p><img src="/posts/cape-experience/6c4c82357f3faa5aaecedd3e55f2cd57.png" alt="PING"></p>
 <p>However, the other CAPE holders that I spoke to did not experience the same issues, so it is possible that this was an isolated incident. Furthermore, HTB does not currently have any servers outside of EU/US, so the latency issues are not unexpected as I am in Singapore (APAC/Asia).</p>
 <h3 id="how-do-i-prepare">How do I prepare?</h3>
 <p>Before beginning the CAPE course, I would recommend that you either have completed and passed the CPTS exam and/or have an extremely sound understanding of Active Directory. This course is <strong>not</strong> for beginners.</p>
@@ -268,6 +277,87 @@ stroke-linejoin="round" class="feather feather-home">
             </div>
         </article></main>
 </div>
+
+<script>
+    function toggleToc() {
+        const content = document.getElementById('tocContent');
+        const button = document.querySelector('.toc-toggle');
+        if (!content || !button) return;
+        content.classList.toggle('expanded');
+        button.classList.toggle('expanded');
+    }
+
+    function toggleMiniToc() {
+        const miniToc = document.getElementById('miniToc');
+        if (miniToc) miniToc.classList.toggle('minimized');
+    }
+
+    function setupActiveHighlighting(links) {
+        const targets = Array.from(links).map(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const el = document.getElementById(decodeURIComponent(href.slice(1)));
+                if (el) return { link, element: el };
+            }
+            return null;
+        }).filter(Boolean);
+
+        if (targets.length === 0) return;
+
+        function update() {
+            const scrollPosition = window.scrollY + 100;
+            let active = null;
+            targets.forEach(t => {
+                if (t.element.offsetTop <= scrollPosition) active = t;
+            });
+            links.forEach(l => l.classList.remove('active'));
+            if (active) active.link.classList.add('active');
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => { update(); ticking = false; });
+                ticking = true;
+            }
+        });
+        update();
+    }
+
+    function initMiniToc() {
+        const miniToc = document.getElementById('miniToc');
+        const miniTocContent = document.getElementById('miniTocContent');
+        const sourceToc = document.getElementById('tocContent');
+        if (!miniToc || !miniTocContent || !sourceToc) return;
+
+        const clone = sourceToc.cloneNode(true);
+        clone.classList.remove('toc-content', 'expanded');
+        clone.removeAttribute('id');
+
+        const links = clone.querySelectorAll('a');
+        if (links.length === 0) return;
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.getElementById(decodeURIComponent(href.slice(1)));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.pushState(null, '', href);
+                    }
+                }
+            });
+        });
+
+        miniTocContent.appendChild(clone);
+        miniToc.classList.add('visible');
+        setupActiveHighlighting(links);
+    }
+
+    document.addEventListener('DOMContentLoaded', initMiniToc);
+</script>
 <footer class="footer">
     <span class="footer_item"> </span>
     &nbsp;
@@ -300,7 +390,7 @@ stroke-linejoin="round" class="feather feather-home">
 </a>
 </div>
     <small class="footer_copyright">
-        © 2025 .
+        © 2026 .
         Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">

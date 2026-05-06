@@ -11,12 +11,15 @@
       <title>The CAPE Experience</title>
       <link>http://localhost:1313/posts/cape-experience/</link>
       <pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/cape-experience/</guid>
       
-      <description>Earlier this month, I took the Certified Active Directory Pentesting Expert (CAPE) certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.
-Overview As I was making this post, another CAPE holder made a review of the certification, which I would highly recommend reading.
-The Certified Active Directory Pentesting Expert (CAPE) certification is a gruelling 10-day long exam that tests the candidate&amp;rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days.</description>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/posts/cape-experience/1742489483461.jpg&#34; alt=&#34;CAPE&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Earlier this month, I took the &lt;a href=&#34;https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert&#34;&gt;Certified Active Directory Pentesting Expert (CAPE)&lt;/a&gt; certification exam and passed with 10/10 flags after 2.5 days of mind-numbing AD attacks. This post is a review of the course and exam, and my experience with it.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As I was making this post, another CAPE holder made a &lt;a href=&#34;https://medium.com/@filip.bartosz.wozniak/hackthebox-cape-certification-700737050cd6&#34;&gt;review&lt;/a&gt; of the certification, which I would highly recommend reading.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;a href=&#34;https://academy.hackthebox.com/preview/certifications/htb-certified-active-directory-pentesting-expert&#34;&gt;Certified Active Directory Pentesting Expert (CAPE)&lt;/a&gt; certification is a gruelling 10-day long exam that tests the candidate&amp;rsquo;s ability to exploit Active Directory environments, this includes an industry-standard report that is expected to be delivered by the end of the 10 days. This course is meant to be a sequel to the &lt;a href=&#34;https://academy.hackthebox.com/preview/certifications/htb-certified-penetration-testing-specialist&#34;&gt;Certified Penetration Testing Specialist (CPTS)&lt;/a&gt;, and candidates are expected to have the knowledge and skills covered in the CPTS course.&lt;/p&gt;</description>
       
     </item>
     
@@ -24,11 +27,12 @@ The Certified Active Directory Pentesting Expert (CAPE) certification is a gruel
       <title>Long Live The Shellcode</title>
       <link>http://localhost:1313/posts/long-live-the-shellcode/</link>
       <pubDate>Fri, 28 Feb 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/long-live-the-shellcode/</guid>
       
-      <description>This blog post is meant to directly support the talk I did for a N0H4TS fireside chat - you can find the slides: here.
-Overview Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes.</description>
+      <description>&lt;p&gt;This blog post is meant to directly support the &lt;a href=&#34;https://www.linkedin.com/posts/n0h4ts_rescheduled-are-you-interested-and-ready-activity-7295820825918611456-Oyyw?utm_source=share&amp;amp;utm_medium=member_desktop&amp;amp;rcm=ACoAAD7pUncBxZ8Rxa4MkspWW4IiCPHKOwK-brc&#34;&gt;talk&lt;/a&gt; I did for a N0H4TS fireside chat - you can find the slides: &lt;a href=&#34;https://docs.google.com/presentation/d/1qn-JkqwkYZCY391gZNmPZhTw9gYENIbhgRNJAg3dXf0/edit?usp=sharing&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/posts/long-live-the-shellcode/Demystifying%20AV_EDR%20Evasion%20%28Public%29.jpg&#34; alt=&#34;Slide 1&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Often when newcomers encounter shellcode, whether through a security course, a CTF challenge, or a blog post - they tend to overlook the underlying mechanics of the code they are executing. This understanding is further abstracted away when using a C2 framework, which handles the intricacies behind the scenes.&lt;/p&gt;</description>
       
     </item>
     
@@ -36,12 +40,13 @@ Overview Often when newcomers encounter shellcode, whether through a security co
       <title>Certified Certification Collector</title>
       <link>http://localhost:1313/posts/certified-cert-collector/</link>
       <pubDate>Sun, 19 Jan 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/certified-cert-collector/</guid>
       
-      <description>I did 6 certifications in 9 months, so that you don&amp;rsquo;t have to!
-Introduction In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the Industry Preparation for Pre-graduate (iPREP) Programme offered by The InfoComm Media Development Authority (IMDA).
-The iPREP Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education.</description>
+      <description>&lt;p&gt;I did 6 certifications in 9 months, so that you don&amp;rsquo;t have to!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/posts/certified-cert-collector/61e28902caf22ff636f8c0b26d902ebd.png&#34; alt=&#34;graph&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In 2024, I decided to spend the year collecting as much knowledge in the form of certifications as physically possible in order to fully utilize the &lt;a href=&#34;https://www.imda.gov.sg/-/media/imda/files/about/media-releases/2017/annex-a---factsheet-of-the-iprep-programme.pdf&#34;&gt;Industry Preparation for Pre-graduate (iPREP) Programme&lt;/a&gt; offered by &lt;a href=&#34;https://www.imda.gov.sg/&#34;&gt;The InfoComm Media Development Authority (IMDA)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;iPREP&lt;/code&gt; Programme is a scheme that greatly subsidizes (up to SGD$500.00) the cost of selected certifications for students currently enrolled in a local institute of higher education. Unfortunately, a quick google search of the programme does not yield many results - but the &lt;a href=&#34;https://nus.edu.sg/cfg/home/24&#34;&gt;National University of Singapore (NUS)&lt;/a&gt; and the &lt;a href=&#34;https://computing.smu.edu.sg/undergraduate/beyond/iprep&#34;&gt;Singapore Management University (SMU)&lt;/a&gt; have pages dedicated to the programme, although the latter seems to be locked behind a login wall.&lt;/p&gt;</description>
       
     </item>
     
@@ -49,11 +54,10 @@ The iPREP Programme is a scheme that greatly subsidizes (up to SGD$500.00) the c
       <title>The Art of Exploiting Active Directory from Linux</title>
       <link>http://localhost:1313/posts/ad-linux/</link>
       <pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/ad-linux/</guid>
       
-      <description>Over the past 6 months, I&amp;rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the Cybernetics prolab and passed the CRTP and CRTE certifications from Altered Security.
-After spending considerable time working with different Command &amp;amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly.</description>
+      <description>&lt;p&gt;Over the past 6 months, I&amp;rsquo;ve been focusing more on the operational side of red teaming and have been actively working at pwning various Active Directory environments and labs. During this time, I finished the &lt;a href=&#34;https://app.hackthebox.com/prolabs/overview/cybernetics&#34;&gt;Cybernetics&lt;/a&gt; prolab and passed the &lt;a href=&#34;https://www.alteredsecurity.com/adlab&#34;&gt;CRTP&lt;/a&gt; and &lt;a href=&#34;https://www.alteredsecurity.com/redteamlab&#34;&gt;CRTE&lt;/a&gt; certifications from Altered Security.&lt;/p&gt;
+&lt;p&gt;After spending considerable time working with different Command &amp;amp; Control (C2) frameworks, troubleshooting .NET compilation errors, forgetting how to UAC bypass, wrapping commands in PS Credential objects, and dealing with PowerShell Constrained Language Mode (CLM), I’ve come to realize that exploiting AD purely from Windows will cause my life expectancy to decrease significantly.&lt;/p&gt;</description>
       
     </item>
     
@@ -61,11 +65,11 @@ After spending considerable time working with different Command &amp;amp; Contro
       <title>Economical Red Teaming</title>
       <link>http://localhost:1313/posts/economic-rt/</link>
       <pubDate>Thu, 11 Apr 2024 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/economic-rt/</guid>
       
-      <description>As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like cai png
-In this blog post, I&amp;rsquo;ll be talking about an underrated resource that can provide an absurd amount of practice &amp;amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story.</description>
+      <description>&lt;p&gt;As a high school student, money is not something that comes easy to me. I have to be very careful with how I spend my money; and the same can be said for thousands of others around the world. Sometimes you have to pick and choose what you spend your money on, just like &lt;a href=&#34;https://en.wikipedia.org/wiki/Economy_rice&#34;&gt;cai png&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/ab5ce8f88a20dc80808326ee54e42b87.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In this blog post, I&amp;rsquo;ll be talking about an underrated resource that &lt;strong&gt;can&lt;/strong&gt; provide an absurd amount of practice &amp;amp; knowledge for essentially pennies (relative to other options), but first let me tell a life story.&lt;/p&gt;</description>
       
     </item>
     
@@ -73,12 +77,12 @@ In this blog post, I&amp;rsquo;ll be talking about an underrated resource that c
       <title>A Trip Down Memory Lane</title>
       <link>http://localhost:1313/posts/memory-lane/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/memory-lane/</guid>
       
-      <description>Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.
-Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.
-A Humble Beginning For many malware developers, evading Windows Defender often represents the first hurdle or objective.</description>
+      <description>&lt;p&gt;Antivirus evasion has quickly become one of the most overwritten topics, with endless articles on writing shellcode loaders and other evasive stageless droppers.&lt;/p&gt;
+&lt;p&gt;Many of these techniques, especially those from older sources, might not be effective right out of the box. This is largely due to the nature of malware development, where it is often a continuous cat-and-mouse game with vendors who are constantly pushing updates to their products.&lt;/p&gt;
+&lt;h2 id=&#34;a-humble-beginning&#34;&gt;A Humble Beginning&lt;/h2&gt;
+&lt;p&gt;For many malware developers, evading Windows Defender often represents the first hurdle or objective. While more experienced developers might view this as a relatively simple challenge, it certainly was not easy for me.&lt;/p&gt;</description>
       
     </item>
     
@@ -86,32 +90,11 @@ A Humble Beginning For many malware developers, evading Windows Defender often r
       <title>Identifying Malicious Bytes in Malware</title>
       <link>http://localhost:1313/posts/malicious-bytes/</link>
       <pubDate>Wed, 07 Feb 2024 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/malicious-bytes/</guid>
       
-      <description>This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.
-Introduction An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash.</description>
-      
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/about/</guid>
-      
-      <description>I&amp;rsquo;m an offensive researcher, malware developer, red teamer and skid. I find joy in emulating TTPs used by adversaries in the wild, and developing evasive tradecraft.
-OffSec Certified Professional (OSCP)
-Certified Penetration Testing Specialist (CPTS)
-Certified Red Team Lead (CRTL)
-Certified Red Team Operator (CRTO)
-Certified Red Team Expert (CRTE)
-Certified Red Team Professional (CRTP)
-Certified Azure Red Team Professional (CARTP)
-GitHub
-Twitter
-LinkedIn</description>
+      <description>&lt;p&gt;This post will cover the process of identifying malicious bytes in malware, malicious bytes referring to known and signatured byte sequences that are often used by security products to identify and detect malware. The goal is to identify these bytes and replace them with benign bytes, in order to evade static detection.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;An age old detection for malware has been the use of file hashes or signatures, however these are easily evaded by changing a couple of bytes in the file- which would result in a completely different hash.&lt;/p&gt;</description>
       
     </item>
     

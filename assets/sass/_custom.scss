@@ -1,0 +1,221 @@
+/* Wider body width on post pages */
+.wrapper.post {
+    max-width: 880px;
+
+    @include media-query($on-mobile) {
+        max-width: calc(#{$narrow-size} - #{$spacing-full});
+    }
+}
+
+/* Home page */
+.wrapper.home {
+    max-width: 760px;
+
+    @include media-query($on-mobile) {
+        max-width: calc(#{$narrow-size} - #{$spacing-full});
+    }
+
+    .author {
+        margin-top: 5rem;
+        margin-bottom: 4.5rem;
+
+        @include media-query($on-mobile) {
+            margin-top: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .author-avatar {
+            width: 96px;
+            height: 96px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .author-name {
+            font-size: 1.85em;
+            margin-top: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .author-bio {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            opacity: 0.78;
+        }
+    }
+}
+
+.home-section {
+    margin-top: 1rem;
+}
+
+.home-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.18);
+}
+
+.home-section-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.85;
+}
+
+.home-section-count {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    opacity: 0.55;
+    font-variant-numeric: tabular-nums;
+}
+
+.home-posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: home-post;
+}
+
+.home-post {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.12);
+    counter-increment: home-post;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.home-post-link {
+    display: block;
+    padding: 1.15rem 0.25rem 1.15rem 0;
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.18s ease, background 0.18s ease;
+    border-radius: 0.35rem;
+
+    &:hover,
+    &:focus {
+        padding-left: 0.55rem;
+        background: rgba(127, 127, 127, 0.05);
+        text-decoration: none;
+        outline: none;
+    }
+
+    &:hover .home-post-title,
+    &:focus .home-post-title {
+        color: $text-link-blue;
+    }
+}
+
+.home-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.35rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.home-post-meta time {
+    color: inherit;
+}
+
+.home-post-star {
+    display: inline-flex;
+    align-items: center;
+
+    .icon-star {
+        width: 12px;
+        height: 12px;
+        color: #f5b740;
+        margin: 0;
+    }
+}
+
+.home-post-title {
+    font-size: 1.32rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.005em;
+    transition: color 0.18s ease;
+}
+
+.home-post-summary {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    opacity: 0.72;
+    /* clamp to two lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.home-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1.4rem;
+    padding: 0.4rem 0;
+    font-size: 0.92rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid transparent;
+    transition: color 0.18s ease, border-color 0.18s ease;
+
+    &:hover,
+    &:focus {
+        color: $text-link-blue;
+        border-bottom-color: $text-link-blue;
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+/* Dark mode adjustments for home page */
+@mixin home-dark-mode {
+    .home-section-header {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .home-post {
+        border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .home-post-link:hover,
+    .home-post-link:focus {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .home-post-link:hover .home-post-title,
+    .home-post-link:focus .home-post-title {
+        color: $dark-text-link-blue;
+    }
+
+    .home-more:hover,
+    .home-more:focus {
+        color: $dark-text-link-blue;
+        border-bottom-color: $dark-text-link-blue;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light) {
+        @include home-dark-mode;
+    }
+}
+
+html.dark {
+    @include home-dark-mode;
+}
